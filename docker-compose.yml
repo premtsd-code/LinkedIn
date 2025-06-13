@@ -1,4 +1,4 @@
-#version: "3.8"
+version: "3.8"
 
 services:
   kafka:
@@ -32,35 +32,10 @@ services:
     environment:
       KAFKA_CLUSTERS_0_NAME: local
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
-      KAFKA_CLUSTERS_0_KSQLDBSERVER: http://ksqldb0:8088
 
-#  notification-db:
-#    image: postgres
-#    container_name: notification-db
-#    environment:
-#      - POSTGRES_DB=notificationDB
-#      - POSTGRES_USER=user
-#      - POSTGRES_PASSWORD=password
-#    networks:
-#      - linkedin-network
-#    volumes:
-#      - notification-db-data:/var/lib/postgresql/data
-
-#  posts-db:
-#    image: postgres
-#    container_name: posts-db
-#    environment:
-#      - POSTGRES_DB=postsDB
-#      - POSTGRES_USER=user
-#      - POSTGRES_PASSWORD=password
-#    networks:
-#      - linkedin-network
-#    volumes:
-#      - posts-db-data:/var/lib/postgresql/data
-
-  linkedin-db:
+  linkedin-db-data:
     image: postgres
-    container_name: linkedin-db
+    container_name: linkedin-db-data
     environment:
       - POSTGRES_DB=linkedinDB
       - POSTGRES_USER=user
@@ -68,24 +43,23 @@ services:
     networks:
       - linkedin-network
     volumes:
-      - linkedin-db-data:/var/lib/postgresql/data
+      - notification-db-data:/var/lib/postgresql/data
+
+  connections-db:
+    image: neo4j
+    container_name: connections-db
+    environment:
+      - NEO4J_AUTH=neo4j/password  # Set your username and password
     ports:
-      - "5432:5432"
-#  connections-db:
-#    image: neo4j
-#    container_name: connections-db
-#    environment:
-#      - NEO4J_AUTH=neo4j/password  # Set your username and password
-#    ports:
-#      - "7474:7474"  # HTTP port
-#      - "7687:7687"  # Bolt port
-#    volumes:
-#      - connections-db-data:/data  # Persist data
-#    networks:
-#      - linkedin-network
+      - "7474:7474"  # HTTP port
+      - "7687:7687"  # Bolt port
+    volumes:
+      - connections-db-data:/data  # Persist data
+    networks:
+      - linkedin-network
 
   discovery-server:
-    image: premtsd1999/linkedin-app/discovery-server
+    image: anuj55149/linkedin-app-discovery-server
     container_name: discovery-server
     networks:
       - linkedin-network
@@ -93,47 +67,47 @@ services:
       - "8761:8761"
 
   posts-service:
-    image: premtsd1999/linkedin-app/post-service
-    container_name: post-service
+    image: anuj55149/linkedin-app-posts-service
+    container_name: posts-service
     networks:
       - linkedin-network
     depends_on:
       - discovery-server
-      - linkedin-db
+      - linkedin-db-data
       - kafka
 
   user-service:
-    image: premtsd1999/linkedin-app/user-service
+    image: anuj55149/linkedin-app-user-service
     container_name: user-service
     networks:
       - linkedin-network
     depends_on:
       - discovery-server
-      - linkedin-db
+      - linkedin-db-data
       - kafka
 
   notification-service:
-    image: premtsd1999/linkedin-app/notification-service
+    image: anuj55149/linkedin-app-notification-service
     container_name: notification-service
     networks:
       - linkedin-network
     depends_on:
       - discovery-server
-      - linkedin-db
+      - linkedin-db-data
       - kafka
 
-#  connections-service:
-#    image: premtsd1999/linkedin-app-connections-service
-#    container_name: connections-service
-#    networks:
-#      - linkedin-network
-#    depends_on:
-#      - discovery-server
-#      - connections-db
-#      - kafka
+  connections-service:
+    image: anuj55149/linkedin-app-connections-service
+    container_name: connections-service
+    networks:
+      - linkedin-network
+    depends_on:
+      - discovery-server
+      - connections-db
+      - kafka
 
   api-gateway:
-    image: premtsd1999/linkedin-app/api-gateway
+    image: anuj55149/linkedin-app-api-gateway
     container_name: api-gateway
     ports:
       - "8080:8080"
@@ -147,8 +121,5 @@ networks:
 
 volumes:
   kafka_data:
-#  notification-db-data:
-#  posts-db-data:
-#  user-db-data:
-#  connections-db-data:
   linkedin-db-data:
+  connections-db-data:

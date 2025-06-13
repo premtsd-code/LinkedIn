@@ -1,0 +1,13 @@
+spring.application.name : config-server
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitlab.cs.nuim.ie/linkedin-microservice/linkedinconfigs
+          username: p250109
+          password: glpat-35dFLYRishXBwu8GyzyQ
+          default-label: main
+server:
+  port: 9999
+eureka.client.service-url.defaultZone: http://localhost:8761/eureka
