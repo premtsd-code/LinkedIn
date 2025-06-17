@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/LinkedIn-App.iml" filepath="$PROJECT_DIR$/.idea/LinkedIn-App.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emailService/emailService.iml" filepath="$PROJECT_DIR$/emailService/emailService.iml" />
     </modules>
   </component>
 </project>

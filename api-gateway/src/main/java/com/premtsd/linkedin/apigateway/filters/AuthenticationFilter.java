@@ -13,6 +13,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.util.List;
 
 @Slf4j
 @Component
@@ -27,10 +28,19 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 //        String requiredRole();
 //    }
 
+    private static final List<String> openApiWhitelist = List.of(
+            "/v3/api-docs", "/swagger-ui", "/swagger-ui.html"
+    );
+
+
 
     public AuthenticationFilter(JwtService jwtService) {
         super(Config.class);
         this.jwtService = jwtService;
+    }
+
+    private boolean isWhitelisted(String path) {
+        return openApiWhitelist.stream().anyMatch(path::contains);
     }
 
     @Override
@@ -39,6 +49,12 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
             log.info("Login request: {}", exchange.getRequest().getURI());
 
             final String tokenHeader = exchange.getRequest().getHeaders().getFirst("Authorization");
+
+            String path = exchange.getRequest().getURI().getPath();
+
+            if (isWhitelisted(path)) {
+                return chain.filter(exchange); // Skip auth
+            }
 
             if(tokenHeader == null || !tokenHeader.startsWith("Bearer")) {
                 exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);

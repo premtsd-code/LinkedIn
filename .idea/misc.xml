@@ -8,9 +8,11 @@
         <option value="$PROJECT_DIR$/post-service/pom.xml" />
         <option value="$PROJECT_DIR$/discovery-server/pom.xml" />
         <option value="$PROJECT_DIR$/api-gateway/pom.xml" />
-        <option value="$PROJECT_DIR$/emailService/pom.xml" />
         <option value="$PROJECT_DIR$/discovery-eureka-server/pom.xml" />
         <option value="$PROJECT_DIR$/config-server/pom.xml" />
+        <option value="$PROJECT_DIR$/connections-service/pom.xml" />
+        <option value="$PROJECT_DIR$/uploader-service/pom.xml" />
+        <option value="$PROJECT_DIR$/emailService/pom.xml" />
       </list>
     </option>
   </component>

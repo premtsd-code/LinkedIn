@@ -6,6 +6,7 @@ import com.premtsd.linkedin.postservice.dto.PostDto;
 import com.premtsd.linkedin.postservice.service.PostsService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,13 +21,8 @@ public class PostsController {
     private final PostsService postsService;
 
     @PostMapping
-    public ResponseEntity<PostDto> createPost(@RequestBody PostCreateRequestDto postDto, HttpServletRequest httpServletRequest) {
-        PostDto createdPost;
-        if(httpServletRequest.getHeader("X-User-Id")!=null)
-         createdPost = postsService.createPost(postDto, UserContextHolder.getCurrentUserId());
-        else
-            createdPost = postsService.createPost(postDto, -1l);
-
+    public ResponseEntity<PostDto> createPost(@RequestBody PostCreateRequestDto postDto) {
+        PostDto createdPost = postsService.createPost(postDto);
         return new ResponseEntity<>(createdPost, HttpStatus.CREATED);
     }
 
@@ -37,9 +33,11 @@ public class PostsController {
     }
 
     @GetMapping("/users/{userId}/allPosts")
-    public ResponseEntity<List<PostDto>> getAllPostsOfUser(@PathVariable Long userId) {
+    public List<PostDto> getAllPostsOfUser(@PathVariable Long userId) {
+        System.out.println("check2");
         List<PostDto> posts = postsService.getAllPostsOfUser(userId);
-        return ResponseEntity.ok(posts);
+        System.out.println("check3");
+        return posts;
     }
 
 }

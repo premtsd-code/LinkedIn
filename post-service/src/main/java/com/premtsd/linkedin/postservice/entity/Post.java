@@ -4,16 +4,21 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+//import org.springframework.data.redis.core.RedisHash;
+//import org.springframework.data.redis.core.index.Indexed;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Setter
+//@RedisHash(value = "posts")
 @Table(name = "posts")
-public class Post {
+public class Post implements Serializable {
 
     @Id
+//    @Indexed
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

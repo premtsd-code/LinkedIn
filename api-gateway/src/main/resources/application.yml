@@ -1,32 +1,53 @@
 spring.application.name: api-gateway
 
 server.port: 8080
-eureka.client.service-url.defaultZone: http://localhost:8761/eureka
+eureka.client.service-url.defaultZone: http://discovery-server:8761/eureka
+
 jwt.secretKey: asdfladf98a7df89aysf8d9yasiudfha9s87dfa89syudhfa98sdfyaisuhdfa98sfy
 
 spring:
   cloud:
     gateway:
       routes:
-        - id: users-service
-          uri: lb://USERS-SERVICE
+        - id: user-service
+          uri: ${USER_SERVICE_URI:lb://USER-SERVICE}
           predicates:
             - Path=/api/v1/users/**
           filters:
             - StripPrefix=2
 
         - id: posts-service
-          uri: lb://POSTS-SERVICE
+          uri: ${POSTS_SERVICE_URI:lb://POSTS-SERVICE}
           predicates:
             - Path=/api/v1/posts/**
           filters:
             - StripPrefix=2
             - name: AuthenticationFilter
 
-#        - id: connections-service
-#          uri: lb://CONNECTIONS-SERVICE
-#          predicates:
-#            - Path=/api/v1/connections/**
-#          filters:
-#            - StripPrefix=2
-#            - name: AuthenticationFilter
+        - id: connections-service
+          uri: ${CONNECTIONS_SERVICE_URI:lb://CONNECTIONS-SERVICE}
+          predicates:
+            - Path=/api/v1/connections/**
+          filters:
+            - StripPrefix=2
+            - name: AuthenticationFilter
+
+
+springdoc:
+  enable-native-support: true
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    config-url: /v3/api-docs/swagger-config
+    urls:
+      - url: /v3/api-docs
+        name: API Gateway Service
+        primaryName: API Gateway Service
+      - url: /api/v1/users/v3/api-docs
+        name: User Service
+        primaryName: User Service
+      - url: /api/v1/posts/v3/api-docs
+        name: Post Service
+        primaryName: Post Service

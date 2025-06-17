@@ -6,11 +6,15 @@ import com.premtsd.linkedin.postservice.dto.PersonDto;
 import com.premtsd.linkedin.postservice.dto.PostCreateRequestDto;
 import com.premtsd.linkedin.postservice.dto.PostDto;
 import com.premtsd.linkedin.postservice.entity.Post;
+import com.premtsd.linkedin.postservice.event.PostCreatedEvent;
 import com.premtsd.linkedin.postservice.exception.ResourceNotFoundException;
 import com.premtsd.linkedin.postservice.repository.PostsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+//import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,34 +29,40 @@ public class PostsService {
     private final ModelMapper modelMapper;
     private final ConnectionsClient connectionsClient;
 
-    public PostDto createPost(PostCreateRequestDto postDto, Long userId) {
+    private final KafkaTemplate<Long, PostCreatedEvent> kafkaTemplate;
+
+    public PostDto createPost(PostCreateRequestDto postDto) {
+        Long userId = UserContextHolder.getCurrentUserId();
         Post post = modelMapper.map(postDto, Post.class);
         post.setUserId(userId);
 
         Post savedPost = postsRepository.save(post);
+
+        PostCreatedEvent postCreatedEvent = PostCreatedEvent.builder()
+                .postId(savedPost.getId())
+                .creatorId(userId)
+                .content(savedPost.getContent())
+                .build();
+
+//        kafkaTemplate.send("post-created-topic", postCreatedEvent);
+
         return modelMapper.map(savedPost, PostDto.class);
     }
 
     public PostDto getPostById(Long postId) {
         log.debug("Retrieving post with ID: {}", postId);
 
-        Long userId = UserContextHolder.getCurrentUserId();
-
-        List<PersonDto> firstConnections = connectionsClient.getFirstConnections();
-
-//        TODO send Notifications to all connections
-
         Post post = postsRepository.findById(postId).orElseThrow(() ->
                 new ResourceNotFoundException("Post not found with id: "+postId));
         return modelMapper.map(post, PostDto.class);
     }
 
+    @Cacheable(value = "post", key = "#userId")
     public List<PostDto> getAllPostsOfUser(Long userId) {
         List<Post> posts = postsRepository.findByUserId(userId);
-
         return posts
-            .stream()
-            .map((element) -> modelMapper.map(element, PostDto.class))
-            .collect(Collectors.toList());
+                .stream()
+                .map((element) -> modelMapper.map(element, PostDto.class))
+                .collect(Collectors.toList());
     }
 }

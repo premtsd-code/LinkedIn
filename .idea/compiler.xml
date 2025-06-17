@@ -6,24 +6,30 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="config-server" />
         <module name="post-service" />
+        <module name="connections-service" />
         <module name="discovery-server" />
         <module name="api-gateway" />
         <module name="user-service" />
+        <module name="uploader-service" />
         <module name="discoveryServer" />
         <module name="emailService" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="config-server" target="21" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-gateway" options="-parameters" />
       <module name="config-server" options="-parameters" />
+      <module name="connections-service" options="-parameters" />
       <module name="discovery-server" options="-parameters" />
       <module name="discoveryServer" options="-parameters" />
       <module name="emailService" options="-parameters" />
       <module name="post-service" options="-parameters" />
+      <module name="uploader-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
   </component>

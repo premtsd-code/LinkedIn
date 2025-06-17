@@ -33,17 +33,19 @@ services:
       KAFKA_CLUSTERS_0_NAME: local
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
 
-  linkedin-db-data:
+  linkedin-db:
     image: postgres
-    container_name: linkedin-db-data
+    container_name: linkedin-db
     environment:
       - POSTGRES_DB=linkedinDB
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
     networks:
       - linkedin-network
     volumes:
-      - notification-db-data:/var/lib/postgresql/data
+      - linkedin-db-data:/var/lib/postgresql/data
 
   connections-db:
     image: neo4j
@@ -59,45 +61,47 @@ services:
       - linkedin-network
 
   discovery-server:
-    image: anuj55149/linkedin-app-discovery-server
+    image: premtsd18/discovery-server
     container_name: discovery-server
     networks:
       - linkedin-network
     ports:
       - "8761:8761"
 
-  posts-service:
-    image: anuj55149/linkedin-app-posts-service
-    container_name: posts-service
+  post-service:
+    image: premtsd18/post-service
+    container_name: post-service
     networks:
       - linkedin-network
     depends_on:
       - discovery-server
-      - linkedin-db-data
+      - linkedin-db
       - kafka
 
   user-service:
-    image: anuj55149/linkedin-app-user-service
+    image: premtsd18/user-service
     container_name: user-service
     networks:
       - linkedin-network
     depends_on:
       - discovery-server
-      - linkedin-db-data
+      - linkedin-db
       - kafka
+    ports:
+      - "9020:9020"
 
-  notification-service:
-    image: anuj55149/linkedin-app-notification-service
-    container_name: notification-service
+  email-service:
+    image: premtsd18/email-service
+    container_name: email-service
     networks:
       - linkedin-network
     depends_on:
       - discovery-server
-      - linkedin-db-data
+      - linkedin-db
       - kafka
 
   connections-service:
-    image: anuj55149/linkedin-app-connections-service
+    image: premtsd18/connections-service
     container_name: connections-service
     networks:
       - linkedin-network
@@ -107,7 +111,7 @@ services:
       - kafka
 
   api-gateway:
-    image: anuj55149/linkedin-app-api-gateway
+    image: premtsd18/api-gateway
     container_name: api-gateway
     ports:
       - "8080:8080"
@@ -115,6 +119,27 @@ services:
       - linkedin-network
     depends_on:
       - discovery-server
+
+  redis:
+    image: bitnami/redis:latest
+    container_name: redis
+    environment:
+      - REDIS_PASSWORD=secret123
+    ports:
+     - "6379:6379"
+    networks:
+     - linkedin-network
+
+#  redisinsight:
+#    image: redislabs/redisinsight:latest
+#    container_name: redisinsight
+#    ports:
+#     - "8001:8001"
+#    depends_on:
+#     - redis
+#    networks:
+#     - linkedin-network
+
 
 networks:
   linkedin-network:

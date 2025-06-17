@@ -21,7 +21,7 @@ import org.apache.tomcat.util.json.JSONParser;
 import org.hibernate.dialect.JsonHelper;
 import org.json.JSONObject;
 import org.modelmapper.ModelMapper;
-import org.springframework.kafka.core.KafkaTemplate;
+//import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class AuthService {
 
-    private final KafkaTemplate<String, String> kafkaTemplate;
+//    private final KafkaTemplate<String, String> kafkaTemplate;
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private final JwtService jwtService;
@@ -77,7 +77,7 @@ public class AuthService {
             }
 
             System.out.println(str);
-            kafkaTemplate.send("topic1", str);
+//            kafkaTemplate.send("topic1", str);
             try {
                 SendEmailEventDto event = objectMapper.readValue(str, SendEmailEventDto.class);
             }catch (Exception e){

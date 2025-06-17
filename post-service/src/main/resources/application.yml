@@ -1,0 +1,11 @@
+spring:
+  kafka:
+    bootstrap-servers: kafka:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.LongSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+#  redis:
+#    host: 172.18.0.10
+#    port: 6379
+#  cache:
+#    type: redis
