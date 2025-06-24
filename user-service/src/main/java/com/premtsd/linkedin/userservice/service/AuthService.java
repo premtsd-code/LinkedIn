@@ -1,15 +1,12 @@
 package com.premtsd.linkedin.userservice.service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.premtsd.linkedin.userservice.dto.LoginRequestDto;
-import com.premtsd.linkedin.userservice.dto.SendEmailEventDto;
 import com.premtsd.linkedin.userservice.dto.SignupRequestDto;
 import com.premtsd.linkedin.userservice.dto.UserDto;
 import com.premtsd.linkedin.userservice.entity.Role;
 import com.premtsd.linkedin.userservice.entity.User;
+import com.premtsd.linkedin.userservice.event.UserCreatedEmailEvent;
 import com.premtsd.linkedin.userservice.exception.BadRequestException;
 import com.premtsd.linkedin.userservice.exception.ResourceNotFoundException;
 import com.premtsd.linkedin.userservice.repository.RoleRepository;
@@ -17,11 +14,8 @@ import com.premtsd.linkedin.userservice.repository.UserRepository;
 import com.premtsd.linkedin.userservice.utils.PasswordUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.json.JSONParser;
-import org.hibernate.dialect.JsonHelper;
-import org.json.JSONObject;
 import org.modelmapper.ModelMapper;
-//import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -32,7 +26,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class AuthService {
 
-//    private final KafkaTemplate<String, String> kafkaTemplate;
+    private final KafkaTemplate<Long, UserCreatedEmailEvent> kafkaTemplate;
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private final JwtService jwtService;
@@ -64,26 +58,12 @@ public class AuthService {
         user.setPassword(PasswordUtil.hashPassword(signupRequestDto.getPassword()));
 
         User savedUser = userRepository.save(user);
-        if(savedUser != null) {
-            SendEmailEventDto sendEmailEventDto=new SendEmailEventDto();
-            sendEmailEventDto.setTo(savedUser.getEmail());
-            sendEmailEventDto.setSubject("Your account has been created at LinkedIn-Like");
-            sendEmailEventDto.setBody("Hi "+savedUser.getName()+",\n"+" Thanks for signing up");
-            String str="";
-            try {
-                 str = objectMapper.writeValueAsString(sendEmailEventDto);
-            }catch (Exception e){
-                System.out.println("Error in json serialization");
-            }
+            UserCreatedEmailEvent userCreatedEmailEvent=new UserCreatedEmailEvent();
+            userCreatedEmailEvent.setTo(savedUser.getEmail());
+            userCreatedEmailEvent.setSubject("Your account has been created at LinkedIn-Like");
+            userCreatedEmailEvent.setBody("Hi "+savedUser.getName()+",\n"+" Thanks for signing up");
 
-            System.out.println(str);
-//            kafkaTemplate.send("topic1", str);
-            try {
-                SendEmailEventDto event = objectMapper.readValue(str, SendEmailEventDto.class);
-            }catch (Exception e){
-                System.out.println("Error in json deserialization");
-            }
-        }
+            kafkaTemplate.send("userCreatedTopic", userCreatedEmailEvent);
         return mapUserToUserDto(savedUser);
     }
 

@@ -1,4 +1,4 @@
-# 📘 Scalable Microservices Architecture
+# 📘 Scalable MicroservicesArchitecture
 
 A LinkedIn themed social platform built using Java and Spring Boot microservices, featuring scalable and distributed design with Kafka, Redis, Eureka, Docker, and centralized configuration and logging tools.
 
@@ -11,7 +11,7 @@ A LinkedIn themed social platform built using Java and Spring Boot microservices
 - **Messaging**: Apache Kafka
 - **Containers**: Docker, Docker Compose
 - **Observability**: ELK Stack, Zipkin
-- **Database**: PostgreSQL / MySQL (based on service)
+- **Database**: PostgreSQL, Neo4j
 - **Others**: Redis, Kafka UI, Logstash, Maven
 
 ---
@@ -85,8 +85,8 @@ LinkedIn/
 
 - **Kafka UI**: Available at `http://localhost:8090`
 - **Eureka Dashboard**: Usually `http://localhost:8761`
-- **Zipkin** (if integrated): `http://localhost:9411`
-- **Kibana**: Accessible on `http://localhost:5601` (when ELK is running)
+- **Zipkin**: `http://localhost:9411`
+- **Kibana**: Accessible on `http://localhost:5601` 
 
 ---
 

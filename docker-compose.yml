@@ -101,9 +101,9 @@ services:
     volumes:
       - ./app/logs/user-service:/app/logs/user-service
 
-  email-service:
-    image: premtsd18/email-service
-    container_name: email-service
+  notification-service:
+    image: premtsd18/notification-service
+    container_name: notification-service
     networks:
       - linkedin-network
     depends_on:
@@ -112,7 +112,7 @@ services:
       - kafka
       - config-server
     volumes:
-      - ./logs/email-service:/logs/email-service
+      - ./logs/notification-service:/logs/notification-service
 
   connections-service:
     image: premtsd18/connections-service
