@@ -1,0 +1,16 @@
+stages:
+  - mirror
+
+mirror_repo:
+  stage: mirror
+  script:
+    - git config --global user.email "i.prem.tsd@gmail.com"
+    - git config --global user.name "Prem Palanisamy"
+
+    - git clone --mirror "$CI_REPOSITORY_URL" repo-mirror
+    - cd repo-mirror
+
+    - git remote set-url --push origin https://oauth2:${PERSONAL_REPO_TOKEN}@github.com/premtsd-code/LinkedIn.git
+    - git push --mirror
+  only:
+    - main  # or whichever branch you want
