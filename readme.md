@@ -1,6 +1,6 @@
-# 📘 LinkedIn Clone – Microservices Architecture
+# 📘 Scalable Microservices Architecture
 
-A LinkedIn-style social platform built using Java and Spring Boot microservices, featuring scalable and distributed design with Kafka, Redis, Eureka, Docker, and centralized configuration and logging tools.
+A LinkedIn themed social platform built using Java and Spring Boot microservices, featuring scalable and distributed design with Kafka, Redis, Eureka, Docker, and centralized configuration and logging tools.
 
 ---
 
@@ -96,6 +96,3 @@ LinkedIn/
 
 ---
 
-### 📃 License
-
-This project is licensed under the [MIT License](LICENSE).
