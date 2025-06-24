@@ -13,6 +13,5 @@ public class PostDto implements Serializable {
     private String content;
     private Long userId;
 //    private LocalDateTime createdAt;
-
-    public PostDto(){}
+    private String imageUrl;
 }

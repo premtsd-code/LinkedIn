@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -o k8s/
+    kompose.version: 1.36.0 (ae2a39403)
+  labels:
+    io.kompose.service: post-service
+  name: post-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: post-service
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -o k8s/
+        kompose.version: 1.36.0 (ae2a39403)
+      labels:
+        io.kompose.service: post-service
+    spec:
+      containers:
+        - image: premtsd18/post-service
+          name: post-service
+          volumeMounts:
+            - mountPath: /app/logs/post-service
+              name: post-service-claim0
+      restartPolicy: Always
+      volumes:
+        - name: post-service-claim0
+          persistentVolumeClaim:
+            claimName: post-service-claim0

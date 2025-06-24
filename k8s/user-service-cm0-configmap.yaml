@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  application-2025-06-18.0.log: ""
+kind: ConfigMap
+metadata:
+  labels:
+    io.kompose.service: user-service
+  name: user-service-cm0

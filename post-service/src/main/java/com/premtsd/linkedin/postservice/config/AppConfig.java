@@ -1,5 +1,8 @@
 package com.premtsd.linkedin.postservice.config;
 
+import feign.Capability;
+import feign.micrometer.MicrometerCapability;
+import io.micrometer.core.instrument.MeterRegistry;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -38,5 +41,10 @@ public class AppConfig {
                                         .type(SecurityScheme.Type.HTTP)
                                         .scheme("bearer")
                                         .bearerFormat("JWT"))); // Optional but recommended
+    }
+
+    @Bean
+    public Capability capability(final MeterRegistry registry) {
+        return new MicrometerCapability(registry);
     }
 }

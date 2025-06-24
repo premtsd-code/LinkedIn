@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -o k8s/
+    kompose.version: 1.36.0 (ae2a39403)
+  labels:
+    io.kompose.service: uploader-service
+  name: uploader-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: uploader-service
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -o k8s/
+        kompose.version: 1.36.0 (ae2a39403)
+      labels:
+        io.kompose.service: uploader-service
+    spec:
+      containers:
+        - image: premtsd18/uploader-service
+          name: uploader-service
+          volumeMounts:
+            - mountPath: /app/logs/uploader-service
+              name: uploader-service-cm0
+      restartPolicy: Always
+      volumes:
+        - configMap:
+            name: uploader-service-cm0
+          name: uploader-service-cm0

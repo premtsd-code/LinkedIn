@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -o k8s/
+    kompose.version: 1.36.0 (ae2a39403)
+  labels:
+    io.kompose.service: connections-service
+  name: connections-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: connections-service
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -o k8s/
+        kompose.version: 1.36.0 (ae2a39403)
+      labels:
+        io.kompose.service: connections-service
+    spec:
+      containers:
+        - image: premtsd18/connections-service
+          name: connections-service
+          volumeMounts:
+            - mountPath: /logs/connections-service
+              name: connections-service-claim0
+      restartPolicy: Always
+      volumes:
+        - name: connections-service-claim0
+          persistentVolumeClaim:
+            claimName: connections-service-claim0

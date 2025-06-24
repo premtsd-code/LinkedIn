@@ -29,7 +29,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 //    }
 
     private static final List<String> openApiWhitelist = List.of(
-            "/v3/api-docs", "/swagger-ui", "/swagger-ui.html"
+            "/v3/api-docs", "/swagger-ui", "/actuator"
     );
 
 

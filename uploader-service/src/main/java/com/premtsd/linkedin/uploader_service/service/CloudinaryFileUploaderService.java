@@ -12,13 +12,21 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class CloudinaryFileUploaderService implements FileUploaderService{
+public class CloudinaryFileUploaderService implements FileUploaderService {
 
     private final Cloudinary cloudinary;
 
     @Override
-    public String upload(MultipartFile file) throws IOException {
-        Map uploadResult = cloudinary.uploader().upload(file.getBytes(), Map.of());
-        return uploadResult.get("secure_url").toString();
+    public String upload(MultipartFile file) {
+        try {
+            log.info("Uploading file to Cloudinary...");
+            Map<?, ?> uploadResult = cloudinary.uploader().upload(file.getBytes(), Map.of());
+            String url = uploadResult.get("secure_url").toString();
+            log.info("Upload successful: {}", url);
+            return url;
+        } catch (IOException e) {
+            log.error("File upload failed", e);
+            throw new RuntimeException("Failed to upload file to Cloudinary", e);
+        }
     }
 }

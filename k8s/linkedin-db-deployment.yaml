@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -o k8s/
+    kompose.version: 1.36.0 (ae2a39403)
+  labels:
+    io.kompose.service: linkedin-db
+  name: linkedin-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: linkedin-db
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -o k8s/
+        kompose.version: 1.36.0 (ae2a39403)
+      labels:
+        io.kompose.service: linkedin-db
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_DB
+              value: linkedinDB
+            - name: POSTGRES_PASSWORD
+              value: password
+            - name: POSTGRES_USER
+              value: user
+          image: postgres
+          name: linkedin-db
+          ports:
+            - containerPort: 5432
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: linkedin-db-data
+      restartPolicy: Always
+      volumes:
+        - name: linkedin-db-data
+          persistentVolumeClaim:
+            claimName: linkedin-db-data

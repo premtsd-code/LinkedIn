@@ -9,16 +9,15 @@ services:
     networks:
       - linkedin-network
     environment:
-      # KRaft settings
       - KAFKA_CFG_NODE_ID=0
       - KAFKA_CFG_PROCESS_ROLES=controller,broker
       - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
-      # Listeners
       - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
       - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
       - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+      - KAFKA_HEAP_OPTS=-Xmx512m -Xms512m
 
   kafbat-ui:
     container_name: kafbat-ui
@@ -51,22 +50,28 @@ services:
     image: neo4j
     container_name: connections-db
     environment:
-      - NEO4J_AUTH=neo4j/password  # Set your username and password
+      - NEO4J_AUTH=neo4j/password
     ports:
-      - "7474:7474"  # HTTP port
-      - "7687:7687"  # Bolt port
+      - "7474:7474"
+      - "7687:7687"
     volumes:
-      - connections-db-data:/data  # Persist data
+      - connections-db-data:/data
     networks:
       - linkedin-network
 
   discovery-server:
     image: premtsd18/discovery-server
+    restart: unless-stopped
     container_name: discovery-server
     networks:
       - linkedin-network
     ports:
       - "8761:8761"
+    depends_on:
+      config-server:
+        condition: service_healthy
+    volumes:
+      - ./logs/discovery-server:/logs/discovery-server
 
   post-service:
     image: premtsd18/post-service
@@ -77,6 +82,9 @@ services:
       - discovery-server
       - linkedin-db
       - kafka
+      - config-server
+    volumes:
+      - ./app/logs/post-service:/app/logs/post-service
 
   user-service:
     image: premtsd18/user-service
@@ -87,8 +95,11 @@ services:
       - discovery-server
       - linkedin-db
       - kafka
+      - config-server
     ports:
       - "9020:9020"
+    volumes:
+      - ./app/logs/user-service:/app/logs/user-service
 
   email-service:
     image: premtsd18/email-service
@@ -99,6 +110,9 @@ services:
       - discovery-server
       - linkedin-db
       - kafka
+      - config-server
+    volumes:
+      - ./logs/email-service:/logs/email-service
 
   connections-service:
     image: premtsd18/connections-service
@@ -109,6 +123,10 @@ services:
       - discovery-server
       - connections-db
       - kafka
+      - config-server
+    volumes:
+      - ./logs/connections-service:/logs/connections-service
+
 
   api-gateway:
     image: premtsd18/api-gateway
@@ -119,6 +137,26 @@ services:
       - linkedin-network
     depends_on:
       - discovery-server
+      - config-server
+    volumes:
+      - ./logs/api-gateway:/logs/api-gateway
+
+
+  config-server:
+    image: premtsd18/config-server
+    container_name: config-server
+    ports:
+      - "8888:8888"
+    networks:
+      - linkedin-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8888/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ./logs/config-server:/logs/config-server
+
 
   redis:
     image: bitnami/redis:latest
@@ -126,19 +164,85 @@ services:
     environment:
       - REDIS_PASSWORD=secret123
     ports:
-     - "6379:6379"
+      - "6379:6379"
     networks:
-     - linkedin-network
+      - linkedin-network
 
-#  redisinsight:
-#    image: redislabs/redisinsight:latest
-#    container_name: redisinsight
-#    ports:
-#     - "8001:8001"
-#    depends_on:
-#     - redis
-#    networks:
-#     - linkedin-network
+  uploader-service:
+    image: premtsd18/uploader-service
+    container_name: uploader-service
+    networks:
+      - linkedin-network
+    depends_on:
+      - discovery-server
+      - config-server
+    volumes:
+      - ./app/logs/uploader-service:/app/logs/uploader-service
+
+
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - linkedin-network
+    environment:
+      - JAVA_OPTS=-Xms256m -Xmx512m
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.13.4
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ports:
+      - "9200:9200"
+    networks:
+      - linkedin-network
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:8.13.4
+    container_name: logstash
+    volumes:
+      - ./logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+    ports:
+      - "5044:5044"
+    networks:
+      - linkedin-network
+    depends_on:
+      - elasticsearch
+    environment:
+      - LS_JAVA_OPTS=-Xms256m -Xmx512m
+
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.13.4
+    container_name: kibana
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    networks:
+      - linkedin-network
+    depends_on:
+      - elasticsearch
+
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:8.13.4
+    container_name: filebeat
+    user: root
+    volumes:
+      - ./filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+      - ./app/logs:/app/logs:ro  # Point to host path where logs are generated
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - linkedin-network
+    depends_on:
+      - logstash
+    command: ["--strict.perms=false"]
 
 
 networks:

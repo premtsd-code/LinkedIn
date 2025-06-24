@@ -1,0 +1,486 @@
+23-06-2025 20:39:13.713 [main] [-] INFO  user-service-c.p.l.u.UserServiceApplication.logStarting - Starting UserServiceApplication using Java 21 with PID 176 (/app/target/classes started by root in /app)
+23-06-2025 20:39:13.716 [main] [-] INFO  user-service-c.p.l.u.UserServiceApplication.logStartupProfileInfo - No active profile set, falling back to 1 default profile: "default"
+23-06-2025 20:39:13.751 [main] [-] INFO  user-service-o.s.c.c.c.ConfigServerConfigDataLoader.logTo - Fetching config from server at : http://config-server:8888
+23-06-2025 20:39:13.752 [main] [-] INFO  user-service-o.s.c.c.c.ConfigServerConfigDataLoader.logTo - Located environment: name=user-service, profiles=[default], label=null, version=a2cff7b073788d4000b49f9d7d40472327a50893, state=
+23-06-2025 20:39:15.087 [main] [-] INFO  user-service-o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+23-06-2025 20:39:15.264 [main] [-] INFO  user-service-o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Finished Spring Data repository scanning in 168 ms. Found 2 JPA repository interfaces.
+23-06-2025 20:39:15.558 [main] [-] INFO  user-service-o.s.cloud.context.scope.GenericScope.setSerializationId - BeanFactory id=a4cb6a81-53e7-3c73-a1d1-ecdb29bf0c54
+23-06-2025 20:39:15.947 [main] [-] WARN  user-service-o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+23-06-2025 20:39:15.952 [main] [-] WARN  user-service-o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+23-06-2025 20:39:16.290 [main] [-] INFO  user-service-o.s.b.w.e.tomcat.TomcatWebServer.initialize - Tomcat initialized with port 9020 (http)
+23-06-2025 20:39:16.305 [main] [-] INFO  user-service-o.a.coyote.http11.Http11NioProtocol.log - Initializing ProtocolHandler ["http-nio-9020"]
+23-06-2025 20:39:16.310 [main] [-] INFO  user-service-o.a.catalina.core.StandardService.log - Starting service [Tomcat]
+23-06-2025 20:39:16.310 [main] [-] INFO  user-service-o.a.catalina.core.StandardEngine.log - Starting Servlet engine: [Apache Tomcat/10.1.30]
+23-06-2025 20:39:16.376 [main] [-] INFO  user-service-o.a.c.c.C.[.[localhost].[/users].log - Initializing Spring embedded WebApplicationContext
+23-06-2025 20:39:16.377 [main] [-] INFO  user-service-o.s.b.w.s.c.ServletWebServerApplicationContext.prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 2623 ms
+23-06-2025 20:39:17.048 [main] [-] DEBUG user-service-o.s.w.f.ServerHttpObservationFilter.init - Filter 'webMvcObservationFilter' configured for use
+23-06-2025 20:39:17.291 [main] [-] INFO  user-service-o.h.jpa.internal.util.LogHelper.logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [name: default]
+23-06-2025 20:39:17.442 [main] [-] INFO  user-service-org.hibernate.Version.logVersion - HHH000412: Hibernate ORM core version 6.5.3.Final
+23-06-2025 20:39:17.523 [main] [-] INFO  user-service-o.h.c.i.RegionFactoryInitiator.initiateService - HHH000026: Second-level cache disabled
+23-06-2025 20:39:17.977 [main] [-] INFO  user-service-o.s.o.j.p.SpringPersistenceUnitInfo.addTransformer - No LoadTimeWeaver setup: ignoring JPA class transformer
+23-06-2025 20:39:18.019 [main] [-] INFO  user-service-com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-1 - Starting...
+23-06-2025 20:39:18.201 [main] [-] INFO  user-service-com.zaxxer.hikari.pool.HikariPool.checkFailFast - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@27adb90f
+23-06-2025 20:39:18.204 [main] [-] INFO  user-service-com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-1 - Start completed.
+23-06-2025 20:39:19.460 [main] [-] INFO  user-service-o.h.e.t.j.p.i.JtaPlatformInitiator.initiateService - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+23-06-2025 20:39:19.543 [main] [-] INFO  user-service-o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
+23-06-2025 20:39:20.311 [main] [-] WARN  user-service-o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+23-06-2025 20:39:20.432 [main] [-] TRACE user-service-o.s.w.s.m.m.a.RequestMappingHandlerMapping.detectHandlerMethods - 
+	c.p.l.u.c.AuthController:
+	{POST [/auth/signup]}: signUp(SignupRequestDto)
+	{POST [/auth/login]}: login(LoginRequestDto)
+23-06-2025 20:39:20.441 [main] [-] TRACE user-service-o.s.w.s.m.m.a.RequestMappingHandlerMapping.detectHandlerMethods - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+	{ [/error]}: error(HttpServletRequest)
+23-06-2025 20:39:20.458 [main] [-] TRACE user-service-o.s.w.s.m.m.a.RequestMappingHandlerMapping.detectHandlerMethods - 
+	o.s.w.a.OpenApiWebMvcResource:
+	{GET [/v3/api-docs], produces [application/json]}: openapiJson(HttpServletRequest,String,Locale)
+	{GET [/v3/api-docs.yaml], produces [application/vnd.oai.openapi]}: openapiYaml(HttpServletRequest,String,Locale)
+23-06-2025 20:39:20.460 [main] [-] TRACE user-service-o.s.w.s.m.m.a.RequestMappingHandlerMapping.detectHandlerMethods - 
+	o.s.w.u.SwaggerWelcomeWebMvc:
+	{GET [/swagger-ui.html]}: redirectToUi(HttpServletRequest)
+23-06-2025 20:39:20.462 [main] [-] TRACE user-service-o.s.w.s.m.m.a.RequestMappingHandlerMapping.detectHandlerMethods - 
+	o.s.w.u.SwaggerConfigResource:
+	{GET [/v3/api-docs/swagger-config], produces [application/json]}: openapiJson(HttpServletRequest)
+23-06-2025 20:39:20.466 [main] [-] DEBUG user-service-o.s.w.s.m.m.a.RequestMappingHandlerMapping.handlerMethodsInitialized - 8 mappings in 'requestMappingHandlerMapping'
+23-06-2025 20:39:20.485 [main] [-] DEBUG user-service-o.s.w.s.h.BeanNameUrlHandlerMapping.detectHandlers - Detected 0 mappings in 'beanNameHandlerMapping'
+23-06-2025 20:39:20.519 [main] [-] TRACE user-service-o.s.w.s.f.s.RouterFunctionMapping.logRouterFunctions - 0 RouterFunction(s) in 'routerFunctionMapping'
+23-06-2025 20:39:20.535 [main] [-] TRACE user-service-o.s.w.s.h.SimpleUrlHandlerMapping.registerHandler - Mapped [/webjars/**] onto ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]]
+23-06-2025 20:39:20.535 [main] [-] TRACE user-service-o.s.w.s.h.SimpleUrlHandlerMapping.registerHandler - Mapped [/**] onto ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+23-06-2025 20:39:20.536 [main] [-] TRACE user-service-o.s.w.s.h.SimpleUrlHandlerMapping.registerHandler - Mapped [/swagger-ui*/*swagger-initializer.js] onto ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]]
+23-06-2025 20:39:20.536 [main] [-] TRACE user-service-o.s.w.s.h.SimpleUrlHandlerMapping.registerHandler - Mapped [/swagger-ui*/**] onto ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]]
+23-06-2025 20:39:20.536 [main] [-] DEBUG user-service-o.s.w.s.h.SimpleUrlHandlerMapping.logMappings - Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+23-06-2025 20:39:20.588 [main] [-] DEBUG user-service-o.s.w.s.m.m.a.RequestMappingHandlerAdapter.initControllerAdviceCache - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+23-06-2025 20:39:20.634 [main] [-] DEBUG user-service-o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver.initExceptionHandlerAdviceCache - ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
+23-06-2025 20:39:21.339 [main] [-] INFO  user-service-o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration.restTemplateDiscoveryClientOptionalArgs - Eureka HTTP Client uses RestTemplate.
+23-06-2025 20:39:21.391 [main] [-] WARN  user-service-o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger.afterPropertiesSet - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+23-06-2025 20:39:21.432 [main] [-] INFO  user-service-o.s.b.a.e.web.EndpointLinksResolver.<init> - Exposing 18 endpoints beneath base path '/actuator'
+23-06-2025 20:39:21.539 [main] [-] INFO  user-service-o.s.c.n.eureka.InstanceInfoFactory.create - Setting initial instance status as: STARTING
+23-06-2025 20:39:21.588 [main] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.<init> - Initializing Eureka in region us-east-1
+23-06-2025 20:39:21.594 [main] [-] INFO  user-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+23-06-2025 20:39:21.608 [main] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.fetchRegistry - Disable delta property : false
+23-06-2025 20:39:21.608 [main] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.fetchRegistry - Single vip registry refresh property : null
+23-06-2025 20:39:21.609 [main] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.fetchRegistry - Force full registry fetch : false
+23-06-2025 20:39:21.609 [main] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.fetchRegistry - Application is null : false
+23-06-2025 20:39:21.609 [main] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.fetchRegistry - Registered Applications size is zero : true
+23-06-2025 20:39:21.610 [main] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.fetchRegistry - Application version is -1: true
+23-06-2025 20:39:21.610 [main] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.getAndStoreFullRegistry - Getting all instance registry info from the eureka server
+23-06-2025 20:39:21.632 [main] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP GET http://discovery-server:8761/eureka/apps/
+23-06-2025 20:39:21.730 [main] [6859bb79e43f23c789c922ccb8e2e366-89c922ccb8e2e366] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:39:21.788 [main] [6859bb79e43f23c789c922ccb8e2e366-89c922ccb8e2e366] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:39:21.790 [main] [6859bb79e43f23c789c922ccb8e2e366-89c922ccb8e2e366] DEBUG user-service-o.s.web.client.RestTemplate.debug - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+23-06-2025 20:39:21.810 [main] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.getAndStoreFullRegistry - The response status is 200
+23-06-2025 20:39:21.814 [main] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.initScheduledTasks - Starting heartbeat executor: renew interval is: 30
+23-06-2025 20:39:21.816 [main] [-] INFO  user-service-c.n.discovery.InstanceInfoReplicator.<init> - InstanceInfoReplicator onDemand update allowed rate per min is 4
+23-06-2025 20:39:21.818 [main] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.<init> - Discovery Client initialized at timestamp 1750711161817 with initial instances count: 1
+23-06-2025 20:39:21.824 [main] [-] INFO  user-service-o.s.c.n.e.s.EurekaServiceRegistry.register - Registering application USER-SERVICE with eureka with status UP
+23-06-2025 20:39:21.825 [main] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.notify - Saw local status change event StatusChangeEvent [timestamp=1750711161825, current=UP, previous=STARTING]
+23-06-2025 20:39:21.827 [DiscoveryClient-InstanceInfoReplicator-%d] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.register - DiscoveryClient_USER-SERVICE/efda52f5d446:user-service:9020: registering service...
+23-06-2025 20:39:21.827 [main] [-] INFO  user-service-o.a.coyote.http11.Http11NioProtocol.log - Starting ProtocolHandler ["http-nio-9020"]
+23-06-2025 20:39:21.831 [DiscoveryClient-InstanceInfoReplicator-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://discovery-server:8761/eureka/apps/USER-SERVICE
+23-06-2025 20:39:21.833 [DiscoveryClient-InstanceInfoReplicator-%d] [6859bb7943abc23f11d5e351bcef245d-11d5e351bcef245d] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:39:21.840 [main] [-] INFO  user-service-o.s.b.w.e.tomcat.TomcatWebServer.start - Tomcat started on port 9020 (http) with context path '/users'
+23-06-2025 20:39:21.842 [main] [-] INFO  user-service-o.s.c.n.e.s.EurekaAutoServiceRegistration.onApplicationEvent - Updating port to 9020
+23-06-2025 20:39:21.844 [DiscoveryClient-InstanceInfoReplicator-%d] [6859bb7943abc23f11d5e351bcef245d-11d5e351bcef245d] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [InstanceInfo [instanceId = efda52f5d446:user-service:9020, appName = USER-SERVICE, hostName = efda52f5d446, status = UP, ipAddr = 172.18.0.17, port = 9020, securePort = 443, dataCenterInfo = com.netflix.appinfo.MyDataCenterInfo@1ebb6e20] as "application/json"
+23-06-2025 20:39:21.856 [main] [-] INFO  user-service-c.p.l.u.UserServiceApplication.logStarted - Started UserServiceApplication in 10.486 seconds (process running for 11.101)
+23-06-2025 20:39:21.867 [DiscoveryClient-InstanceInfoReplicator-%d] [6859bb7943abc23f11d5e351bcef245d-11d5e351bcef245d] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 204 NO_CONTENT
+23-06-2025 20:39:21.868 [DiscoveryClient-InstanceInfoReplicator-%d] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.register - DiscoveryClient_USER-SERVICE/efda52f5d446:user-service:9020 - registration status: 204
+23-06-2025 20:39:22.809 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://zipkin:9411/api/v2/spans
+23-06-2025 20:39:22.810 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:39:22.810 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [[B@560d50f6] as "application/json"
+23-06-2025 20:39:22.816 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 202 ACCEPTED
+23-06-2025 20:39:51.816 [DiscoveryClient-CacheRefreshExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP GET http://discovery-server:8761/eureka/apps/delta
+23-06-2025 20:39:51.817 [DiscoveryClient-HeartbeatExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP PUT http://discovery-server:8761/eureka/apps/USER-SERVICE/efda52f5d446:user-service:9020?status=UP&lastDirtyTimestamp=1750711161825
+23-06-2025 20:39:51.817 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bb977e6c580667d5d1029dd96182-67d5d1029dd96182] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:39:51.820 [DiscoveryClient-HeartbeatExecutor-%d] [6859bb97318916e5a1960481bab1b216-a1960481bab1b216] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:39:51.822 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bb977e6c580667d5d1029dd96182-67d5d1029dd96182] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:39:51.823 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bb977e6c580667d5d1029dd96182-67d5d1029dd96182] DEBUG user-service-o.s.web.client.RestTemplate.debug - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+23-06-2025 20:39:51.826 [DiscoveryClient-HeartbeatExecutor-%d] [6859bb97318916e5a1960481bab1b216-a1960481bab1b216] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:39:51.846 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://zipkin:9411/api/v2/spans
+23-06-2025 20:39:51.847 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:39:51.847 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [[B@6fe90e9f] as "application/json"
+23-06-2025 20:39:51.851 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 202 ACCEPTED
+23-06-2025 20:40:21.828 [DiscoveryClient-CacheRefreshExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP GET http://discovery-server:8761/eureka/apps/delta
+23-06-2025 20:40:21.828 [DiscoveryClient-HeartbeatExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP PUT http://discovery-server:8761/eureka/apps/USER-SERVICE/efda52f5d446:user-service:9020?status=UP&lastDirtyTimestamp=1750711161825
+23-06-2025 20:40:21.829 [DiscoveryClient-HeartbeatExecutor-%d] [6859bbb5be5c0beacbec2bb4da491d58-cbec2bb4da491d58] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:40:21.829 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bbb5da080f0f7d23c98e537a8231-7d23c98e537a8231] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:40:21.836 [DiscoveryClient-HeartbeatExecutor-%d] [6859bbb5be5c0beacbec2bb4da491d58-cbec2bb4da491d58] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:40:21.836 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bbb5da080f0f7d23c98e537a8231-7d23c98e537a8231] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:40:21.837 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bbb5da080f0f7d23c98e537a8231-7d23c98e537a8231] DEBUG user-service-o.s.web.client.RestTemplate.debug - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+23-06-2025 20:40:21.883 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://zipkin:9411/api/v2/spans
+23-06-2025 20:40:21.883 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:40:21.884 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [[B@73e83b72] as "application/json"
+23-06-2025 20:40:21.889 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 202 ACCEPTED
+23-06-2025 20:40:51.839 [DiscoveryClient-HeartbeatExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP PUT http://discovery-server:8761/eureka/apps/USER-SERVICE/efda52f5d446:user-service:9020?status=UP&lastDirtyTimestamp=1750711161825
+23-06-2025 20:40:51.840 [DiscoveryClient-HeartbeatExecutor-%d] [6859bbd39e8430b042499c7a8682e53d-42499c7a8682e53d] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:40:51.841 [DiscoveryClient-CacheRefreshExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP GET http://discovery-server:8761/eureka/apps/delta
+23-06-2025 20:40:51.842 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bbd36505fc0d2e3b9bf865e807a9-2e3b9bf865e807a9] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:40:51.846 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bbd36505fc0d2e3b9bf865e807a9-2e3b9bf865e807a9] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:40:51.846 [DiscoveryClient-HeartbeatExecutor-%d] [6859bbd39e8430b042499c7a8682e53d-42499c7a8682e53d] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:40:51.846 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bbd36505fc0d2e3b9bf865e807a9-2e3b9bf865e807a9] DEBUG user-service-o.s.web.client.RestTemplate.debug - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+23-06-2025 20:40:51.920 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://zipkin:9411/api/v2/spans
+23-06-2025 20:40:51.921 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:40:51.921 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [[B@3b0902aa] as "application/json"
+23-06-2025 20:40:51.926 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 202 ACCEPTED
+23-06-2025 20:41:21.849 [DiscoveryClient-HeartbeatExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP PUT http://discovery-server:8761/eureka/apps/USER-SERVICE/efda52f5d446:user-service:9020?status=UP&lastDirtyTimestamp=1750711161825
+23-06-2025 20:41:21.850 [DiscoveryClient-HeartbeatExecutor-%d] [6859bbf1c931223d2de3093e72f33a62-2de3093e72f33a62] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:41:21.850 [DiscoveryClient-CacheRefreshExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP GET http://discovery-server:8761/eureka/apps/delta
+23-06-2025 20:41:21.851 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bbf1cb468b5a87ab9d050049b485-87ab9d050049b485] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:41:21.855 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bbf1cb468b5a87ab9d050049b485-87ab9d050049b485] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:41:21.855 [DiscoveryClient-HeartbeatExecutor-%d] [6859bbf1c931223d2de3093e72f33a62-2de3093e72f33a62] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:41:21.856 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bbf1cb468b5a87ab9d050049b485-87ab9d050049b485] DEBUG user-service-o.s.web.client.RestTemplate.debug - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+23-06-2025 20:41:21.958 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://zipkin:9411/api/v2/spans
+23-06-2025 20:41:21.959 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:41:21.959 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [[B@3d551db8] as "application/json"
+23-06-2025 20:41:21.964 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 202 ACCEPTED
+23-06-2025 20:41:51.858 [DiscoveryClient-HeartbeatExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP PUT http://discovery-server:8761/eureka/apps/USER-SERVICE/efda52f5d446:user-service:9020?status=UP&lastDirtyTimestamp=1750711161825
+23-06-2025 20:41:51.859 [DiscoveryClient-CacheRefreshExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP GET http://discovery-server:8761/eureka/apps/delta
+23-06-2025 20:41:51.859 [DiscoveryClient-HeartbeatExecutor-%d] [6859bc0f5dd9e9c0275cac1611601406-275cac1611601406] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:41:51.859 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bc0f47732d8ffe53924d27ced9a5-fe53924d27ced9a5] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:41:51.864 [DiscoveryClient-HeartbeatExecutor-%d] [6859bc0f5dd9e9c0275cac1611601406-275cac1611601406] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:41:51.864 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bc0f47732d8ffe53924d27ced9a5-fe53924d27ced9a5] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:41:51.865 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bc0f47732d8ffe53924d27ced9a5-fe53924d27ced9a5] DEBUG user-service-o.s.web.client.RestTemplate.debug - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+23-06-2025 20:41:51.995 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://zipkin:9411/api/v2/spans
+23-06-2025 20:41:51.996 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:41:51.997 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [[B@7b15de41] as "application/json"
+23-06-2025 20:41:52.001 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 202 ACCEPTED
+23-06-2025 20:42:21.866 [DiscoveryClient-HeartbeatExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP PUT http://discovery-server:8761/eureka/apps/USER-SERVICE/efda52f5d446:user-service:9020?status=UP&lastDirtyTimestamp=1750711161825
+23-06-2025 20:42:21.866 [DiscoveryClient-CacheRefreshExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP GET http://discovery-server:8761/eureka/apps/delta
+23-06-2025 20:42:21.866 [DiscoveryClient-HeartbeatExecutor-%d] [6859bc2db5c3cd571ffebe7ca8effc91-1ffebe7ca8effc91] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:42:21.867 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bc2dfcc4346418305902e937bcb7-18305902e937bcb7] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:42:21.870 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bc2dfcc4346418305902e937bcb7-18305902e937bcb7] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:42:21.870 [DiscoveryClient-HeartbeatExecutor-%d] [6859bc2db5c3cd571ffebe7ca8effc91-1ffebe7ca8effc91] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:42:21.870 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bc2dfcc4346418305902e937bcb7-18305902e937bcb7] DEBUG user-service-o.s.web.client.RestTemplate.debug - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+23-06-2025 20:42:22.031 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://zipkin:9411/api/v2/spans
+23-06-2025 20:42:22.032 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:42:22.032 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [[B@499449fa] as "application/json"
+23-06-2025 20:42:22.036 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 202 ACCEPTED
+23-06-2025 20:42:51.871 [DiscoveryClient-HeartbeatExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP PUT http://discovery-server:8761/eureka/apps/USER-SERVICE/efda52f5d446:user-service:9020?status=UP&lastDirtyTimestamp=1750711161825
+23-06-2025 20:42:51.872 [DiscoveryClient-HeartbeatExecutor-%d] [6859bc4bd3feb9fccdfa1f51d5554205-cdfa1f51d5554205] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:42:51.873 [DiscoveryClient-CacheRefreshExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP GET http://discovery-server:8761/eureka/apps/delta
+23-06-2025 20:42:51.873 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bc4b1b5f8c39572706840ab2ca90-572706840ab2ca90] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:42:51.875 [DiscoveryClient-HeartbeatExecutor-%d] [6859bc4bd3feb9fccdfa1f51d5554205-cdfa1f51d5554205] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:42:51.875 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bc4b1b5f8c39572706840ab2ca90-572706840ab2ca90] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:42:51.876 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bc4b1b5f8c39572706840ab2ca90-572706840ab2ca90] DEBUG user-service-o.s.web.client.RestTemplate.debug - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+23-06-2025 20:42:52.066 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://zipkin:9411/api/v2/spans
+23-06-2025 20:42:52.067 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:42:52.067 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [[B@3a7b1e30] as "application/json"
+23-06-2025 20:42:52.072 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 202 ACCEPTED
+23-06-2025 20:43:21.876 [DiscoveryClient-HeartbeatExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP PUT http://discovery-server:8761/eureka/apps/USER-SERVICE/efda52f5d446:user-service:9020?status=UP&lastDirtyTimestamp=1750711161825
+23-06-2025 20:43:21.877 [DiscoveryClient-HeartbeatExecutor-%d] [6859bc69d0af9e44c661a271791a22d9-c661a271791a22d9] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:43:21.878 [DiscoveryClient-CacheRefreshExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP GET http://discovery-server:8761/eureka/apps/delta
+23-06-2025 20:43:21.879 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bc69b9d0443a5ca2c3f238290080-5ca2c3f238290080] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:43:21.882 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bc69b9d0443a5ca2c3f238290080-5ca2c3f238290080] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:43:21.882 [DiscoveryClient-HeartbeatExecutor-%d] [6859bc69d0af9e44c661a271791a22d9-c661a271791a22d9] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:43:21.883 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bc69b9d0443a5ca2c3f238290080-5ca2c3f238290080] DEBUG user-service-o.s.web.client.RestTemplate.debug - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+23-06-2025 20:43:22.102 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://zipkin:9411/api/v2/spans
+23-06-2025 20:43:22.104 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:43:22.104 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [[B@2f567c1a] as "application/json"
+23-06-2025 20:43:22.108 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 202 ACCEPTED
+23-06-2025 20:43:51.884 [DiscoveryClient-HeartbeatExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP PUT http://discovery-server:8761/eureka/apps/USER-SERVICE/efda52f5d446:user-service:9020?status=UP&lastDirtyTimestamp=1750711161825
+23-06-2025 20:43:51.884 [DiscoveryClient-CacheRefreshExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP GET http://discovery-server:8761/eureka/apps/delta
+23-06-2025 20:43:51.885 [DiscoveryClient-HeartbeatExecutor-%d] [6859bc87c9b043c7c9e4561791cb6042-c9e4561791cb6042] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:43:51.885 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bc87b920cd699087e93a9752895c-9087e93a9752895c] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:43:51.890 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bc87b920cd699087e93a9752895c-9087e93a9752895c] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:43:51.890 [DiscoveryClient-HeartbeatExecutor-%d] [6859bc87c9b043c7c9e4561791cb6042-c9e4561791cb6042] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:43:51.890 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bc87b920cd699087e93a9752895c-9087e93a9752895c] DEBUG user-service-o.s.web.client.RestTemplate.debug - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+23-06-2025 20:43:52.137 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://zipkin:9411/api/v2/spans
+23-06-2025 20:43:52.138 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:43:52.138 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [[B@7a645867] as "application/json"
+23-06-2025 20:43:52.142 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 202 ACCEPTED
+23-06-2025 20:44:03.050 [SpringApplicationShutdownHook] [-] INFO  user-service-o.s.c.n.e.s.EurekaServiceRegistry.deregister - Unregistering application USER-SERVICE with eureka with status DOWN
+23-06-2025 20:44:03.053 [SpringApplicationShutdownHook] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.notify - Saw local status change event StatusChangeEvent [timestamp=1750711443053, current=DOWN, previous=UP]
+23-06-2025 20:44:03.054 [DiscoveryClient-InstanceInfoReplicator-%d] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.register - DiscoveryClient_USER-SERVICE/efda52f5d446:user-service:9020: registering service...
+23-06-2025 20:44:03.056 [DiscoveryClient-InstanceInfoReplicator-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://discovery-server:8761/eureka/apps/USER-SERVICE
+23-06-2025 20:44:03.057 [DiscoveryClient-InstanceInfoReplicator-%d] [6859bc935c06352254a3e26101f0099e-54a3e26101f0099e] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:44:03.058 [DiscoveryClient-InstanceInfoReplicator-%d] [6859bc935c06352254a3e26101f0099e-54a3e26101f0099e] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [InstanceInfo [instanceId = efda52f5d446:user-service:9020, appName = USER-SERVICE, hostName = efda52f5d446, status = DOWN, ipAddr = 172.18.0.17, port = 9020, securePort = 443, dataCenterInfo = com.netflix.appinfo.MyDataCenterInfo@1ebb6e20] as "application/json"
+23-06-2025 20:44:03.066 [DiscoveryClient-InstanceInfoReplicator-%d] [6859bc935c06352254a3e26101f0099e-54a3e26101f0099e] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 204 NO_CONTENT
+23-06-2025 20:44:03.067 [SpringApplicationShutdownHook] [-] INFO  user-service-o.s.o.j.LocalContainerEntityManagerFactoryBean.destroy - Closing JPA EntityManagerFactory for persistence unit 'default'
+23-06-2025 20:44:03.067 [DiscoveryClient-InstanceInfoReplicator-%d] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.register - DiscoveryClient_USER-SERVICE/efda52f5d446:user-service:9020 - registration status: 204
+23-06-2025 20:44:03.082 [SpringApplicationShutdownHook] [-] INFO  user-service-com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown initiated...
+23-06-2025 20:44:03.088 [SpringApplicationShutdownHook] [-] INFO  user-service-com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown completed.
+23-06-2025 20:44:03.153 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://zipkin:9411/api/v2/spans
+23-06-2025 20:44:03.153 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:44:03.154 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [[B@11d41548] as "application/json"
+23-06-2025 20:44:03.158 [SpringApplicationShutdownHook] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.shutdown - Shutting down DiscoveryClient ...
+23-06-2025 20:44:06.159 [SpringApplicationShutdownHook] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.unregister - Unregistering ...
+23-06-2025 20:44:06.161 [SpringApplicationShutdownHook] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP DELETE http://discovery-server:8761/eureka/apps/USER-SERVICE/efda52f5d446:user-service:9020
+23-06-2025 20:44:06.162 [SpringApplicationShutdownHook] [6859bc9683f4d847f77ddee77c9a19cb-f77ddee77c9a19cb] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:44:06.172 [SpringApplicationShutdownHook] [6859bc9683f4d847f77ddee77c9a19cb-f77ddee77c9a19cb] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:44:06.172 [SpringApplicationShutdownHook] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.unregister - DiscoveryClient_USER-SERVICE/efda52f5d446:user-service:9020 - deregister  status: 200
+23-06-2025 20:44:06.173 [SpringApplicationShutdownHook] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.shutdown - Completed shut down of DiscoveryClient
+23-06-2025 20:45:20.112 [main] [-] INFO  user-service-c.p.l.u.UserServiceApplication.logStarting - Starting UserServiceApplication using Java 21 with PID 175 (/app/target/classes started by root in /app)
+23-06-2025 20:45:20.115 [main] [-] INFO  user-service-c.p.l.u.UserServiceApplication.logStartupProfileInfo - No active profile set, falling back to 1 default profile: "default"
+23-06-2025 20:45:20.151 [main] [-] INFO  user-service-o.s.c.c.c.ConfigServerConfigDataLoader.logTo - Fetching config from server at : http://config-server:8888
+23-06-2025 20:45:20.152 [main] [-] INFO  user-service-o.s.c.c.c.ConfigServerConfigDataLoader.logTo - Located environment: name=user-service, profiles=[default], label=null, version=a2cff7b073788d4000b49f9d7d40472327a50893, state=
+23-06-2025 20:45:21.372 [main] [-] INFO  user-service-o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+23-06-2025 20:45:21.610 [main] [-] INFO  user-service-o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Finished Spring Data repository scanning in 225 ms. Found 2 JPA repository interfaces.
+23-06-2025 20:45:22.064 [main] [-] INFO  user-service-o.s.cloud.context.scope.GenericScope.setSerializationId - BeanFactory id=a4cb6a81-53e7-3c73-a1d1-ecdb29bf0c54
+23-06-2025 20:45:22.452 [main] [-] WARN  user-service-o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+23-06-2025 20:45:22.457 [main] [-] WARN  user-service-o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+23-06-2025 20:45:22.771 [main] [-] INFO  user-service-o.s.b.w.e.tomcat.TomcatWebServer.initialize - Tomcat initialized with port 9020 (http)
+23-06-2025 20:45:22.784 [main] [-] INFO  user-service-o.a.coyote.http11.Http11NioProtocol.log - Initializing ProtocolHandler ["http-nio-9020"]
+23-06-2025 20:45:22.788 [main] [-] INFO  user-service-o.a.catalina.core.StandardService.log - Starting service [Tomcat]
+23-06-2025 20:45:22.789 [main] [-] INFO  user-service-o.a.catalina.core.StandardEngine.log - Starting Servlet engine: [Apache Tomcat/10.1.30]
+23-06-2025 20:45:22.864 [main] [-] INFO  user-service-o.a.c.c.C.[.[localhost].[/users].log - Initializing Spring embedded WebApplicationContext
+23-06-2025 20:45:22.865 [main] [-] INFO  user-service-o.s.b.w.s.c.ServletWebServerApplicationContext.prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 2711 ms
+23-06-2025 20:45:23.401 [main] [-] DEBUG user-service-o.s.w.f.ServerHttpObservationFilter.init - Filter 'webMvcObservationFilter' configured for use
+23-06-2025 20:45:23.522 [main] [-] INFO  user-service-o.h.jpa.internal.util.LogHelper.logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [name: default]
+23-06-2025 20:45:23.575 [main] [-] INFO  user-service-org.hibernate.Version.logVersion - HHH000412: Hibernate ORM core version 6.5.3.Final
+23-06-2025 20:45:23.609 [main] [-] INFO  user-service-o.h.c.i.RegionFactoryInitiator.initiateService - HHH000026: Second-level cache disabled
+23-06-2025 20:45:23.894 [main] [-] INFO  user-service-o.s.o.j.p.SpringPersistenceUnitInfo.addTransformer - No LoadTimeWeaver setup: ignoring JPA class transformer
+23-06-2025 20:45:23.922 [main] [-] INFO  user-service-com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-1 - Starting...
+23-06-2025 20:45:24.096 [main] [-] INFO  user-service-com.zaxxer.hikari.pool.HikariPool.checkFailFast - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3ca5da54
+23-06-2025 20:45:24.098 [main] [-] INFO  user-service-com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-1 - Start completed.
+23-06-2025 20:45:25.064 [main] [-] INFO  user-service-o.h.e.t.j.p.i.JtaPlatformInitiator.initiateService - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+23-06-2025 20:45:25.090 [main] [-] WARN  user-service-o.h.e.jdbc.spi.SqlExceptionHelper.logWarning - SQL Warning Code: 0, SQLState: 00000
+23-06-2025 20:45:25.090 [main] [-] WARN  user-service-o.h.e.jdbc.spi.SqlExceptionHelper.logWarning - relation "users_roles" does not exist, skipping
+23-06-2025 20:45:25.091 [main] [-] WARN  user-service-o.h.e.jdbc.spi.SqlExceptionHelper.logWarning - SQL Warning Code: 0, SQLState: 00000
+23-06-2025 20:45:25.092 [main] [-] WARN  user-service-o.h.e.jdbc.spi.SqlExceptionHelper.logWarning - relation "users_roles" does not exist, skipping
+23-06-2025 20:45:25.093 [main] [-] WARN  user-service-o.h.e.jdbc.spi.SqlExceptionHelper.logWarning - SQL Warning Code: 0, SQLState: 00000
+23-06-2025 20:45:25.094 [main] [-] WARN  user-service-o.h.e.jdbc.spi.SqlExceptionHelper.logWarning - table "role" does not exist, skipping
+23-06-2025 20:45:25.095 [main] [-] WARN  user-service-o.h.e.jdbc.spi.SqlExceptionHelper.logWarning - SQL Warning Code: 0, SQLState: 00000
+23-06-2025 20:45:25.097 [main] [-] WARN  user-service-o.h.e.jdbc.spi.SqlExceptionHelper.logWarning - table "users" does not exist, skipping
+23-06-2025 20:45:25.098 [main] [-] WARN  user-service-o.h.e.jdbc.spi.SqlExceptionHelper.logWarning - SQL Warning Code: 0, SQLState: 00000
+23-06-2025 20:45:25.099 [main] [-] WARN  user-service-o.h.e.jdbc.spi.SqlExceptionHelper.logWarning - table "users_roles" does not exist, skipping
+23-06-2025 20:45:25.140 [main] [-] INFO  user-service-o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
+23-06-2025 20:45:25.747 [main] [-] WARN  user-service-o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+23-06-2025 20:45:25.852 [main] [-] TRACE user-service-o.s.w.s.m.m.a.RequestMappingHandlerMapping.detectHandlerMethods - 
+	c.p.l.u.c.AuthController:
+	{POST [/auth/signup]}: signUp(SignupRequestDto)
+	{POST [/auth/login]}: login(LoginRequestDto)
+23-06-2025 20:45:25.862 [main] [-] TRACE user-service-o.s.w.s.m.m.a.RequestMappingHandlerMapping.detectHandlerMethods - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+	{ [/error]}: error(HttpServletRequest)
+23-06-2025 20:45:25.878 [main] [-] TRACE user-service-o.s.w.s.m.m.a.RequestMappingHandlerMapping.detectHandlerMethods - 
+	o.s.w.a.OpenApiWebMvcResource:
+	{GET [/v3/api-docs], produces [application/json]}: openapiJson(HttpServletRequest,String,Locale)
+	{GET [/v3/api-docs.yaml], produces [application/vnd.oai.openapi]}: openapiYaml(HttpServletRequest,String,Locale)
+23-06-2025 20:45:25.881 [main] [-] TRACE user-service-o.s.w.s.m.m.a.RequestMappingHandlerMapping.detectHandlerMethods - 
+	o.s.w.u.SwaggerWelcomeWebMvc:
+	{GET [/swagger-ui.html]}: redirectToUi(HttpServletRequest)
+23-06-2025 20:45:25.883 [main] [-] TRACE user-service-o.s.w.s.m.m.a.RequestMappingHandlerMapping.detectHandlerMethods - 
+	o.s.w.u.SwaggerConfigResource:
+	{GET [/v3/api-docs/swagger-config], produces [application/json]}: openapiJson(HttpServletRequest)
+23-06-2025 20:45:25.888 [main] [-] DEBUG user-service-o.s.w.s.m.m.a.RequestMappingHandlerMapping.handlerMethodsInitialized - 8 mappings in 'requestMappingHandlerMapping'
+23-06-2025 20:45:25.914 [main] [-] DEBUG user-service-o.s.w.s.h.BeanNameUrlHandlerMapping.detectHandlers - Detected 0 mappings in 'beanNameHandlerMapping'
+23-06-2025 20:45:25.946 [main] [-] TRACE user-service-o.s.w.s.f.s.RouterFunctionMapping.logRouterFunctions - 0 RouterFunction(s) in 'routerFunctionMapping'
+23-06-2025 20:45:25.964 [main] [-] TRACE user-service-o.s.w.s.h.SimpleUrlHandlerMapping.registerHandler - Mapped [/webjars/**] onto ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]]
+23-06-2025 20:45:25.965 [main] [-] TRACE user-service-o.s.w.s.h.SimpleUrlHandlerMapping.registerHandler - Mapped [/**] onto ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+23-06-2025 20:45:25.966 [main] [-] TRACE user-service-o.s.w.s.h.SimpleUrlHandlerMapping.registerHandler - Mapped [/swagger-ui*/*swagger-initializer.js] onto ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]]
+23-06-2025 20:45:25.966 [main] [-] TRACE user-service-o.s.w.s.h.SimpleUrlHandlerMapping.registerHandler - Mapped [/swagger-ui*/**] onto ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]]
+23-06-2025 20:45:25.967 [main] [-] DEBUG user-service-o.s.w.s.h.SimpleUrlHandlerMapping.logMappings - Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+23-06-2025 20:45:26.018 [main] [-] DEBUG user-service-o.s.w.s.m.m.a.RequestMappingHandlerAdapter.initControllerAdviceCache - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+23-06-2025 20:45:26.066 [main] [-] DEBUG user-service-o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver.initExceptionHandlerAdviceCache - ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
+23-06-2025 20:45:26.890 [main] [-] INFO  user-service-o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration.restTemplateDiscoveryClientOptionalArgs - Eureka HTTP Client uses RestTemplate.
+23-06-2025 20:45:26.986 [main] [-] WARN  user-service-o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger.afterPropertiesSet - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+23-06-2025 20:45:27.038 [main] [-] INFO  user-service-o.s.b.a.e.web.EndpointLinksResolver.<init> - Exposing 18 endpoints beneath base path '/actuator'
+23-06-2025 20:45:27.149 [main] [-] INFO  user-service-o.s.c.n.eureka.InstanceInfoFactory.create - Setting initial instance status as: STARTING
+23-06-2025 20:45:27.184 [main] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.<init> - Initializing Eureka in region us-east-1
+23-06-2025 20:45:27.191 [main] [-] INFO  user-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+23-06-2025 20:45:27.206 [main] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.fetchRegistry - Disable delta property : false
+23-06-2025 20:45:27.207 [main] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.fetchRegistry - Single vip registry refresh property : null
+23-06-2025 20:45:27.207 [main] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.fetchRegistry - Force full registry fetch : false
+23-06-2025 20:45:27.208 [main] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.fetchRegistry - Application is null : false
+23-06-2025 20:45:27.208 [main] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.fetchRegistry - Registered Applications size is zero : true
+23-06-2025 20:45:27.209 [main] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.fetchRegistry - Application version is -1: true
+23-06-2025 20:45:27.210 [main] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.getAndStoreFullRegistry - Getting all instance registry info from the eureka server
+23-06-2025 20:45:27.247 [main] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP GET http://discovery-server:8761/eureka/apps/
+23-06-2025 20:45:27.367 [main] [6859bce779b816f5cd4d275d2fe250fb-cd4d275d2fe250fb] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:45:27.444 [main] [6859bce779b816f5cd4d275d2fe250fb-cd4d275d2fe250fb] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:45:27.450 [main] [6859bce779b816f5cd4d275d2fe250fb-cd4d275d2fe250fb] DEBUG user-service-o.s.web.client.RestTemplate.debug - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+23-06-2025 20:45:27.471 [main] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.getAndStoreFullRegistry - The response status is 200
+23-06-2025 20:45:27.474 [main] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.initScheduledTasks - Starting heartbeat executor: renew interval is: 30
+23-06-2025 20:45:27.479 [main] [-] INFO  user-service-c.n.discovery.InstanceInfoReplicator.<init> - InstanceInfoReplicator onDemand update allowed rate per min is 4
+23-06-2025 20:45:27.481 [main] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.<init> - Discovery Client initialized at timestamp 1750711527481 with initial instances count: 0
+23-06-2025 20:45:27.493 [main] [-] INFO  user-service-o.s.c.n.e.s.EurekaServiceRegistry.register - Registering application USER-SERVICE with eureka with status UP
+23-06-2025 20:45:27.494 [main] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.notify - Saw local status change event StatusChangeEvent [timestamp=1750711527494, current=UP, previous=STARTING]
+23-06-2025 20:45:27.497 [main] [-] INFO  user-service-o.a.coyote.http11.Http11NioProtocol.log - Starting ProtocolHandler ["http-nio-9020"]
+23-06-2025 20:45:27.500 [DiscoveryClient-InstanceInfoReplicator-%d] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.register - DiscoveryClient_USER-SERVICE/efda52f5d446:user-service:9020: registering service...
+23-06-2025 20:45:27.509 [DiscoveryClient-InstanceInfoReplicator-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://discovery-server:8761/eureka/apps/USER-SERVICE
+23-06-2025 20:45:27.513 [DiscoveryClient-InstanceInfoReplicator-%d] [6859bce7ad368d55d573831c431ffc5a-d573831c431ffc5a] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:45:27.531 [main] [-] INFO  user-service-o.s.b.w.e.tomcat.TomcatWebServer.start - Tomcat started on port 9020 (http) with context path '/users'
+23-06-2025 20:45:27.535 [main] [-] INFO  user-service-o.s.c.n.e.s.EurekaAutoServiceRegistration.onApplicationEvent - Updating port to 9020
+23-06-2025 20:45:27.544 [DiscoveryClient-InstanceInfoReplicator-%d] [6859bce7ad368d55d573831c431ffc5a-d573831c431ffc5a] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [InstanceInfo [instanceId = efda52f5d446:user-service:9020, appName = USER-SERVICE, hostName = efda52f5d446, status = UP, ipAddr = 172.18.0.19, port = 9020, securePort = 443, dataCenterInfo = com.netflix.appinfo.MyDataCenterInfo@6a636c62] as "application/json"
+23-06-2025 20:45:27.558 [main] [-] INFO  user-service-c.p.l.u.UserServiceApplication.logStarted - Started UserServiceApplication in 12.848 seconds (process running for 13.348)
+23-06-2025 20:45:27.578 [DiscoveryClient-InstanceInfoReplicator-%d] [6859bce7ad368d55d573831c431ffc5a-d573831c431ffc5a] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 204 NO_CONTENT
+23-06-2025 20:45:27.579 [DiscoveryClient-InstanceInfoReplicator-%d] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.register - DiscoveryClient_USER-SERVICE/efda52f5d446:user-service:9020 - registration status: 204
+23-06-2025 20:45:28.469 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://zipkin:9411/api/v2/spans
+23-06-2025 20:45:28.470 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:45:28.471 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [[B@45875eb9] as "application/json"
+23-06-2025 20:45:28.481 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 202 ACCEPTED
+23-06-2025 20:45:57.476 [DiscoveryClient-CacheRefreshExecutor-%d] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.fetchRegistry - Disable delta property : false
+23-06-2025 20:45:57.477 [DiscoveryClient-CacheRefreshExecutor-%d] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.fetchRegistry - Single vip registry refresh property : null
+23-06-2025 20:45:57.477 [DiscoveryClient-CacheRefreshExecutor-%d] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.fetchRegistry - Force full registry fetch : false
+23-06-2025 20:45:57.478 [DiscoveryClient-CacheRefreshExecutor-%d] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.fetchRegistry - Application is null : false
+23-06-2025 20:45:57.478 [DiscoveryClient-CacheRefreshExecutor-%d] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.fetchRegistry - Registered Applications size is zero : true
+23-06-2025 20:45:57.478 [DiscoveryClient-CacheRefreshExecutor-%d] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.fetchRegistry - Application version is -1: false
+23-06-2025 20:45:57.478 [DiscoveryClient-CacheRefreshExecutor-%d] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.getAndStoreFullRegistry - Getting all instance registry info from the eureka server
+23-06-2025 20:45:57.479 [DiscoveryClient-CacheRefreshExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP GET http://discovery-server:8761/eureka/apps/
+23-06-2025 20:45:57.479 [DiscoveryClient-HeartbeatExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP PUT http://discovery-server:8761/eureka/apps/USER-SERVICE/efda52f5d446:user-service:9020?status=UP&lastDirtyTimestamp=1750711527494
+23-06-2025 20:45:57.480 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bd05e6a379300a790b7cff8db80c-0a790b7cff8db80c] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:45:57.484 [DiscoveryClient-HeartbeatExecutor-%d] [6859bd0527b4bc92aa07ac9f6c0e2246-aa07ac9f6c0e2246] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:45:57.486 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bd05e6a379300a790b7cff8db80c-0a790b7cff8db80c] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:45:57.487 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bd05e6a379300a790b7cff8db80c-0a790b7cff8db80c] DEBUG user-service-o.s.web.client.RestTemplate.debug - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+23-06-2025 20:45:57.492 [DiscoveryClient-HeartbeatExecutor-%d] [6859bd0527b4bc92aa07ac9f6c0e2246-aa07ac9f6c0e2246] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:45:57.498 [DiscoveryClient-CacheRefreshExecutor-%d] [-] INFO  user-service-c.netflix.discovery.DiscoveryClient.getAndStoreFullRegistry - The response status is 200
+23-06-2025 20:45:57.512 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://zipkin:9411/api/v2/spans
+23-06-2025 20:45:57.512 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:45:57.513 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [[B@41b8bde6] as "application/json"
+23-06-2025 20:45:57.518 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 202 ACCEPTED
+23-06-2025 20:46:27.494 [DiscoveryClient-HeartbeatExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP PUT http://discovery-server:8761/eureka/apps/USER-SERVICE/efda52f5d446:user-service:9020?status=UP&lastDirtyTimestamp=1750711527494
+23-06-2025 20:46:27.495 [DiscoveryClient-HeartbeatExecutor-%d] [6859bd234f0dddd67e7636f625af4068-7e7636f625af4068] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:46:27.501 [DiscoveryClient-CacheRefreshExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP GET http://discovery-server:8761/eureka/apps/delta
+23-06-2025 20:46:27.501 [DiscoveryClient-HeartbeatExecutor-%d] [6859bd234f0dddd67e7636f625af4068-7e7636f625af4068] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:46:27.502 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bd23ebe5eb27925cfb1a481b05f1-925cfb1a481b05f1] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:46:27.507 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bd23ebe5eb27925cfb1a481b05f1-925cfb1a481b05f1] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:46:27.508 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bd23ebe5eb27925cfb1a481b05f1-925cfb1a481b05f1] DEBUG user-service-o.s.web.client.RestTemplate.debug - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+23-06-2025 20:46:27.549 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://zipkin:9411/api/v2/spans
+23-06-2025 20:46:27.550 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:46:27.551 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [[B@22a7e086] as "application/json"
+23-06-2025 20:46:27.557 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 202 ACCEPTED
+23-06-2025 20:46:57.504 [DiscoveryClient-HeartbeatExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP PUT http://discovery-server:8761/eureka/apps/USER-SERVICE/efda52f5d446:user-service:9020?status=UP&lastDirtyTimestamp=1750711527494
+23-06-2025 20:46:57.505 [DiscoveryClient-HeartbeatExecutor-%d] [6859bd41bf944ad41617efb24e86c0ad-1617efb24e86c0ad] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:46:57.510 [DiscoveryClient-HeartbeatExecutor-%d] [6859bd41bf944ad41617efb24e86c0ad-1617efb24e86c0ad] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:46:57.512 [DiscoveryClient-CacheRefreshExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP GET http://discovery-server:8761/eureka/apps/delta
+23-06-2025 20:46:57.513 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bd41d8e9e382c8b41c1ab7b72c95-c8b41c1ab7b72c95] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:46:57.519 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bd41d8e9e382c8b41c1ab7b72c95-c8b41c1ab7b72c95] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:46:57.520 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bd41d8e9e382c8b41c1ab7b72c95-c8b41c1ab7b72c95] DEBUG user-service-o.s.web.client.RestTemplate.debug - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+23-06-2025 20:46:57.588 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://zipkin:9411/api/v2/spans
+23-06-2025 20:46:57.589 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:46:57.590 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [[B@4427dc34] as "application/json"
+23-06-2025 20:46:57.595 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 202 ACCEPTED
+23-06-2025 20:47:27.514 [DiscoveryClient-HeartbeatExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP PUT http://discovery-server:8761/eureka/apps/USER-SERVICE/efda52f5d446:user-service:9020?status=UP&lastDirtyTimestamp=1750711527494
+23-06-2025 20:47:27.515 [DiscoveryClient-HeartbeatExecutor-%d] [6859bd5f78e2324b0041d39ef15f37d8-0041d39ef15f37d8] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:47:27.521 [DiscoveryClient-HeartbeatExecutor-%d] [6859bd5f78e2324b0041d39ef15f37d8-0041d39ef15f37d8] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:47:27.524 [DiscoveryClient-CacheRefreshExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP GET http://discovery-server:8761/eureka/apps/delta
+23-06-2025 20:47:27.526 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bd5f9d54c60388170a33faade4cd-88170a33faade4cd] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:47:27.531 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bd5f9d54c60388170a33faade4cd-88170a33faade4cd] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:47:27.532 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bd5f9d54c60388170a33faade4cd-88170a33faade4cd] DEBUG user-service-o.s.web.client.RestTemplate.debug - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+23-06-2025 20:47:27.626 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://zipkin:9411/api/v2/spans
+23-06-2025 20:47:27.627 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:47:27.627 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [[B@30143c14] as "application/json"
+23-06-2025 20:47:27.633 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 202 ACCEPTED
+23-06-2025 20:47:57.523 [DiscoveryClient-HeartbeatExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP PUT http://discovery-server:8761/eureka/apps/USER-SERVICE/efda52f5d446:user-service:9020?status=UP&lastDirtyTimestamp=1750711527494
+23-06-2025 20:47:57.525 [DiscoveryClient-HeartbeatExecutor-%d] [6859bd7dbe7185c6933d96c930d36c44-933d96c930d36c44] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:47:57.531 [DiscoveryClient-HeartbeatExecutor-%d] [6859bd7dbe7185c6933d96c930d36c44-933d96c930d36c44] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:47:57.536 [DiscoveryClient-CacheRefreshExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP GET http://discovery-server:8761/eureka/apps/delta
+23-06-2025 20:47:57.537 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bd7d1069628a269ec5b585d505ec-269ec5b585d505ec] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:47:57.543 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bd7d1069628a269ec5b585d505ec-269ec5b585d505ec] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:47:57.544 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bd7d1069628a269ec5b585d505ec-269ec5b585d505ec] DEBUG user-service-o.s.web.client.RestTemplate.debug - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+23-06-2025 20:47:57.664 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://zipkin:9411/api/v2/spans
+23-06-2025 20:47:57.665 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:47:57.665 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [[B@37161903] as "application/json"
+23-06-2025 20:47:57.670 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 202 ACCEPTED
+23-06-2025 20:48:27.533 [DiscoveryClient-HeartbeatExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP PUT http://discovery-server:8761/eureka/apps/USER-SERVICE/efda52f5d446:user-service:9020?status=UP&lastDirtyTimestamp=1750711527494
+23-06-2025 20:48:27.534 [DiscoveryClient-HeartbeatExecutor-%d] [6859bd9b676bc51afe7d2ea8eee48986-fe7d2ea8eee48986] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:48:27.540 [DiscoveryClient-HeartbeatExecutor-%d] [6859bd9b676bc51afe7d2ea8eee48986-fe7d2ea8eee48986] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:48:27.547 [DiscoveryClient-CacheRefreshExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP GET http://discovery-server:8761/eureka/apps/delta
+23-06-2025 20:48:27.548 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bd9b9d86ab7ce70dce75d830b9d6-e70dce75d830b9d6] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:48:27.554 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bd9b9d86ab7ce70dce75d830b9d6-e70dce75d830b9d6] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:48:27.554 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bd9b9d86ab7ce70dce75d830b9d6-e70dce75d830b9d6] DEBUG user-service-o.s.web.client.RestTemplate.debug - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+23-06-2025 20:48:27.701 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://zipkin:9411/api/v2/spans
+23-06-2025 20:48:27.702 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:48:27.702 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [[B@2aa87cb7] as "application/json"
+23-06-2025 20:48:27.707 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 202 ACCEPTED
+23-06-2025 20:48:57.543 [DiscoveryClient-HeartbeatExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP PUT http://discovery-server:8761/eureka/apps/USER-SERVICE/efda52f5d446:user-service:9020?status=UP&lastDirtyTimestamp=1750711527494
+23-06-2025 20:48:57.544 [DiscoveryClient-HeartbeatExecutor-%d] [6859bdb986e122871a40bcb669f33998-1a40bcb669f33998] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:48:57.549 [DiscoveryClient-HeartbeatExecutor-%d] [6859bdb986e122871a40bcb669f33998-1a40bcb669f33998] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:48:57.557 [DiscoveryClient-CacheRefreshExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP GET http://discovery-server:8761/eureka/apps/delta
+23-06-2025 20:48:57.558 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bdb922480dc4e02f29fe451dbab2-e02f29fe451dbab2] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:48:57.562 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bdb922480dc4e02f29fe451dbab2-e02f29fe451dbab2] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:48:57.563 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bdb922480dc4e02f29fe451dbab2-e02f29fe451dbab2] DEBUG user-service-o.s.web.client.RestTemplate.debug - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+23-06-2025 20:48:57.737 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://zipkin:9411/api/v2/spans
+23-06-2025 20:48:57.738 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:48:57.738 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [[B@5014d3aa] as "application/json"
+23-06-2025 20:48:57.743 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 202 ACCEPTED
+23-06-2025 20:49:27.553 [DiscoveryClient-HeartbeatExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP PUT http://discovery-server:8761/eureka/apps/USER-SERVICE/efda52f5d446:user-service:9020?status=UP&lastDirtyTimestamp=1750711527494
+23-06-2025 20:49:27.554 [DiscoveryClient-HeartbeatExecutor-%d] [6859bdd7c45313a7e9f3b545adfe8c7a-e9f3b545adfe8c7a] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:49:27.563 [DiscoveryClient-HeartbeatExecutor-%d] [6859bdd7c45313a7e9f3b545adfe8c7a-e9f3b545adfe8c7a] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:49:27.566 [DiscoveryClient-CacheRefreshExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP GET http://discovery-server:8761/eureka/apps/delta
+23-06-2025 20:49:27.567 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bdd78685c7d344e5500c934fec1b-44e5500c934fec1b] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:49:27.571 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bdd78685c7d344e5500c934fec1b-44e5500c934fec1b] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:49:27.572 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bdd78685c7d344e5500c934fec1b-44e5500c934fec1b] DEBUG user-service-o.s.web.client.RestTemplate.debug - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+23-06-2025 20:49:27.772 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://zipkin:9411/api/v2/spans
+23-06-2025 20:49:27.772 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:49:27.773 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [[B@41f1a120] as "application/json"
+23-06-2025 20:49:27.779 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 202 ACCEPTED
+23-06-2025 20:49:57.565 [DiscoveryClient-HeartbeatExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP PUT http://discovery-server:8761/eureka/apps/USER-SERVICE/efda52f5d446:user-service:9020?status=UP&lastDirtyTimestamp=1750711527494
+23-06-2025 20:49:57.566 [DiscoveryClient-HeartbeatExecutor-%d] [6859bdf5bb78b8b8281e24a70b6b3888-281e24a70b6b3888] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:49:57.571 [DiscoveryClient-HeartbeatExecutor-%d] [6859bdf5bb78b8b8281e24a70b6b3888-281e24a70b6b3888] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:49:57.574 [DiscoveryClient-CacheRefreshExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP GET http://discovery-server:8761/eureka/apps/delta
+23-06-2025 20:49:57.575 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bdf5c850e5a513d8d9ef7d67d2ca-13d8d9ef7d67d2ca] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:49:57.581 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bdf5c850e5a513d8d9ef7d67d2ca-13d8d9ef7d67d2ca] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:49:57.582 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bdf5c850e5a513d8d9ef7d67d2ca-13d8d9ef7d67d2ca] DEBUG user-service-o.s.web.client.RestTemplate.debug - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+23-06-2025 20:49:57.809 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://zipkin:9411/api/v2/spans
+23-06-2025 20:49:57.810 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:49:57.811 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [[B@4628661c] as "application/json"
+23-06-2025 20:49:57.815 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 202 ACCEPTED
+23-06-2025 20:50:27.214 [AsyncResolver-bootstrap-executor-%d] [-] INFO  user-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+23-06-2025 20:50:27.575 [DiscoveryClient-HeartbeatExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP PUT http://discovery-server:8761/eureka/apps/USER-SERVICE/efda52f5d446:user-service:9020?status=UP&lastDirtyTimestamp=1750711527494
+23-06-2025 20:50:27.576 [DiscoveryClient-HeartbeatExecutor-%d] [6859be1335b2d68b07da4f3589e27e63-07da4f3589e27e63] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:50:27.581 [DiscoveryClient-HeartbeatExecutor-%d] [6859be1335b2d68b07da4f3589e27e63-07da4f3589e27e63] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:50:27.583 [DiscoveryClient-CacheRefreshExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP GET http://discovery-server:8761/eureka/apps/delta
+23-06-2025 20:50:27.584 [DiscoveryClient-CacheRefreshExecutor-%d] [6859be13a39b822c9e6de0c2c8d6f90f-9e6de0c2c8d6f90f] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:50:27.590 [DiscoveryClient-CacheRefreshExecutor-%d] [6859be13a39b822c9e6de0c2c8d6f90f-9e6de0c2c8d6f90f] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:50:27.590 [DiscoveryClient-CacheRefreshExecutor-%d] [6859be13a39b822c9e6de0c2c8d6f90f-9e6de0c2c8d6f90f] DEBUG user-service-o.s.web.client.RestTemplate.debug - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+23-06-2025 20:50:27.844 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://zipkin:9411/api/v2/spans
+23-06-2025 20:50:27.845 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:50:27.846 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [[B@2f8cf7aa] as "application/json"
+23-06-2025 20:50:27.850 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 202 ACCEPTED
+23-06-2025 20:50:57.583 [DiscoveryClient-HeartbeatExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP PUT http://discovery-server:8761/eureka/apps/USER-SERVICE/efda52f5d446:user-service:9020?status=UP&lastDirtyTimestamp=1750711527494
+23-06-2025 20:50:57.584 [DiscoveryClient-HeartbeatExecutor-%d] [6859be314b864542c16678b684d1f128-c16678b684d1f128] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:50:57.589 [DiscoveryClient-HeartbeatExecutor-%d] [6859be314b864542c16678b684d1f128-c16678b684d1f128] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:50:57.593 [DiscoveryClient-CacheRefreshExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP GET http://discovery-server:8761/eureka/apps/delta
+23-06-2025 20:50:57.594 [DiscoveryClient-CacheRefreshExecutor-%d] [6859be315c206992bfc3526f306e9f14-bfc3526f306e9f14] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:50:57.598 [DiscoveryClient-CacheRefreshExecutor-%d] [6859be315c206992bfc3526f306e9f14-bfc3526f306e9f14] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:50:57.599 [DiscoveryClient-CacheRefreshExecutor-%d] [6859be315c206992bfc3526f306e9f14-bfc3526f306e9f14] DEBUG user-service-o.s.web.client.RestTemplate.debug - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+23-06-2025 20:50:57.881 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://zipkin:9411/api/v2/spans
+23-06-2025 20:50:57.881 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:50:57.882 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [[B@5973f872] as "application/json"
+23-06-2025 20:50:57.886 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 202 ACCEPTED
+23-06-2025 20:51:27.591 [DiscoveryClient-HeartbeatExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP PUT http://discovery-server:8761/eureka/apps/USER-SERVICE/efda52f5d446:user-service:9020?status=UP&lastDirtyTimestamp=1750711527494
+23-06-2025 20:51:27.592 [DiscoveryClient-HeartbeatExecutor-%d] [6859be4fa92100c49f36de1825b7b508-9f36de1825b7b508] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:51:27.597 [DiscoveryClient-HeartbeatExecutor-%d] [6859be4fa92100c49f36de1825b7b508-9f36de1825b7b508] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:51:27.602 [DiscoveryClient-CacheRefreshExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP GET http://discovery-server:8761/eureka/apps/delta
+23-06-2025 20:51:27.603 [DiscoveryClient-CacheRefreshExecutor-%d] [6859be4f7ca22390e83b3dac04910540-e83b3dac04910540] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:51:27.608 [DiscoveryClient-CacheRefreshExecutor-%d] [6859be4f7ca22390e83b3dac04910540-e83b3dac04910540] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:51:27.609 [DiscoveryClient-CacheRefreshExecutor-%d] [6859be4f7ca22390e83b3dac04910540-e83b3dac04910540] DEBUG user-service-o.s.web.client.RestTemplate.debug - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+23-06-2025 20:51:27.916 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://zipkin:9411/api/v2/spans
+23-06-2025 20:51:27.916 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:51:27.917 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [[B@15c7aadd] as "application/json"
+23-06-2025 20:51:27.920 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 202 ACCEPTED
+23-06-2025 20:51:57.599 [DiscoveryClient-HeartbeatExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP PUT http://discovery-server:8761/eureka/apps/USER-SERVICE/efda52f5d446:user-service:9020?status=UP&lastDirtyTimestamp=1750711527494
+23-06-2025 20:51:57.600 [DiscoveryClient-HeartbeatExecutor-%d] [6859be6dc55ae73d106bf0033a7474d2-106bf0033a7474d2] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:51:57.605 [DiscoveryClient-HeartbeatExecutor-%d] [6859be6dc55ae73d106bf0033a7474d2-106bf0033a7474d2] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:51:57.612 [DiscoveryClient-CacheRefreshExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP GET http://discovery-server:8761/eureka/apps/delta
+23-06-2025 20:51:57.613 [DiscoveryClient-CacheRefreshExecutor-%d] [6859be6da750752219d6827748b5a843-19d6827748b5a843] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:51:57.617 [DiscoveryClient-CacheRefreshExecutor-%d] [6859be6da750752219d6827748b5a843-19d6827748b5a843] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:51:57.618 [DiscoveryClient-CacheRefreshExecutor-%d] [6859be6da750752219d6827748b5a843-19d6827748b5a843] DEBUG user-service-o.s.web.client.RestTemplate.debug - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+23-06-2025 20:51:57.951 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://zipkin:9411/api/v2/spans
+23-06-2025 20:51:57.951 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:51:57.952 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [[B@105a36ff] as "application/json"
+23-06-2025 20:51:57.956 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 202 ACCEPTED
+23-06-2025 20:52:27.607 [DiscoveryClient-HeartbeatExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP PUT http://discovery-server:8761/eureka/apps/USER-SERVICE/efda52f5d446:user-service:9020?status=UP&lastDirtyTimestamp=1750711527494
+23-06-2025 20:52:27.608 [DiscoveryClient-HeartbeatExecutor-%d] [6859be8b13bb80e642b1f3d74c55337b-42b1f3d74c55337b] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:52:27.613 [DiscoveryClient-HeartbeatExecutor-%d] [6859be8b13bb80e642b1f3d74c55337b-42b1f3d74c55337b] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:52:27.620 [DiscoveryClient-CacheRefreshExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP GET http://discovery-server:8761/eureka/apps/delta
+23-06-2025 20:52:27.621 [DiscoveryClient-CacheRefreshExecutor-%d] [6859be8b36e90275256c5ef93e363b9d-256c5ef93e363b9d] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:52:27.625 [DiscoveryClient-CacheRefreshExecutor-%d] [6859be8b36e90275256c5ef93e363b9d-256c5ef93e363b9d] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:52:27.626 [DiscoveryClient-CacheRefreshExecutor-%d] [6859be8b36e90275256c5ef93e363b9d-256c5ef93e363b9d] DEBUG user-service-o.s.web.client.RestTemplate.debug - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+23-06-2025 20:52:27.986 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://zipkin:9411/api/v2/spans
+23-06-2025 20:52:27.987 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:52:27.987 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [[B@5823b2f9] as "application/json"
+23-06-2025 20:52:27.991 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 202 ACCEPTED
+23-06-2025 20:52:57.615 [DiscoveryClient-HeartbeatExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP PUT http://discovery-server:8761/eureka/apps/USER-SERVICE/efda52f5d446:user-service:9020?status=UP&lastDirtyTimestamp=1750711527494
+23-06-2025 20:52:57.617 [DiscoveryClient-HeartbeatExecutor-%d] [6859bea97abae9603801c2f339b71949-3801c2f339b71949] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:52:57.622 [DiscoveryClient-HeartbeatExecutor-%d] [6859bea97abae9603801c2f339b71949-3801c2f339b71949] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:52:57.628 [DiscoveryClient-CacheRefreshExecutor-%d] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP GET http://discovery-server:8761/eureka/apps/delta
+23-06-2025 20:52:57.628 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bea93fbe961a5497e7e6f86f4f4b-5497e7e6f86f4f4b] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:52:57.632 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bea93fbe961a5497e7e6f86f4f4b-5497e7e6f86f4f4b] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 200 OK
+23-06-2025 20:52:57.635 [DiscoveryClient-CacheRefreshExecutor-%d] [6859bea93fbe961a5497e7e6f86f4f4b-5497e7e6f86f4f4b] DEBUG user-service-o.s.web.client.RestTemplate.debug - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+23-06-2025 20:52:58.022 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - HTTP POST http://zipkin:9411/api/v2/spans
+23-06-2025 20:52:58.022 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Accept=[application/json, application/*+json]
+23-06-2025 20:52:58.023 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Writing [[B@1e5571e7] as "application/json"
+23-06-2025 20:52:58.026 [AsyncReporter{ZipkinRestTemplateSender{http://zipkin:9411/api/v2/spans}}] [-] DEBUG user-service-o.s.web.client.RestTemplate.debug - Response 202 ACCEPTED

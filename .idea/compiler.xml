@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="config-server" />
         <module name="post-service" />
         <module name="connections-service" />
         <module name="discovery-server" />
@@ -16,9 +17,6 @@
         <module name="emailService" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="config-server" target="21" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

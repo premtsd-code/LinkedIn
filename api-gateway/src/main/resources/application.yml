@@ -1,11 +1,8 @@
-spring.application.name: api-gateway
-
-server.port: 8080
-eureka.client.service-url.defaultZone: http://discovery-server:8761/eureka
-
-jwt.secretKey: asdfladf98a7df89aysf8d9yasiudfha9s87dfa89syudhfa98sdfyaisuhdfa98sfy
-
 spring:
+  application:
+    name: api-gateway
+  config:
+    import: configserver:http://config-server:8888
   cloud:
     gateway:
       routes:
@@ -32,6 +29,14 @@ spring:
             - StripPrefix=2
             - name: AuthenticationFilter
 
+        - id: uploader-service
+          uri: ${UPLOADER_SERVICE_URI:lb://UPLOADER-SERVICE}
+          predicates:
+            - Path=/api/v1/uploads/**
+          filters:
+            - StripPrefix=2
+            - name: AuthenticationFilter
+
 
 springdoc:
   enable-native-support: true
@@ -51,3 +56,9 @@ springdoc:
       - url: /api/v1/posts/v3/api-docs
         name: Post Service
         primaryName: Post Service
+      - url: /api/v1/connections/v3/api-docs
+        name: Connection Service
+        primaryName: Connection Service
+      - url: /api/v1/uploads/v3/api-docs
+        name: Uploader Service
+        primaryName: Uploader Service

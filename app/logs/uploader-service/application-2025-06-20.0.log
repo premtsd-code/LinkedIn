@@ -1,0 +1,339 @@
+20-06-2025 07:11:21.336 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 07:16:21.535 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 07:21:21.892 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 07:26:21.968 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 07:31:21.910 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 07:36:21.934 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 07:41:21.961 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 07:46:21.904 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 07:51:21.904 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 07:56:21.907 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 08:01:21.914 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 08:06:21.921 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 08:11:21.917 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 08:16:21.916 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 08:21:21.919 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 08:26:21.924 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 08:31:21.929 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 08:36:21.934 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 08:41:21.938 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 08:46:21.930 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 08:51:21.927 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 08:56:21.927 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 09:01:21.929 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 09:06:21.931 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 09:11:21.934 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 09:16:21.935 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 09:21:21.933 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 09:26:21.933 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 09:31:21.935 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 09:36:21.936 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 09:41:21.939 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 09:46:21.941 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 09:51:21.942 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 09:56:21.940 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 10:01:21.939 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 10:06:21.940 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 10:11:21.941 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 10:16:21.942 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 10:21:21.944 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 10:26:21.944 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 10:31:21.944 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 10:36:21.944 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 10:41:21.946 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 10:46:21.947 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 10:51:21.949 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 10:56:21.951 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 11:01:21.955 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 11:06:21.958 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 11:11:21.960 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 11:16:21.962 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 11:21:21.964 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 11:26:21.965 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 11:31:21.966 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 11:36:21.971 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 11:41:21.976 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 11:46:21.980 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 11:51:21.984 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 11:56:21.987 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 12:01:21.989 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 12:06:21.991 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 12:55:10.427 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 13:00:10.416 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 13:05:10.417 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 13:10:10.418 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 13:15:10.420 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 13:20:10.423 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 13:25:10.425 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 13:30:10.490 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 13:35:10.562 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 13:40:10.515 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 13:45:10.508 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 13:50:10.522 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 13:55:10.519 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 14:00:10.527 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 14:05:10.539 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 14:10:10.540 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 14:15:10.536 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 14:20:10.539 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 14:25:10.545 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 14:30:10.554 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 14:35:10.564 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 14:40:10.574 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 14:45:10.561 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 14:50:10.548 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 14:55:10.543 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 15:00:10.543 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 15:05:10.547 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 15:10:10.551 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 15:15:10.555 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 15:20:10.547 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 15:25:10.544 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 15:30:10.543 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 15:35:10.545 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 15:40:10.548 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 15:45:10.552 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 15:50:10.556 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 15:55:10.550 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 16:00:10.548 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 16:05:10.548 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 16:10:10.549 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 16:15:10.551 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 16:20:10.553 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 16:25:10.555 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 16:30:10.556 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 16:35:10.558 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 16:40:10.560 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 16:45:10.562 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 16:50:10.564 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 16:55:10.567 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 17:00:10.569 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 17:05:10.571 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 17:10:10.573 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 17:15:10.575 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 17:20:10.577 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 17:25:10.579 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 17:30:10.582 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 17:35:10.583 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 17:40:10.585 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 17:45:10.588 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 17:50:10.590 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 17:55:10.592 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 18:00:10.594 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 18:05:10.596 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 18:10:10.597 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 18:15:10.597 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 18:20:10.598 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 18:25:10.599 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 18:30:10.600 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 18:46:12.447 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 18:51:12.453 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 18:56:12.455 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 19:01:12.456 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 19:06:12.458 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 19:11:12.460 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 19:16:12.461 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 19:21:12.878 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 19:26:12.884 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 19:31:12.880 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 19:36:12.876 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 19:41:12.874 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 19:46:12.891 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 19:51:12.894 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 19:56:12.895 [AsyncResolver-bootstrap-executor-%d] [-] INFO  uploader-service-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+20-06-2025 19:56:14.198 [SpringApplicationShutdownHook] [-] INFO  uploader-service-o.s.c.n.e.s.EurekaServiceRegistry.deregister - Unregistering application UPLOADER-SERVICE with eureka with status DOWN
+20-06-2025 19:56:14.199 [SpringApplicationShutdownHook] [-] INFO  uploader-service-c.netflix.discovery.DiscoveryClient.notify - Saw local status change event StatusChangeEvent [timestamp=1750449374199, current=DOWN, previous=UP]
+20-06-2025 19:56:14.203 [DiscoveryClient-InstanceInfoReplicator-%d] [-] INFO  uploader-service-c.netflix.discovery.DiscoveryClient.register - DiscoveryClient_UPLOADER-SERVICE/ba092dbc87d8:uploader-service:9050: registering service...
+20-06-2025 19:56:14.215 [DiscoveryClient-InstanceInfoReplicator-%d] [-] INFO  uploader-service-c.netflix.discovery.DiscoveryClient.register - DiscoveryClient_UPLOADER-SERVICE/ba092dbc87d8:uploader-service:9050 - registration status: 204
+20-06-2025 19:56:14.371 [SpringApplicationShutdownHook] [-] INFO  uploader-service-c.netflix.discovery.DiscoveryClient.shutdown - Shutting down DiscoveryClient ...
+20-06-2025 19:56:17.373 [SpringApplicationShutdownHook] [-] INFO  uploader-service-c.netflix.discovery.DiscoveryClient.unregister - Unregistering ...
+20-06-2025 19:56:19.019 [SpringApplicationShutdownHook] [-] INFO  uploader-service-c.n.d.s.t.d.RedirectingEurekaHttpClient.execute - Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://discovery-server:8761/eureka/} exception=I/O error on DELETE request for "http://discovery-server:8761/eureka/apps/UPLOADER-SERVICE/ba092dbc87d8:uploader-service:9050": discovery-server: Name does not resolve stacktrace=org.springframework.web.client.ResourceAccessException: I/O error on DELETE request for "http://discovery-server:8761/eureka/apps/UPLOADER-SERVICE/ba092dbc87d8:uploader-service:9050": discovery-server: Name does not resolve
+	at org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:915)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:895)
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:790)
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:672)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateEurekaHttpClient.cancel(RestTemplateEurekaHttpClient.java:87)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:91)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.DiscoveryClient.unregister(DiscoveryClient.java:919)
+	at com.netflix.discovery.DiscoveryClient.shutdown(DiscoveryClient.java:900)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMethod.invoke(InitDestroyAnnotationBeanPostProcessor.java:457)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeDestroyMethods(InitDestroyAnnotationBeanPostProcessor.java:415)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeDestruction(InitDestroyAnnotationBeanPostProcessor.java:239)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:202)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.run(DisposableBeanAdapter.java:195)
+	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.destroy(GenericScope.java:389)
+	at org.springframework.cloud.context.scope.GenericScope.destroy(GenericScope.java:136)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:211)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1202)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1195)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1195)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1156)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.doClose(ServletWebServerApplicationContext.java:174)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1102)
+	at org.springframework.boot.SpringApplicationShutdownHook.closeAndWait(SpringApplicationShutdownHook.java:145)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:114)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.net.UnknownHostException: discovery-server: Name does not resolve
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Inet6AddressImpl.java:52)
+	at java.base/java.net.InetAddress$PlatformResolver.lookupByName(InetAddress.java:1211)
+	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1828)
+	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:1139)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1818)
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1688)
+	at org.apache.hc.client5.http.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:45)
+	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:144)
+	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:450)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:162)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:172)
+	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:142)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:192)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:113)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:152)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:116)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:170)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
+	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
+	at org.springframework.http.client.HttpComponentsClientHttpRequest.executeInternal(HttpComponentsClientHttpRequest.java:99)
+	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:70)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:112)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateTransportClientFactory.lambda$restTemplate$3(RestTemplateTransportClientFactory.java:170)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:88)
+	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:72)
+	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:889)
+	... 37 more
+
+20-06-2025 19:56:19.020 [SpringApplicationShutdownHook] [-] WARN  uploader-service-c.n.d.s.t.d.RetryableEurekaHttpClient.execute - Request execution failed with message: I/O error on DELETE request for "http://discovery-server:8761/eureka/apps/UPLOADER-SERVICE/ba092dbc87d8:uploader-service:9050": discovery-server: Name does not resolve
+20-06-2025 19:56:19.026 [SpringApplicationShutdownHook] [-] INFO  uploader-service-c.n.d.s.t.d.RedirectingEurekaHttpClient.execute - Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://discovery-server:8761/eureka/}, exception=I/O error on DELETE request for "http://discovery-server:8761/eureka/apps/UPLOADER-SERVICE/ba092dbc87d8:uploader-service:9050": discovery-server stacktrace=org.springframework.web.client.ResourceAccessException: I/O error on DELETE request for "http://discovery-server:8761/eureka/apps/UPLOADER-SERVICE/ba092dbc87d8:uploader-service:9050": discovery-server
+	at org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:915)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:895)
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:790)
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:672)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateEurekaHttpClient.cancel(RestTemplateEurekaHttpClient.java:87)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.executeOnNewServer(RedirectingEurekaHttpClient.java:121)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:80)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.DiscoveryClient.unregister(DiscoveryClient.java:919)
+	at com.netflix.discovery.DiscoveryClient.shutdown(DiscoveryClient.java:900)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMethod.invoke(InitDestroyAnnotationBeanPostProcessor.java:457)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeDestroyMethods(InitDestroyAnnotationBeanPostProcessor.java:415)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeDestruction(InitDestroyAnnotationBeanPostProcessor.java:239)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:202)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.run(DisposableBeanAdapter.java:195)
+	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.destroy(GenericScope.java:389)
+	at org.springframework.cloud.context.scope.GenericScope.destroy(GenericScope.java:136)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:211)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1202)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1195)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1195)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1156)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.doClose(ServletWebServerApplicationContext.java:174)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1102)
+	at org.springframework.boot.SpringApplicationShutdownHook.closeAndWait(SpringApplicationShutdownHook.java:145)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:114)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.net.UnknownHostException: discovery-server
+	at java.base/java.net.InetAddress$CachedLookup.get(InetAddress.java:988)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1818)
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1688)
+	at org.apache.hc.client5.http.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:45)
+	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:144)
+	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:450)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:162)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:172)
+	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:142)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:192)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:113)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:152)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:116)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:170)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
+	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
+	at org.springframework.http.client.HttpComponentsClientHttpRequest.executeInternal(HttpComponentsClientHttpRequest.java:99)
+	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:70)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:112)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateTransportClientFactory.lambda$restTemplate$3(RestTemplateTransportClientFactory.java:170)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:88)
+	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:72)
+	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:889)
+	... 38 more
+
+20-06-2025 19:56:19.027 [SpringApplicationShutdownHook] [-] WARN  uploader-service-c.n.d.s.t.d.RetryableEurekaHttpClient.execute - Request execution failed with message: I/O error on DELETE request for "http://discovery-server:8761/eureka/apps/UPLOADER-SERVICE/ba092dbc87d8:uploader-service:9050": discovery-server
+20-06-2025 19:56:19.028 [SpringApplicationShutdownHook] [-] ERROR uploader-service-c.netflix.discovery.DiscoveryClient.unregister - DiscoveryClient_UPLOADER-SERVICE/ba092dbc87d8:uploader-service:9050 - de-registration failedCannot execute request on any known server
+com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.DiscoveryClient.unregister(DiscoveryClient.java:919)
+	at com.netflix.discovery.DiscoveryClient.shutdown(DiscoveryClient.java:900)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMethod.invoke(InitDestroyAnnotationBeanPostProcessor.java:457)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeDestroyMethods(InitDestroyAnnotationBeanPostProcessor.java:415)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeDestruction(InitDestroyAnnotationBeanPostProcessor.java:239)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:202)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.run(DisposableBeanAdapter.java:195)
+	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.destroy(GenericScope.java:389)
+	at org.springframework.cloud.context.scope.GenericScope.destroy(GenericScope.java:136)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:211)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1202)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1195)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1195)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1156)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.doClose(ServletWebServerApplicationContext.java:174)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1102)
+	at org.springframework.boot.SpringApplicationShutdownHook.closeAndWait(SpringApplicationShutdownHook.java:145)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:114)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+20-06-2025 19:56:19.033 [SpringApplicationShutdownHook] [-] INFO  uploader-service-c.netflix.discovery.DiscoveryClient.shutdown - Completed shut down of DiscoveryClient

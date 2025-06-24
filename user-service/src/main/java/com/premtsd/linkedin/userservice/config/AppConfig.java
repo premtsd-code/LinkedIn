@@ -5,6 +5,9 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 //import io.swagger.v3.oas.models.info.Info;
 //import io.swagger.v3.oas.models.OpenAPI;
+import feign.Capability;
+import feign.micrometer.MicrometerCapability;
+import io.micrometer.core.instrument.MeterRegistry;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -51,16 +54,9 @@ public class AppConfig {
     }
 
 
-//    @Bean
-//    public WebMvcConfigurer corsConfigurer() {
-//        return new WebMvcConfigurer() {
-//            @Override
-//            public void addCorsMappings(CorsRegistry registry) {
-//                registry.addMapping("/**")
-//                        .allowedMethods("*")
-//                        .allowedOrigins("*");
-//            }
-//        };
-//    }
+    @Bean
+    public Capability capability(final MeterRegistry registry) {
+        return new MicrometerCapability(registry);
+    }
 
 }

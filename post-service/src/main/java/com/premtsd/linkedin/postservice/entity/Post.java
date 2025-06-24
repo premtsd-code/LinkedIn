@@ -30,4 +30,6 @@ public class Post implements Serializable {
 
     @CreationTimestamp
     private LocalDateTime createdAt;
+
+    private String imageUrl;
 }

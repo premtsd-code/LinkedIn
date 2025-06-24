@@ -1,31 +1,38 @@
 package com.premtsd.linkedin.uploader_service.controller;
 
 import com.premtsd.linkedin.uploader_service.service.FileUploaderService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
 
 @RestController
 @RequestMapping("/file")
 @RequiredArgsConstructor
+@Slf4j
 public class FileUploadController {
 
     private final FileUploaderService fileUploaderService;
 
-    @PostMapping
-    public ResponseEntity<String> uploadImage(@RequestParam MultipartFile file) {
-        try {
-            String url = fileUploaderService.upload(file);
-            return ResponseEntity.ok(url);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
 
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @Operation(summary = "Upload a file", description = "Uploads a file and returns its Cloudinary URL")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Upload successful"),
+            @ApiResponse(responseCode = "500", description = "Upload failed")
+    })
+    public ResponseEntity<String> uploadImage(
+            @Parameter(description = "The file to upload")
+            @RequestPart("file") MultipartFile file) throws Exception {
+
+        log.info("Received upload request");
+        String url = fileUploaderService.upload(file);
+        return ResponseEntity.ok(url);
     }
 }
