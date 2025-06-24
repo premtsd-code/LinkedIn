@@ -18,16 +18,16 @@ A LinkedIn themed social platform built using Java and Spring Boot microservices
 
 ### 🧩 Microservices Included
 
-| Service Name         | Description                                  |
-|----------------------|----------------------------------------------|
-| `user-service`       | Manages user profiles and authentication     |
-| `post-service`       | Handles posts, likes, and comments           |
-| `connections-service`| Manages user connections (follow system)     |
-| `emailService`       | Sends email notifications                    |
-| `uploader-service`   | Handles media uploads                        |
-| `api-gateway`        | Routes external requests to microservices    |
-| `discovery-server`   | Eureka server for service registry           |
-| `config-server`      | Centralized configuration management         |
+| Service Name           | Description                              |
+|------------------------|------------------------------------------|
+| `user-service`         | Manages user profiles and authentication |
+| `post-service`         | Handles posts, likes, and comments       |
+| `connections-service`  | Manages user connections (follow system) |
+| `notification-service` | Sends notification and emails            |
+| `uploader-service`     | Handles media uploads                    |
+| `api-gateway`          | Routes external requests to microservices |
+| `discovery-server`     | Eureka server for service registry       |
+| `config-server`        | Centralized configuration management     |
 
 ---
 
@@ -60,7 +60,7 @@ LinkedIn/
 ├── config-server/
 ├── connections-service/
 ├── discovery-server/
-├── emailService/
+├── notification-service/
 ├── post-service/
 ├── uploader-service/
 ├── user-service/
