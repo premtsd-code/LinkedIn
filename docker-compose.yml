@@ -149,6 +149,8 @@ services:
       - "8888:8888"
     networks:
       - linkedin-network
+    env_file:
+      - .env
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8888/actuator/health"]
       interval: 10s
@@ -243,7 +245,6 @@ services:
     depends_on:
       - logstash
     command: ["--strict.perms=false"]
-
 
 networks:
   linkedin-network:
