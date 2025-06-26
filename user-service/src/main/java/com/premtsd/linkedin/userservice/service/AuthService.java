@@ -7,6 +7,7 @@ import com.premtsd.linkedin.userservice.dto.UserDto;
 import com.premtsd.linkedin.userservice.entity.Role;
 import com.premtsd.linkedin.userservice.entity.User;
 import com.premtsd.linkedin.userservice.event.UserCreatedEmailEvent;
+import com.premtsd.linkedin.userservice.event.UserCreatedEvent;
 import com.premtsd.linkedin.userservice.exception.BadRequestException;
 import com.premtsd.linkedin.userservice.exception.ResourceNotFoundException;
 import com.premtsd.linkedin.userservice.repository.RoleRepository;
@@ -27,6 +28,7 @@ import java.util.stream.Collectors;
 public class AuthService {
 
     private final KafkaTemplate<Long, UserCreatedEmailEvent> kafkaTemplate;
+    private final KafkaTemplate<Long, UserCreatedEvent> kafkaTemplate1;
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private final JwtService jwtService;
@@ -64,6 +66,11 @@ public class AuthService {
             userCreatedEmailEvent.setBody("Hi "+savedUser.getName()+",\n"+" Thanks for signing up");
 
             kafkaTemplate.send("userCreatedTopic", userCreatedEmailEvent);
+
+        UserCreatedEvent userCreatedEvent=new UserCreatedEvent();
+        userCreatedEvent.setUserId(savedUser.getId());
+        userCreatedEvent.setName(savedUser.getName());
+        kafkaTemplate1.send("user-created-topic", userCreatedEvent);
         return mapUserToUserDto(savedUser);
     }
 

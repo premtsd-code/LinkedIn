@@ -5,8 +5,10 @@ import com.premtsd.linkedin.connectionservice.entity.Person;
 import com.premtsd.linkedin.connectionservice.event.AcceptConnectionRequestEvent;
 import com.premtsd.linkedin.connectionservice.event.SendConnectionRequestEvent;
 import com.premtsd.linkedin.connectionservice.repository.PersonRepository;
+import com.premtsd.linkedin.userservice.event.UserCreatedEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,16 @@ public class ConnectionsService {
     private final PersonRepository personRepository;
     private final KafkaTemplate<Long, SendConnectionRequestEvent> sendRequestKafkaTemplate;
     private final KafkaTemplate<Long, AcceptConnectionRequestEvent> acceptRequestKafkaTemplate;
+
+
+    @KafkaListener(topics = "user-created-topic", groupId = "connection-service")
+    public void handleUserCreated(UserCreatedEvent event) {
+        log.info("Received user creation event: {}", event);
+        Person person = new Person();
+        person.setUserId(event.getUserId());
+        person.setName(event.getName());
+        personRepository.save(person);
+    }
 
     public List<Person> getFirstDegreeConnections() {
         Long userId = UserContextHolder.getCurrentUserId();
