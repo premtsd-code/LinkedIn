@@ -1,0 +1,64 @@
+spring:
+  application:
+    name: api-gateway
+  config:
+    import: configserver:http://config-server:8888
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: ${USER_SERVICE_URI:lb://USER-SERVICE}
+          predicates:
+            - Path=/api/v1/users/**
+          filters:
+            - StripPrefix=2
+
+        - id: posts-service
+          uri: ${POSTS_SERVICE_URI:lb://POSTS-SERVICE}
+          predicates:
+            - Path=/api/v1/posts/**
+          filters:
+            - StripPrefix=2
+            - name: AuthenticationFilter
+
+        - id: connections-service
+          uri: ${CONNECTIONS_SERVICE_URI:lb://CONNECTIONS-SERVICE}
+          predicates:
+            - Path=/api/v1/connections/**
+          filters:
+            - StripPrefix=2
+            - name: AuthenticationFilter
+
+        - id: uploader-service
+          uri: ${UPLOADER_SERVICE_URI:lb://UPLOADER-SERVICE}
+          predicates:
+            - Path=/api/v1/uploads/**
+          filters:
+            - StripPrefix=2
+            - name: AuthenticationFilter
+
+
+springdoc:
+  enable-native-support: true
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    config-url: /v3/api-docs/swagger-config
+    urls:
+      - url: /v3/api-docs
+        name: API Gateway Service
+        primaryName: API Gateway Service
+      - url: /api/v1/users/v3/api-docs
+        name: User Service
+        primaryName: User Service
+      - url: /api/v1/posts/v3/api-docs
+        name: Post Service
+        primaryName: Post Service
+      - url: /api/v1/connections/v3/api-docs
+        name: Connection Service
+        primaryName: Connection Service
+      - url: /api/v1/uploads/v3/api-docs
+        name: Uploader Service
+        primaryName: Uploader Service

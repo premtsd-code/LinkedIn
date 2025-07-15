@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final AuthService authService;
-
+    
     @PostMapping("/signup")
     public ResponseEntity<UserDto> signUp(@RequestBody SignupRequestDto signupRequestDto) {
         UserDto userDto = authService.signUp(signupRequestDto);

@@ -1,16 +1,23 @@
-spring.application.name: config-server
 spring:
+  application:
+    name: config-server
+
   cloud:
     config:
       server:
         git:
           uri: https://gitlab.cs.nuim.ie/linkedin-microservice/linkedinconfigs
-          username: p250109
-          password: ${GIT_PASSWORD}
           default-label: main
+          username: p250109
+          password: ${GIT_PASSWORD}  # Use env var or Docker secret for safety
+          clone-on-start: true       # Good for reliability on restart
+
 server:
   port: 8888
+
 eureka:
   client:
+    register-with-eureka: true
+    fetch-registry: true
     service-url:
       defaultZone: http://discovery-server:8761/eureka

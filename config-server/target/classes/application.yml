@@ -1,0 +1,16 @@
+spring.application.name: config-server
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitlab.cs.nuim.ie/linkedin-microservice/linkedinconfigs
+          username: p250109
+          password: ${GIT_PASSWORD}
+          default-label: main
+server:
+  port: 8888
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery-server:8761/eureka

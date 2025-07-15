@@ -5,83 +5,83 @@ import io.jsonwebtoken.JwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
+import reactor.core.publisher.Mono;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Slf4j
 @Component
 public class AuthenticationFilter extends AbstractGatewayFilterFactory<AuthenticationFilter.Config> {
 
-    private final JwtService jwtService;
-
-//    @Retention(RetentionPolicy.RUNTIME)
-//    @Target(ElementType.METHOD)
-//    @PreAuthorize("@jwtAuthorizationService.hasPermission(authentication, #requiredRole)")
-//    public @interface JwtPreAuthorize {
-//        String requiredRole();
-//    }
-
-    private static final List<String> openApiWhitelist = List.of(
+    private static final List<String> OPEN_API_WHITELIST = List.of(
             "/v3/api-docs", "/swagger-ui", "/actuator"
     );
 
-
+    private final JwtService jwtService;
 
     public AuthenticationFilter(JwtService jwtService) {
         super(Config.class);
         this.jwtService = jwtService;
     }
 
-    private boolean isWhitelisted(String path) {
-        return openApiWhitelist.stream().anyMatch(path::contains);
-    }
-
     @Override
     public GatewayFilter apply(Config config) {
         return (exchange, chain) -> {
-            log.info("Login request: {}", exchange.getRequest().getURI());
-
-            final String tokenHeader = exchange.getRequest().getHeaders().getFirst("Authorization");
-
             String path = exchange.getRequest().getURI().getPath();
 
             if (isWhitelisted(path)) {
-                return chain.filter(exchange); // Skip auth
+                return chain.filter(exchange);
             }
 
-            if(tokenHeader == null || !tokenHeader.startsWith("Bearer")) {
-                exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-                log.error("Authorization token header not found");
-                return exchange.getResponse().setComplete();
+            String authHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+            if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+                return onError(exchange, "Authorization header missing or invalid", HttpStatus.UNAUTHORIZED);
             }
 
-            final String token = tokenHeader.split("Bearer ")[1];
+            String token = authHeader.substring(7).trim(); // safer than split
 
             try {
                 String userId = jwtService.getUserIdFromToken(token);
-                ServerWebExchange modifiedExchange = exchange
-                        .mutate()
-                        .request(r -> r.header("X-User-Id", userId))
-                        .build();
+                jwtService.validateTokenWithRole(token, config.requiredRole);
 
-                jwtService.validateTokenWithRole(token,"USER");
+                ServerWebExchange modifiedExchange = exchange.mutate()
+                        .request(builder -> builder.header("X-User-Id", userId))
+                        .build();
 
                 return chain.filter(modifiedExchange);
             } catch (JwtException e) {
-                log.error("JWT Exception: {}", e.getLocalizedMessage());
-                exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-                return exchange.getResponse().setComplete();
+                log.warn("JWT validation failed: {}", e.getMessage());
+                return onError(exchange, "Invalid or expired token", HttpStatus.UNAUTHORIZED);
             }
         };
     }
 
+    private boolean isWhitelisted(String path) {
+        return OPEN_API_WHITELIST.stream().anyMatch(path::contains);
+    }
+
+    private Mono<Void> onError(ServerWebExchange exchange, String message, HttpStatus status) {
+        exchange.getResponse().setStatusCode(status);
+        exchange.getResponse().getHeaders().setContentType(MediaType.TEXT_PLAIN);
+        byte[] bytes = message.getBytes(StandardCharsets.UTF_8);
+        return exchange.getResponse().writeWith(Mono.just(exchange.getResponse().bufferFactory().wrap(bytes)));
+    }
+
     public static class Config {
+        private String requiredRole = "USER"; // default
+
+        public String getRequiredRole() {
+            return requiredRole;
+        }
+
+        public void setRequiredRole(String requiredRole) {
+            this.requiredRole = requiredRole;
+        }
     }
 }

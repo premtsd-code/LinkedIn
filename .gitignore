@@ -1,0 +1,35 @@
+# -------------------------
+# IDE & project settings
+# -------------------------
+.idea/
+*.iml
+
+# -------------------------
+# Environment & secrets
+# -------------------------
+.env
+
+# -------------------------
+# Logs
+# -------------------------
+*.log
+logs/
+**/logs/
+
+# -------------------------
+# Build & Maven/Gradle outputs
+# -------------------------
+target/
+**/target/
+!**/src/**/target/   # don't ignore source directories by accident
+
+# -------------------------
+# OS-generated files
+# -------------------------
+.DS_Store
+Thumbs.db
+
+# -------------------------
+# Local configs
+# -------------------------
+filebeat.yml

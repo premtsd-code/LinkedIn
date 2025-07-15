@@ -1,18 +1,25 @@
 package com.premtsd.linkedin.connectionservice.auth;
 
+import lombok.experimental.UtilityClass;
+
+/**
+ * Stores the authenticated user ID in a ThreadLocal context.
+ * Should be cleared after each request (typically in a filter).
+ */
+@UtilityClass
 public class UserContextHolder {
 
     private static final ThreadLocal<Long> currentUserId = new ThreadLocal<>();
 
-    public static Long getCurrentUserId() {
+    public Long getCurrentUserId() {
         return currentUserId.get();
     }
 
-    static void setCurrentUserId(Long userId) {
+    public void setCurrentUserId(Long userId) {
         currentUserId.set(userId);
     }
 
-    static void clear() {
+    public void clear() {
         currentUserId.remove();
     }
 }

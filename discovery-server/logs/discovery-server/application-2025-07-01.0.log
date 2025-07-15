@@ -1,0 +1,64 @@
+01-07-2025 18:56:20.587 [main] [-] INFO  discovery-server-c.p.l.d.DiscoveryEurekaServerApplication.logStarting - Starting DiscoveryEurekaServerApplication using Java 21.0.7 with PID 3256 (C:\Users\shazam\IdeaProjects\microservices\discovery-server\target\classes started by shazam in C:\Users\shazam\IdeaProjects\microservices\discovery-server)
+01-07-2025 18:56:20.591 [main] [-] INFO  discovery-server-c.p.l.d.DiscoveryEurekaServerApplication.logStartupProfileInfo - No active profile set, falling back to 1 default profile: "default"
+01-07-2025 18:56:20.646 [main] [-] INFO  discovery-server-o.s.c.c.c.ConfigServerConfigDataLoader.logTo - Fetching config from server at : http://config-server:
+01-07-2025 18:56:20.674 [main] [-] INFO  discovery-server-o.s.c.c.c.ConfigServerConfigDataLoader.logTo - Exception on Url - http://config-server::org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://config-server/discovery-server/default": config-server. Will be trying the next url if available
+01-07-2025 18:56:20.675 [main] [-] WARN  discovery-server-o.s.c.c.c.ConfigServerConfigDataLoader.logTo - Could not locate PropertySource ([ConfigServerConfigDataResource@6ea1bcdc uris = array<String>['http://config-server:'], optional = true, profiles = 'default']): I/O error on GET request for "http://config-server/discovery-server/default": config-server
+01-07-2025 18:56:20.675 [main] [-] INFO  discovery-server-o.s.c.c.c.ConfigServerConfigDataLoader.logTo - Fetching config from server at : http://config-server:
+01-07-2025 18:56:20.676 [main] [-] INFO  discovery-server-o.s.c.c.c.ConfigServerConfigDataLoader.logTo - Exception on Url - http://config-server::org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://config-server/discovery-server/default": config-server. Will be trying the next url if available
+01-07-2025 18:56:20.676 [main] [-] WARN  discovery-server-o.s.c.c.c.ConfigServerConfigDataLoader.logTo - Could not locate PropertySource ([ConfigServerConfigDataResource@48c40605 uris = array<String>['http://config-server:'], optional = true, profiles = 'default']): I/O error on GET request for "http://config-server/discovery-server/default": config-server
+01-07-2025 18:56:20.676 [main] [-] INFO  discovery-server-o.s.c.c.c.ConfigServerConfigDataLoader.logTo - Fetching config from server at : http://config-server:
+01-07-2025 18:56:20.676 [main] [-] INFO  discovery-server-o.s.c.c.c.ConfigServerConfigDataLoader.logTo - Exception on Url - http://config-server::org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://config-server/discovery-server/default": config-server. Will be trying the next url if available
+01-07-2025 18:56:20.676 [main] [-] WARN  discovery-server-o.s.c.c.c.ConfigServerConfigDataLoader.logTo - Could not locate PropertySource ([ConfigServerConfigDataResource@54107f42 uris = array<String>['http://config-server:'], optional = true, profiles = 'default']): I/O error on GET request for "http://config-server/discovery-server/default": config-server
+01-07-2025 18:56:21.633 [main] [-] INFO  discovery-server-o.s.cloud.context.scope.GenericScope.setSerializationId - BeanFactory id=780c4741-b529-3d36-b784-098330e5c1d2
+01-07-2025 18:56:21.687 [main] [-] WARN  discovery-server-o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+01-07-2025 18:56:21.689 [main] [-] WARN  discovery-server-o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+01-07-2025 18:56:21.962 [main] [-] INFO  discovery-server-o.s.b.w.e.tomcat.TomcatWebServer.initialize - Tomcat initialized with port 8761 (http)
+01-07-2025 18:56:21.973 [main] [-] INFO  discovery-server-o.a.coyote.http11.Http11NioProtocol.log - Initializing ProtocolHandler ["http-nio-8761"]
+01-07-2025 18:56:21.977 [main] [-] INFO  discovery-server-o.a.catalina.core.StandardService.log - Starting service [Tomcat]
+01-07-2025 18:56:21.978 [main] [-] INFO  discovery-server-o.a.catalina.core.StandardEngine.log - Starting Servlet engine: [Apache Tomcat/10.1.30]
+01-07-2025 18:56:22.050 [main] [-] INFO  discovery-server-o.a.c.c.C.[Tomcat].[localhost].[/].log - Initializing Spring embedded WebApplicationContext
+01-07-2025 18:56:22.051 [main] [-] INFO  discovery-server-o.s.b.w.s.c.ServletWebServerApplicationContext.prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 1372 ms
+01-07-2025 18:56:22.946 [main] [-] INFO  discovery-server-c.n.d.p.DiscoveryJerseyProvider.<init> - Using JSON encoding codec LegacyJacksonJson
+01-07-2025 18:56:22.947 [main] [-] INFO  discovery-server-c.n.d.p.DiscoveryJerseyProvider.<init> - Using JSON decoding codec LegacyJacksonJson
+01-07-2025 18:56:23.070 [main] [-] INFO  discovery-server-c.n.d.p.DiscoveryJerseyProvider.<init> - Using XML encoding codec XStreamXml
+01-07-2025 18:56:23.070 [main] [-] INFO  discovery-server-c.n.d.p.DiscoveryJerseyProvider.<init> - Using XML decoding codec XStreamXml
+01-07-2025 18:56:23.561 [main] [-] WARN  discovery-server-o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger.afterPropertiesSet - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+01-07-2025 18:56:23.575 [main] [-] INFO  discovery-server-o.s.c.n.eureka.InstanceInfoFactory.create - Setting initial instance status as: STARTING
+01-07-2025 18:56:23.587 [main] [-] INFO  discovery-server-c.netflix.discovery.DiscoveryClient.<init> - Initializing Eureka in region us-east-1
+01-07-2025 18:56:23.587 [main] [-] INFO  discovery-server-c.netflix.discovery.DiscoveryClient.<init> - Client configured to neither register nor query for data.
+01-07-2025 18:56:23.589 [main] [-] INFO  discovery-server-c.netflix.discovery.DiscoveryClient.<init> - Discovery Client initialized at timestamp 1751392583588 with initial instances count: 0
+01-07-2025 18:56:23.639 [main] [-] INFO  discovery-server-c.n.e.DefaultEurekaServerContext.initialize - Initializing ...
+01-07-2025 18:56:23.640 [main] [-] INFO  discovery-server-c.n.eureka.cluster.PeerEurekaNodes.updatePeerEurekaNodes - Adding new peer nodes [http://localhost:8761/eureka/]
+01-07-2025 18:56:23.663 [main] [-] INFO  discovery-server-c.n.d.p.DiscoveryJerseyProvider.<init> - Using JSON encoding codec LegacyJacksonJson
+01-07-2025 18:56:23.663 [main] [-] INFO  discovery-server-c.n.d.p.DiscoveryJerseyProvider.<init> - Using JSON decoding codec LegacyJacksonJson
+01-07-2025 18:56:23.663 [main] [-] INFO  discovery-server-c.n.d.p.DiscoveryJerseyProvider.<init> - Using XML encoding codec XStreamXml
+01-07-2025 18:56:23.663 [main] [-] INFO  discovery-server-c.n.d.p.DiscoveryJerseyProvider.<init> - Using XML decoding codec XStreamXml
+01-07-2025 18:56:23.685 [main] [-] INFO  discovery-server-c.n.eureka.cluster.PeerEurekaNodes.start - Replica node URL:  http://localhost:8761/eureka/
+01-07-2025 18:56:23.690 [main] [-] INFO  discovery-server-c.n.e.r.AbstractInstanceRegistry.initRemoteRegionRegistry - Finished initializing remote region registries. All known remote regions: []
+01-07-2025 18:56:23.691 [main] [-] INFO  discovery-server-c.n.e.DefaultEurekaServerContext.initialize - Initialized
+01-07-2025 18:56:23.697 [main] [-] INFO  discovery-server-o.s.b.a.e.web.EndpointLinksResolver.<init> - Exposing 1 endpoint beneath base path '/actuator'
+01-07-2025 18:56:23.730 [main] [-] INFO  discovery-server-o.s.c.n.e.s.EurekaServiceRegistry.register - Registering application DISCOVERY-SERVER with eureka with status UP
+01-07-2025 18:56:23.732 [main] [-] INFO  discovery-server-o.a.coyote.http11.Http11NioProtocol.log - Starting ProtocolHandler ["http-nio-8761"]
+01-07-2025 18:56:23.739 [Thread-9] [-] INFO  discovery-server-o.s.c.n.e.s.EurekaServerBootstrap.isAws - isAws returned false
+01-07-2025 18:56:23.740 [Thread-9] [-] INFO  discovery-server-o.s.c.n.e.s.EurekaServerBootstrap.initEurekaServerContext - Initialized server context
+01-07-2025 18:56:23.740 [Thread-9] [-] INFO  discovery-server-c.n.e.r.PeerAwareInstanceRegistryImpl.openForTraffic - Got 1 instances from neighboring DS node
+01-07-2025 18:56:23.740 [Thread-9] [-] INFO  discovery-server-c.n.e.r.PeerAwareInstanceRegistryImpl.openForTraffic - Renew threshold is: 1
+01-07-2025 18:56:23.740 [Thread-9] [-] INFO  discovery-server-c.n.e.r.PeerAwareInstanceRegistryImpl.openForTraffic - Changing status to UP
+01-07-2025 18:56:23.742 [Thread-9] [-] INFO  discovery-server-o.s.c.n.e.s.EurekaServerInitializerConfiguration.lambda$start$0 - Started Eureka Server
+01-07-2025 18:56:23.745 [main] [-] INFO  discovery-server-o.s.b.w.e.tomcat.TomcatWebServer.start - Tomcat started on port 8761 (http) with context path '/'
+01-07-2025 18:56:23.745 [main] [-] INFO  discovery-server-o.s.c.n.e.s.EurekaAutoServiceRegistration.onApplicationEvent - Updating port to 8761
+01-07-2025 18:56:23.759 [main] [-] INFO  discovery-server-c.p.l.d.DiscoveryEurekaServerApplication.logStarted - Started DiscoveryEurekaServerApplication in 6.717 seconds (process running for 7.071)
+01-07-2025 18:57:23.742 [Eureka-EvictionTimer] [-] INFO  discovery-server-c.n.e.r.AbstractInstanceRegistry.run - Running the evict task with compensationTime 0ms
+01-07-2025 18:58:23.744 [Eureka-EvictionTimer] [-] INFO  discovery-server-c.n.e.r.AbstractInstanceRegistry.run - Running the evict task with compensationTime 1ms
+01-07-2025 18:59:23.743 [Eureka-EvictionTimer] [-] INFO  discovery-server-c.n.e.r.AbstractInstanceRegistry.run - Running the evict task with compensationTime 0ms
+01-07-2025 19:00:23.743 [Eureka-EvictionTimer] [-] INFO  discovery-server-c.n.e.r.AbstractInstanceRegistry.run - Running the evict task with compensationTime 0ms
+01-07-2025 19:01:23.748 [Eureka-EvictionTimer] [-] INFO  discovery-server-c.n.e.r.AbstractInstanceRegistry.run - Running the evict task with compensationTime 4ms
+01-07-2025 19:02:23.753 [Eureka-EvictionTimer] [-] INFO  discovery-server-c.n.e.r.AbstractInstanceRegistry.run - Running the evict task with compensationTime 5ms
+01-07-2025 19:03:23.762 [Eureka-EvictionTimer] [-] INFO  discovery-server-c.n.e.r.AbstractInstanceRegistry.run - Running the evict task with compensationTime 8ms
+01-07-2025 19:04:23.762 [Eureka-EvictionTimer] [-] INFO  discovery-server-c.n.e.r.AbstractInstanceRegistry.run - Running the evict task with compensationTime 0ms
+01-07-2025 19:05:23.770 [Eureka-EvictionTimer] [-] INFO  discovery-server-c.n.e.r.AbstractInstanceRegistry.run - Running the evict task with compensationTime 8ms
+01-07-2025 19:06:23.776 [Eureka-EvictionTimer] [-] INFO  discovery-server-c.n.e.r.AbstractInstanceRegistry.run - Running the evict task with compensationTime 5ms
+01-07-2025 19:07:23.781 [Eureka-EvictionTimer] [-] INFO  discovery-server-c.n.e.r.AbstractInstanceRegistry.run - Running the evict task with compensationTime 4ms
+01-07-2025 19:08:23.781 [Eureka-EvictionTimer] [-] INFO  discovery-server-c.n.e.r.AbstractInstanceRegistry.run - Running the evict task with compensationTime 0ms
+01-07-2025 19:09:23.782 [Eureka-EvictionTimer] [-] INFO  discovery-server-c.n.e.r.AbstractInstanceRegistry.run - Running the evict task with compensationTime 0ms
+01-07-2025 19:10:23.783 [Eureka-EvictionTimer] [-] INFO  discovery-server-c.n.e.r.AbstractInstanceRegistry.run - Running the evict task with compensationTime 1ms

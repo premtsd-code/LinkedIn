@@ -14,30 +14,42 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 
+/**
+ * Application-wide configuration for metrics and OpenAPI documentation.
+ */
 @Configuration
-public class appConfig {
+public class AppConfig {
+
+    private static final String SECURITY_SCHEME_NAME = "bearerAuth";
+
+    /**
+     * Enables Micrometer capability for Feign clients.
+     */
     @Bean
-    public Capability capability(final MeterRegistry registry) {
+    public Capability feignMicrometerCapability(MeterRegistry registry) {
         return new MicrometerCapability(registry);
     }
 
-    final String securitySchemeName = "bearerAuth";
-
+    /**
+     * Configures the OpenAPI documentation with JWT-based authentication.
+     */
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
                         .title("Connection Service API")
                         .version("1.0")
-                        .description("API for Connection Service"))
-                .servers(List.of(new Server().url("http://localhost:8080/api/v1/connections")))
-                .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
+                        .description("API for managing LinkedIn-style user connections"))
+                .servers(List.of(
+                        new Server().url("http://localhost:8080/api/v1/connections")
+                ))
+                .addSecurityItem(new SecurityRequirement().addList(SECURITY_SCHEME_NAME))
                 .components(new Components()
-                        .addSecuritySchemes(securitySchemeName,
+                        .addSecuritySchemes(SECURITY_SCHEME_NAME,
                                 new SecurityScheme()
-                                        .name(securitySchemeName)
+                                        .name(SECURITY_SCHEME_NAME)
                                         .type(SecurityScheme.Type.HTTP)
                                         .scheme("bearer")
-                                        .bearerFormat("JWT"))); // Optional but recommended;
+                                        .bearerFormat("JWT"))); // Recommended for Swagger UI clarity
     }
 }

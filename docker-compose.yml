@@ -53,7 +53,7 @@ services:
       - NEO4J_AUTH=neo4j/password
     ports:
       - "7474:7474"
-      - "7687:7687"
+#      - "7687:7687"
     volumes:
       - connections-db-data:/data
     networks:
@@ -83,6 +83,10 @@ services:
       - linkedin-db
       - kafka
       - config-server
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD : secret123
     volumes:
       - ./app/logs/post-service:/app/logs/post-service
 
@@ -96,8 +100,8 @@ services:
       - linkedin-db
       - kafka
       - config-server
-    ports:
-      - "9020:9020"
+#    ports:
+#      - "9020:9020"
     volumes:
       - ./app/logs/user-service:/app/logs/user-service
 
@@ -145,8 +149,8 @@ services:
   config-server:
     image: premtsd18/config-server
     container_name: config-server
-    ports:
-      - "8888:8888"
+#    ports:
+#      - "8888:8888"
     networks:
       - linkedin-network
     env_file:

@@ -21,74 +21,19 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @EnableCaching
 public class RedisConfig {
 
-//    @Bean
-//    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
-//        RedisTemplate<String, Object> template = new RedisTemplate<>();
-//        template.setConnectionFactory(connectionFactory);
-//
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        objectMapper.activateDefaultTyping(objectMapper.getPolymorphicTypeValidator(), ObjectMapper.DefaultTyping.NON_FINAL);
-//
-//        GenericJackson2JsonRedisSerializer serializer = new GenericJackson2JsonRedisSerializer(objectMapper);
-//
-//        template.setKeySerializer(new StringRedisSerializer());
-//        template.setValueSerializer(serializer);
-//        template.setHashKeySerializer(new StringRedisSerializer());
-//        template.setHashValueSerializer(serializer);
-//        template.setDefaultSerializer(serializer);
-//        template.afterPropertiesSet();
-//
-//        return template;
-//    }
+    @Bean
+    public LettuceConnectionFactory redisConnectionFactory() {
+        RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
+        config.setHostName(System.getenv().getOrDefault("REDIS_HOST", "localhost"));
+        config.setPort(Integer.parseInt(System.getenv().getOrDefault("REDIS_PORT", "6379")));
 
-//    @Bean
-//    public CacheManager cacheManager(RedisConnectionFactory connectionFactory) {
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        objectMapper.activateDefaultTyping(objectMapper.getPolymorphicTypeValidator(), ObjectMapper.DefaultTyping.NON_FINAL);
-//
-//        RedisSerializer<Object> serializer = new GenericJackson2JsonRedisSerializer(objectMapper);
-//        RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
-//                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(serializer));
-//
-//        return RedisCacheManager.builder(connectionFactory)
-//                .cacheDefaults(config)
-//                .build();
-//    }
-@Bean
-public LettuceConnectionFactory redisConnectionFactory() {
-    RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
-    config.setHostName("localhost");
-    config.setPort(6379);
-//    config.setUsername("default");
-    config.setPassword("secret123");
+        // Only set password if you actually require authentication
+        String redisPassword = System.getenv("REDIS_PASSWORD");
+        if (redisPassword != null && !redisPassword.isEmpty()) {
+            config.setPassword(redisPassword);
+        }
 
-    LettuceClientConfiguration clientConfig = LettuceClientConfiguration.builder()
-//            .useSsl()
-            .build();
-
-    return new LettuceConnectionFactory(config, clientConfig);
-}
-
-//    @Bean
-//    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
-//        RedisTemplate<String, Object> template = new RedisTemplate<>();
-//        template.setConnectionFactory(connectionFactory);
-//        template.setKeySerializer(new StringRedisSerializer());
-//        template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
-//        return template;
-//    }
-//
-//    @Bean
-//    public RedisCacheManager cacheManager(RedisConnectionFactory connectionFactory) {
-//        RedisSerializationContext.SerializationPair<Object> jsonSerializer =
-//                RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer());
-//
-//        RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
-//                .serializeValuesWith(jsonSerializer);
-//
-//        return RedisCacheManager.builder(connectionFactory)
-//                .cacheDefaults(config)
-//                .build();
-//    }
+        return new LettuceConnectionFactory(config);
+    }
 
 }
