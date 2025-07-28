@@ -3,11 +3,16 @@
 # -------------------------
 .idea/
 *.iml
+.vscode/
+*.swp
+*.swo
 
 # -------------------------
 # Environment & secrets
 # -------------------------
 .env
+.env.local
+.env.*.local
 
 # -------------------------
 # Logs
@@ -22,12 +27,42 @@ logs/
 target/
 **/target/
 !**/src/**/target/   # don't ignore source directories by accident
+build/
+**/build/
+
+# -------------------------
+# Unwanted directories & files
+# -------------------------
+prem-portfolio/
+*.ps1
+*.sh
+
+# -------------------------
+# Node.js & Angular (if any)
+# -------------------------
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# -------------------------
+# Docker & Infrastructure
+# -------------------------
+**/certs/
+**/letsencrypt/
 
 # -------------------------
 # OS-generated files
 # -------------------------
 .DS_Store
 Thumbs.db
+*.tmp
+*.temp
 
 # -------------------------
 # Local configs

@@ -18,14 +18,16 @@ public class CloudinaryFileUploaderService implements FileUploaderService {
 
     @Override
     public String upload(MultipartFile file) {
+        log.info("Starting Cloudinary upload for file: {}, size: {} bytes",
+                file.getOriginalFilename(), file.getSize());
         try {
-            log.info("Uploading file to Cloudinary...");
+            log.debug("Converting file to bytes and uploading to Cloudinary");
             Map<?, ?> uploadResult = cloudinary.uploader().upload(file.getBytes(), Map.of());
             String url = uploadResult.get("secure_url").toString();
-            log.info("Upload successful: {}", url);
+            log.info("Cloudinary upload successful - URL: {}", url);
             return url;
         } catch (IOException e) {
-            log.error("File upload failed", e);
+            log.error("Cloudinary upload failed for file: {}. Error: {}", file.getOriginalFilename(), e.getMessage());
             throw new RuntimeException("Failed to upload file to Cloudinary", e);
         }
     }

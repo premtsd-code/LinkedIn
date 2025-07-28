@@ -5,6 +5,7 @@ import com.premtsd.linkedin.userservice.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class JwtService {
 
     @Value("${jwt.secretKey}")
@@ -25,7 +27,8 @@ public class JwtService {
     }
 
     public String generateAccessToken(User user) {
-        return Jwts.builder()
+        log.debug("Generating access token for user: {}", user.getEmail());
+        String token = Jwts.builder()
                 .subject(user.getId().toString())
                 .claim("email", user.getEmail())
                 .claim("roles",user.getRoles().stream().map(role -> role.getName()).collect(Collectors.toList()))
@@ -33,15 +36,20 @@ public class JwtService {
                 .expiration(new Date(System.currentTimeMillis() + 1000*60*100))
                 .signWith(getSecretKey())
                 .compact();
+        log.info("Access token generated successfully for user: {}", user.getEmail());
+        return token;
     }
 
     public Long getUserIdFromToken(String token) {
+        log.debug("Extracting user ID from token");
         Claims claims = Jwts.parser()
                 .verifyWith(getSecretKey())
                 .build()
                 .parseSignedClaims(token)
                 .getPayload();
-        return Long.valueOf(claims.getSubject());
+        Long userId = Long.valueOf(claims.getSubject());
+        log.debug("User ID extracted: {}", userId);
+        return userId;
     }
 
 }

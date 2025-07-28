@@ -1,0 +1,140 @@
+# Traefik Dynamic Configuration
+# This file contains dynamic configuration that can be updated without restarting Traefik
+
+# HTTP to HTTPS redirect middleware
+http:
+  middlewares:
+    # Security headers middleware
+    security-headers:
+      headers:
+        accessControlAllowMethods:
+          - GET
+          - OPTIONS
+          - PUT
+          - POST
+          - DELETE
+          - PATCH
+        accessControlMaxAge: 100
+        hostsProxyHeaders:
+          - "X-Forwarded-Host"
+        referrerPolicy: "same-origin"
+        customRequestHeaders:
+          X-Forwarded-Proto: "https"
+        customResponseHeaders:
+          X-Frame-Options: "SAMEORIGIN"
+          X-Content-Type-Options: "nosniff"
+          X-XSS-Protection: "1; mode=block"
+          Strict-Transport-Security: "max-age=31536000; includeSubDomains; preload"
+          Content-Security-Policy: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' wss: https:;"
+
+    # Rate limiting middleware
+    rate-limit:
+      rateLimit:
+        burst: 100
+        average: 50
+
+    # Basic auth middleware (for admin services)
+    admin-auth:
+      basicAuth:
+        users:
+          - "admin:$2y$10$8K8N8K8N8K8N8K8N8K8N8O"  # admin:admin (change this!)
+
+    # CORS middleware for API
+    api-cors:
+      headers:
+        accessControlAllowOriginList:
+          - "https://premtsd.com"
+          - "https://www.premtsd.com"
+        accessControlAllowMethods:
+          - "GET"
+          - "POST"
+          - "PUT"
+          - "DELETE"
+          - "PATCH"
+          - "OPTIONS"
+        accessControlAllowHeaders:
+          - "Content-Type"
+          - "Authorization"
+          - "X-Requested-With"
+        accessControlExposeHeaders:
+          - "Content-Length"
+          - "Content-Range"
+        accessControlAllowCredentials: true
+        accessControlMaxAge: 100
+        addVaryHeader: true
+
+    # Compression middleware
+    compression:
+      compress: {}
+
+    # Strip prefix middleware for API versioning
+    api-strip-prefix:
+      stripPrefix:
+        prefixes:
+          - "/api/v1"
+
+  # Services (if you need to define custom services)
+  services:
+    # Example: External service
+    # external-api:
+    #   loadBalancer:
+    #     servers:
+    #       - url: "https://external-api.example.com"
+
+  # Routers (additional dynamic routes)
+  routers:
+    # Health check endpoint
+    health:
+      rule: "Host(`premtsd.com`) && Path(`/health`)"
+      service: "health-service"
+      entryPoints:
+        - "websecure"
+      tls:
+        certResolver: "letsencrypt"
+
+    # API documentation
+    api-docs:
+      rule: "Host(`api.premtsd.com`) && PathPrefix(`/docs`)"
+      service: "api-gateway"
+      entryPoints:
+        - "websecure"
+      tls:
+        certResolver: "letsencrypt"
+      middlewares:
+        - "security-headers"
+        - "compression"
+
+# TLS Configuration
+tls:
+  # Custom TLS options
+  options:
+    modern:
+      minVersion: "VersionTLS13"
+      cipherSuites:
+        - "TLS_AES_256_GCM_SHA384"
+        - "TLS_CHACHA20_POLY1305_SHA256"
+        - "TLS_AES_128_GCM_SHA256"
+
+    intermediate:
+      minVersion: "VersionTLS12"
+      cipherSuites:
+        - "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+        - "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305"
+        - "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+
+  # Certificate stores (for custom certificates)
+  stores:
+    default:
+      defaultCertificate:
+        certFile: "/certs/default.crt"
+        keyFile: "/certs/default.key"
+
+# TCP Configuration (if needed)
+tcp:
+  routers: {}
+  services: {}
+
+# UDP Configuration (if needed)
+udp:
+  routers: {}
+  services: {}

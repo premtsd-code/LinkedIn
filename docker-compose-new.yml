@@ -2,7 +2,6 @@ services:
   kafka:
     image: docker.io/bitnami/kafka:3.8
     container_name: kafka
-    platform: linux/arm64
     volumes:
       - "kafka_data:/bitnami"
       - ./logs/kafka:/opt/bitnami/kafka/logs
@@ -28,8 +27,8 @@ services:
   prem-portfolio:
     build:
       context: ./prem-portfolio
+      dockerfile: Dockerfile
     container_name: prem-portfolio
-    platform: linux/arm64
     ports:
       - "4200:4200"
     networks:
@@ -54,7 +53,6 @@ services:
   kafbat-ui:
     container_name: kafbat-ui
     image: ghcr.io/kafbat/kafka-ui:latest
-    platform: linux/arm64
     ports:
       - 8090:8080
     depends_on:
@@ -79,44 +77,51 @@ services:
         max-file: "3"
         labels: "service=kafbat-ui"
 
-  # =======================
-  # PostgreSQL
-  # =======================
   linkedin-db:
-    image: postgres:15
+    image: postgres
     container_name: linkedin-db
     environment:
-      POSTGRES_DB: linkedinDB
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+      - POSTGRES_DB=linkedinDB
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
     ports:
       - "5432:5432"
-    volumes:
-      - linkedin-db-data:/var/lib/postgresql/data
     networks:
       - linkedin-network
+    volumes:
+      - linkedin-db-data:/var/lib/postgresql/data
+      - ./logs/linkedin-db:/var/log/postgresql
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        labels: "service=linkedin-db"
 
-  # =======================
-  # Neo4j Graph DB
-  # =======================
   connections-db:
-    image: neo4j:5.18
+    image: neo4j
     container_name: connections-db
     environment:
-      NEO4J_AUTH: neo4j/password
+      - NEO4J_AUTH=neo4j/password
     ports:
       - "7474:7474"
       - "7687:7687"
     volumes:
       - connections-db-data:/data
+      - ./logs/connections-db:/logs
     networks:
       - linkedin-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        labels: "service=connections-db"
 
   discovery-server:
-    image: premtsd18/discovery-server:arm64
+    image: premtsd18/discovery-server
     restart: unless-stopped
     container_name: discovery-server
-    platform: linux/arm64
     networks:
       - linkedin-network
     ports:
@@ -140,9 +145,8 @@ services:
         labels: "service=discovery-server"
 
   post-service:
-    image: premtsd18/post-service:arm64
+    image: premtsd18/post-service
     container_name: post-service
-    platform: linux/arm64
     networks:
       - linkedin-network
     depends_on:
@@ -164,9 +168,8 @@ services:
         labels: "service=post-service"
 
   user-service:
-    image: premtsd18/user-service:arm64
+    image: premtsd18/user-service
     container_name: user-service
-    platform: linux/arm64
     networks:
       - linkedin-network
     depends_on:
@@ -184,9 +187,8 @@ services:
         labels: "service=user-service"
 
   notification-service:
-    image: premtsd18/notification-service:arm64
+    image: premtsd18/notification-service
     container_name: notification-service
-    platform: linux/arm64
     networks:
       - linkedin-network
     depends_on:
@@ -204,9 +206,8 @@ services:
         labels: "service=notification-service"
 
   connections-service:
-    image: premtsd18/connections-service:arm64
+    image: premtsd18/connections-service
     container_name: connections-service
-    platform: linux/arm64
     networks:
       - linkedin-network
     depends_on:
@@ -224,9 +225,8 @@ services:
         labels: "service=connections-service"
 
   api-gateway:
-    image: premtsd18/api-gateway:arm64
+    image: premtsd18/api-gateway
     container_name: api-gateway
-    platform: linux/arm64
     ports:
       - "8080:8080"
     networks:
@@ -256,9 +256,8 @@ services:
         labels: "service=api-gateway"
 
   config-server:
-    image: premtsd18/config-server:arm64
+    image: premtsd18/config-server
     container_name: config-server
-    platform: linux/arm64
     networks:
       - linkedin-network
     env_file:
@@ -280,7 +279,6 @@ services:
   redis:
     image: bitnami/redis:latest
     container_name: redis
-    platform: linux/arm64
     environment:
       - REDIS_PASSWORD=secret123
     ports:
@@ -297,9 +295,8 @@ services:
         labels: "service=redis"
 
   uploader-service:
-    image: premtsd18/uploader-service:arm64
+    image: premtsd18/uploader-service
     container_name: uploader-service
-    platform: linux/arm64
     networks:
       - linkedin-network
     depends_on:
@@ -315,9 +312,8 @@ services:
         labels: "service=uploader-service"
 
   zipkin:
-    image: openzipkin/zipkin:latest
+    image: openzipkin/zipkin
     container_name: zipkin
-    platform: linux/arm64
     ports:
       - "9411:9411"
     networks:
@@ -339,40 +335,94 @@ services:
         max-file: "3"
         labels: "service=zipkin"
 
+  opensearch-init:
+    image: busybox:latest
+    container_name: opensearch-init
+    user: root
+    volumes:
+      - opensearch-data:/usr/share/opensearch/data
+      - ./logs/opensearch:/usr/share/opensearch/logs
+    command: >
+      sh -c "
+        mkdir -p /usr/share/opensearch/logs &&
+        mkdir -p /usr/share/opensearch/data &&
+        chown -R 1000:1000 /usr/share/opensearch/logs &&
+        chown -R 1000:1000 /usr/share/opensearch/data &&
+        chmod -R 755 /usr/share/opensearch/logs &&
+        chmod -R 755 /usr/share/opensearch/data
+      "
+
   opensearch:
-    image: opensearchproject/opensearch:2.12.0
+    image: opensearchproject/opensearch:2.17.0
     container_name: opensearch
+    user: "1000:1000"
     environment:
-      discovery.type: single-node
-      DISABLE_SECURITY_PLUGIN: "true"
-      OPENSEARCH_JAVA_OPTS: -Xms512m -Xmx512m
+      - discovery.type=single-node
+      - DISABLE_SECURITY_PLUGIN=true
+      - OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m
+      - DISABLE_INSTALL_DEMO_CONFIG=true
+      - DISABLE_PERFORMANCE_ANALYZER_AGENT_CLI=true
+      - bootstrap.memory_lock=true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
     ports:
       - "9200:9200"
     networks:
       - linkedin-network
+    volumes:
+      - opensearch-data:/usr/share/opensearch/data
+      - ./logs/opensearch:/usr/share/opensearch/logs
+    depends_on:
+      opensearch-init:
+        condition: service_completed_successfully
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        labels: "service=opensearch"
 
   opensearch-dashboards:
-    image: opensearchproject/opensearch-dashboards:2.12.0
+    image: opensearchproject/opensearch-dashboards:2.17.0
     container_name: opensearch-dashboards
+    user: "1000:1000"
     environment:
       - OPENSEARCH_HOSTS=http://opensearch:9200
       - DISABLE_SECURITY_DASHBOARDS_PLUGIN=true
+    ports:
+      - "5601:5601"
     depends_on:
       - opensearch
+    networks:
+      - linkedin-network
+    volumes:
+      - ./logs/opensearch-dashboards:/usr/share/opensearch-dashboards/logs
     labels:
       - "traefik.enable=true"
+      # HTTP route for local development
+      - "traefik.http.routers.opensearch-http.rule=Host(`logs.premtsd.com`)"
+      - "traefik.http.routers.opensearch-http.entrypoints=web"
+      - "traefik.http.services.opensearch-http.loadbalancer.server.port=5601"
+      # HTTPS route for production
       - "traefik.http.routers.opensearch.rule=Host(`logs.premtsd.com`)"
       - "traefik.http.routers.opensearch.entrypoints=websecure"
       - "traefik.http.routers.opensearch.tls.certresolver=letsencrypt"
       - "traefik.http.services.opensearch.loadbalancer.server.port=5601"
-    networks:
-      - linkedin-network
-
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        labels: "service=opensearch-dashboards"
 
   opensearch-logstash:
     image: opensearchproject/logstash-oss-with-opensearch-output-plugin:8.9.0
     container_name: opensearch-logstash
-    platform: linux/arm64
     volumes:
       - ./logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
       - ./logs/opensearch-logstash:/usr/share/logstash/logs
@@ -394,7 +444,6 @@ services:
   filebeat:
     image: docker.elastic.co/beats/filebeat:8.13.4
     container_name: filebeat
-    platform: linux/arm64
     user: root
     volumes:
       - ./filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
@@ -416,12 +465,11 @@ services:
         labels: "service=filebeat"
 
   # =======================
-  # Traefik Reverse Proxy with HTTPS (ARM64)
+  # Traefik Reverse Proxy with HTTPS
   # =======================
   traefik:
     image: traefik:v3.0
     container_name: traefik
-    platform: linux/arm64
     command:
       - "--api.dashboard=true"
       - "--api.insecure=true"
@@ -459,7 +507,6 @@ services:
         max-size: "10m"
         max-file: "3"
         labels: "service=traefik"
-
 networks:
   linkedin-network:
 
@@ -467,5 +514,6 @@ volumes:
   kafka_data:
   linkedin-db-data:
   connections-db-data:
+  opensearch-data:
   prometheus-data:
   grafana-data:

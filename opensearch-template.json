@@ -1,0 +1,71 @@
+{
+  "index_patterns": ["linkedin-logs-*"],
+  "template": {
+    "settings": {
+      "number_of_shards": 1,
+      "number_of_replicas": 0,
+      "index.refresh_interval": "5s"
+    },
+    "mappings": {
+      "properties": {
+        "@timestamp": {
+          "type": "date"
+        },
+        "trace_id": {
+          "type": "keyword",
+          "index": true
+        },
+        "span_id": {
+          "type": "keyword",
+          "index": true
+        },
+        "service_name": {
+          "type": "keyword",
+          "index": true
+        },
+        "log_level": {
+          "type": "keyword",
+          "index": true
+        },
+        "logger": {
+          "type": "keyword",
+          "index": true
+        },
+        "has_trace": {
+          "type": "boolean"
+        },
+        "log_message": {
+          "type": "text",
+          "analyzer": "standard"
+        },
+        "message": {
+          "type": "text",
+          "analyzer": "standard"
+        },
+        "thread": {
+          "type": "keyword"
+        },
+        "log_timestamp": {
+          "type": "date",
+          "format": "dd-MM-yyyy HH:mm:ss.SSS"
+        },
+        "log_type": {
+          "type": "keyword"
+        },
+        "source_type": {
+          "type": "keyword"
+        },
+        "container": {
+          "properties": {
+            "name": {
+              "type": "keyword"
+            },
+            "id": {
+              "type": "keyword"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -37,7 +37,6 @@ spring:
             - StripPrefix=2
             - name: AuthenticationFilter
 
-
 springdoc:
   enable-native-support: true
   api-docs:

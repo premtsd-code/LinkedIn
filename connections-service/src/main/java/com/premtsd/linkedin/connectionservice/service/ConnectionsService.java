@@ -14,9 +14,9 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
-import org.springframework.util.concurrent.ListenableFutureCallback;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @RequiredArgsConstructor
 @Service
@@ -52,24 +52,37 @@ public class ConnectionsService {
         validateSenderAndReceiver(senderId, receiverId);
 
         if (personRepository.connectionRequestExists(senderId, receiverId)) {
+            log.warn("Connection request already exists: sender={}, receiver={}", senderId, receiverId);
             throw new BusinessRuleViolationException("Connection request already exists");
         }
 
         if (personRepository.alreadyConnected(senderId, receiverId)) {
+            log.warn("Users are already connected: sender={}, receiver={}", senderId, receiverId);
             throw new BusinessRuleViolationException("Users are already connected");
         }
 
+        log.debug("Adding connection request to graph database");
         personRepository.addConnectionRequest(senderId, receiverId);
-        log.info("Connection request added to graph DB");
+        log.info("Connection request added to graph DB successfully");
 
+        log.debug("Publishing connection request event");
         SendConnectionRequestEvent event = SendConnectionRequestEvent.builder()
                 .senderId(senderId)
                 .receiverId(receiverId)
                 .build();
 
-        sendRequestKafkaTemplate.send(SEND_TOPIC, event.getReceiverId(), event)
-                .addCallback(kafkaCallback(SEND_TOPIC, event));
+        CompletableFuture<SendResult<Long, SendConnectionRequestEvent>> future =
+                sendRequestKafkaTemplate.send(SEND_TOPIC, event.getReceiverId(), event);
 
+        future.whenComplete((result, ex) -> {
+            if (ex == null) {
+                log.info("Sent connection request event to topic {}: {}", SEND_TOPIC, event);
+            } else {
+                log.error("Failed to send connection request event to topic {}: {}", SEND_TOPIC, event, ex);
+            }
+        });
+
+        log.info("Connection request process completed: sender={}, receiver={}", senderId, receiverId);
         return true;
     }
 
@@ -78,32 +91,47 @@ public class ConnectionsService {
         log.info("Accepting connection request from sender={} to receiver={}", senderId, receiverId);
 
         if (!personRepository.connectionRequestExists(senderId, receiverId)) {
+            log.warn("No connection request exists to accept: sender={}, receiver={}", senderId, receiverId);
             throw new BusinessRuleViolationException("No connection request to accept");
         }
 
+        log.debug("Accepting connection request in graph database");
         personRepository.acceptConnectionRequest(senderId, receiverId);
-        log.info("Accepted connection request in graph DB");
+        log.info("Accepted connection request in graph DB successfully");
 
+        log.debug("Publishing accept connection request event");
         AcceptConnectionRequestEvent event = AcceptConnectionRequestEvent.builder()
                 .senderId(senderId)
                 .receiverId(receiverId)
                 .build();
 
-        acceptRequestKafkaTemplate.send(ACCEPT_TOPIC, event.getReceiverId(), event)
-                .addCallback(kafkaCallback(ACCEPT_TOPIC, event));
+        CompletableFuture<SendResult<Long, AcceptConnectionRequestEvent>> future =
+                acceptRequestKafkaTemplate.send(ACCEPT_TOPIC, event.getReceiverId(), event);
 
+        future.whenComplete((result, ex) -> {
+            if (ex == null) {
+                log.info("Sent accept connection request event to topic {}: {}", ACCEPT_TOPIC, event);
+            } else {
+                log.error("Failed to send accept connection request event to topic {}: {}", ACCEPT_TOPIC, event, ex);
+            }
+        });
+
+        log.info("Accept connection request process completed: sender={}, receiver={}", senderId, receiverId);
         return true;
     }
 
     public Boolean rejectConnectionRequest(Long senderId) {
         Long receiverId = UserContextHolder.getCurrentUserId();
+        log.info("Rejecting connection request from sender={} to receiver={}", senderId, receiverId);
 
         if (!personRepository.connectionRequestExists(senderId, receiverId)) {
+            log.warn("No connection request exists to reject: sender={}, receiver={}", senderId, receiverId);
             throw new BusinessRuleViolationException("No connection request to reject");
         }
 
+        log.debug("Rejecting connection request in graph database");
         personRepository.rejectConnectionRequest(senderId, receiverId);
-        log.info("Rejected connection request from sender={} to receiver={}", senderId, receiverId);
+        log.info("Connection request rejected successfully: sender={}, receiver={}", senderId, receiverId);
         return true;
     }
 
@@ -117,17 +145,5 @@ public class ConnectionsService {
         }
     }
 
-    private <T> ListenableFutureCallback<SendResult<Long, T>> kafkaCallback(String topic, T event) {
-        return new ListenableFutureCallback<>() {
-            @Override
-            public void onSuccess(SendResult<Long, T> result) {
-                log.info("Sent event to topic {}: {}", topic, event);
-            }
 
-            @Override
-            public void onFailure(Throwable ex) {
-                log.error("Failed to send event to topic {}: {}", topic, event, ex);
-            }
-        };
-    }
 }

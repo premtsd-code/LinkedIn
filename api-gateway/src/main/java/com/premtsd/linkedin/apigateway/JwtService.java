@@ -22,18 +22,24 @@ public class JwtService {
 
     @PostConstruct
     void init() {
+        log.info("Initializing JWT Service...");
         // Ensure key length is valid for HMAC
         byte[] keyBytes = jwtSecretKey.getBytes(StandardCharsets.UTF_8);
         if (keyBytes.length < 32) {
+            log.error("JWT secret key length is insufficient: {} bytes", keyBytes.length);
             throw new IllegalArgumentException("JWT secret key must be at least 256 bits (32 bytes).");
         }
         this.secretKey = Keys.hmacShaKeyFor(keyBytes);
+        log.info("JWT Service initialized successfully");
     }
 
     public String getUserIdFromToken(String token) {
+        log.debug("Extracting user ID from JWT token");
         try {
             Claims claims = parseToken(token);
-            return claims.getSubject();
+            String userId = claims.getSubject();
+            log.debug("Successfully extracted user ID: {}", userId);
+            return userId;
         } catch (JwtException e) {
             log.error("Failed to parse JWT: {}", e.getMessage());
             throw new JwtException("Invalid JWT token");
@@ -41,14 +47,17 @@ public class JwtService {
     }
 
     public void validateTokenWithRole(String token, String expectedRole) {
+        log.debug("Validating token with required role: {}", expectedRole);
         try {
             Claims claims = parseToken(token);
             List<String> roles = claims.get("roles", List.class);
+            log.debug("User roles from token: {}", roles);
 
             if (roles == null || !roles.contains(expectedRole)) {
-                log.warn("Token does not contain required role: {}", expectedRole);
+                log.warn("Token does not contain required role: {}. User roles: {}", expectedRole, roles);
                 throw new JwtException("User is not authorized.");
             }
+            log.debug("Role validation successful for role: {}", expectedRole);
         } catch (JwtException e) {
             log.error("JWT validation failed: {}", e.getMessage());
             throw new JwtException("Invalid JWT token or role mismatch.");

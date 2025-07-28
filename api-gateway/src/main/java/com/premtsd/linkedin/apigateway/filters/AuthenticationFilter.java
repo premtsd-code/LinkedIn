@@ -34,21 +34,26 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
     public GatewayFilter apply(Config config) {
         return (exchange, chain) -> {
             String path = exchange.getRequest().getURI().getPath();
+            log.debug("Processing authentication for path: {}", path);
 
             if (isWhitelisted(path)) {
+                log.debug("Path {} is whitelisted, skipping authentication", path);
                 return chain.filter(exchange);
             }
 
             String authHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
             if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+                log.warn("Authorization header missing or invalid for path: {}", path);
                 return onError(exchange, "Authorization header missing or invalid", HttpStatus.UNAUTHORIZED);
             }
 
             String token = authHeader.substring(7).trim(); // safer than split
+            log.debug("Validating JWT token for path: {}", path);
 
             try {
                 String userId = jwtService.getUserIdFromToken(token);
                 jwtService.validateTokenWithRole(token, config.requiredRole);
+                log.info("Authentication successful for user: {} on path: {}", userId, path);
 
                 ServerWebExchange modifiedExchange = exchange.mutate()
                         .request(builder -> builder.header("X-User-Id", userId))
@@ -56,7 +61,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 
                 return chain.filter(modifiedExchange);
             } catch (JwtException e) {
-                log.warn("JWT validation failed: {}", e.getMessage());
+                log.warn("JWT validation failed for path {}: {}", path, e.getMessage());
                 return onError(exchange, "Invalid or expired token", HttpStatus.UNAUTHORIZED);
             }
         };

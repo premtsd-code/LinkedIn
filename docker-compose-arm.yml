@@ -28,6 +28,7 @@ services:
   prem-portfolio:
     build:
       context: ./prem-portfolio
+      dockerfile: Dockerfile.arm64  # ARM64-specific Dockerfile
     container_name: prem-portfolio
     platform: linux/arm64
     ports:
@@ -79,38 +80,49 @@ services:
         max-file: "3"
         labels: "service=kafbat-ui"
 
-  # =======================
-  # PostgreSQL
-  # =======================
   linkedin-db:
-    image: postgres:15
+    image: arm64v8/postgres:16
     container_name: linkedin-db
+    platform: linux/arm64
     environment:
-      POSTGRES_DB: linkedinDB
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+      - POSTGRES_DB=linkedinDB
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
     ports:
       - "5432:5432"
-    volumes:
-      - linkedin-db-data:/var/lib/postgresql/data
     networks:
       - linkedin-network
+    volumes:
+      - linkedin-db-data:/var/lib/postgresql/data
+      - ./logs/linkedin-db:/var/log/postgresql
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        labels: "service=linkedin-db"
 
-  # =======================
-  # Neo4j Graph DB
-  # =======================
   connections-db:
-    image: neo4j:5.18
+    image: neo4j:5.15-community
     container_name: connections-db
+    platform: linux/arm64
     environment:
-      NEO4J_AUTH: neo4j/password
+      - NEO4J_AUTH=neo4j/password
+      - NEO4J_PLUGINS=["apoc"]
     ports:
       - "7474:7474"
       - "7687:7687"
     volumes:
       - connections-db-data:/data
+      - ./logs/connections-db:/logs
     networks:
       - linkedin-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        labels: "service=connections-db"
 
   discovery-server:
     image: premtsd18/discovery-server:arm64
@@ -340,34 +352,57 @@ services:
         labels: "service=zipkin"
 
   opensearch:
-    image: opensearchproject/opensearch:2.12.0
+    image: opensearchproject/opensearch:2.17.0
     container_name: opensearch
+    platform: linux/arm64
     environment:
-      discovery.type: single-node
-      DISABLE_SECURITY_PLUGIN: "true"
-      OPENSEARCH_JAVA_OPTS: -Xms512m -Xmx512m
+      - discovery.type=single-node
+      - DISABLE_SECURITY_PLUGIN=true
+      - OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
     ports:
       - "9200:9200"
     networks:
       - linkedin-network
+    volumes:
+      - ./logs/opensearch:/usr/share/opensearch/logs
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        labels: "service=opensearch"
 
   opensearch-dashboards:
-    image: opensearchproject/opensearch-dashboards:2.12.0
+    image: opensearchproject/opensearch-dashboards:2.17.0
     container_name: opensearch-dashboards
+    platform: linux/arm64
     environment:
       - OPENSEARCH_HOSTS=http://opensearch:9200
       - DISABLE_SECURITY_DASHBOARDS_PLUGIN=true
+    ports:
+      - "5601:5601"
     depends_on:
       - opensearch
+    networks:
+      - linkedin-network
+    volumes:
+      - ./logs/opensearch-dashboards:/usr/share/opensearch-dashboards/logs
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.opensearch.rule=Host(`logs.premtsd.com`)"
       - "traefik.http.routers.opensearch.entrypoints=websecure"
       - "traefik.http.routers.opensearch.tls.certresolver=letsencrypt"
       - "traefik.http.services.opensearch.loadbalancer.server.port=5601"
-    networks:
-      - linkedin-network
-
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        labels: "service=opensearch-dashboards"
 
   opensearch-logstash:
     image: opensearchproject/logstash-oss-with-opensearch-output-plugin:8.9.0

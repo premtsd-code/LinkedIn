@@ -31,8 +31,15 @@ public class FileUploadController {
             @Parameter(description = "The file to upload")
             @RequestPart("file") MultipartFile file) throws Exception {
 
-        log.info("Received upload request");
-        String url = fileUploaderService.upload(file);
-        return ResponseEntity.ok(url);
+        log.info("Received file upload request - filename: {}, size: {} bytes",
+                file.getOriginalFilename(), file.getSize());
+        try {
+            String url = fileUploaderService.upload(file);
+            log.info("File uploaded successfully - URL: {}", url);
+            return ResponseEntity.ok(url);
+        } catch (Exception e) {
+            log.error("File upload failed for file: {}. Error: {}", file.getOriginalFilename(), e.getMessage());
+            throw e;
+        }
     }
 }
