@@ -37,6 +37,14 @@ spring:
             - StripPrefix=2
             - name: AuthenticationFilter
 
+        - id: notification-service
+          uri: ${NOTIFICATION_SERVICE_URI:lb://NOTIFICATION-SERVICE}
+          predicates:
+            - Path=/api/v1/notifications/**
+          filters:
+            - StripPrefix=2
+            - name: AuthenticationFilter
+
 springdoc:
   enable-native-support: true
   api-docs:
@@ -61,3 +69,6 @@ springdoc:
       - url: /api/v1/uploads/v3/api-docs
         name: Uploader Service
         primaryName: Uploader Service
+      - url: /api/v1/notifications/v3/api-docs
+        name: Notification Service
+        primaryName: Notification Service

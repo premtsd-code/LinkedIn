@@ -196,6 +196,8 @@ services:
       - linkedin-db
       - kafka
       - config-server
+    ports:
+      - "9293:9293"
     volumes:
       - ./logs/notification-service:/logs/notification-service
     logging:
