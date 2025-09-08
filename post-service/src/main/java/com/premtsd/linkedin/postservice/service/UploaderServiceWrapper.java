@@ -17,9 +17,9 @@ public class UploaderServiceWrapper {
     private final UploaderClient uploaderClient;
 
 
-//    @RateLimiter(name = "uploadImageRateLimiter", fallbackMethod = "fallbackRateLimit")
-    @CircuitBreaker(name = "uploadImageCircuitBreaker", fallbackMethod = "fallbackUpload")
-    @Retry(name = "uploadImageRetry", fallbackMethod = "fallbackRetry")
+    @RateLimiter(name = "uploadImageRateLimiter", fallbackMethod = "fallbackRateLimit")
+//    @CircuitBreaker(name = "uploadImageCircuitBreaker", fallbackMethod = "fallbackUpload")
+//    @Retry(name = "uploadImageRetry", fallbackMethod = "fallbackRetry")
     public String uploadFile(MultipartFile file) {
         log.info("Calling uploader-service for image upload...");
         return uploaderClient.uploadFile(file);

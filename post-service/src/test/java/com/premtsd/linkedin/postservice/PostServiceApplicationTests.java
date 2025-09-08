@@ -1,19 +1,28 @@
 package com.premtsd.linkedin.postservice;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.RedisTemplate;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 
 @SpringBootTest
+@ActiveProfiles("test")
+@TestPropertySource(properties = {
+    "spring.cloud.config.enabled=false",
+    "spring.cloud.config.import-check.enabled=false",
+    "eureka.client.enabled=false"
+})
 class PostServiceApplicationTests {
 
-	@Autowired
-	private RedisTemplate<String, String> redisTemplate;
+	@Test
+	void contextLoads() {
+		// This test verifies that the Spring application context loads successfully
+		// with all the required beans and configurations
+	}
 
 	@Test
-	void testRedisConnection() {
+	void applicationStarts() {
+		// This test verifies that the application can start without errors
+		// when external dependencies are disabled
 	}
 }

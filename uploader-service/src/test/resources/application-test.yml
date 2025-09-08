@@ -1,0 +1,46 @@
+# Test configuration to disable external dependencies
+spring:
+  cloud:
+    config:
+      enabled: false
+      import-check:
+        enabled: false
+      discovery:
+        enabled: false
+      fail-fast: false
+    config:
+      import: optional:configserver:
+  config:
+    import: optional:configserver:
+
+eureka:
+  client:
+    enabled: false
+
+# Mock Cloudinary configuration for tests
+cloudinary:
+  cloud-name: test-cloud
+  api-key: test-key
+  api-secret: test-secret
+
+# Mock GCS configuration for tests
+gcs:
+  bucket-name: test-bucket
+  access-account: |
+    {
+      "type": "service_account",
+      "project_id": "test-project",
+      "private_key_id": "test-key-id",
+      "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC7VJTUt9Us8cKB\nxhXBaaxLQO/Q6PKpkmpnfmD4cJ5Ar9As1Qo+u+1elDh2Jg==\n-----END PRIVATE KEY-----\n",
+      "client_email": "test@test-project.iam.gserviceaccount.com",
+      "client_id": "123456789",
+      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+      "token_uri": "https://oauth2.googleapis.com/token"
+    }
+
+# Logging
+logging:
+  level:
+    com.premtsd.linkedin.uploader_service: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.test: DEBUG

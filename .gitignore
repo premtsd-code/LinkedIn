@@ -20,6 +20,18 @@
 *.log
 logs/
 **/logs/
+app/
+traefik/
+prem-portfolio/
+logs/
+logstash/
+fix-opensearch-permissions.ps1
+filebeat.yml
+fix-opensearch-permissions.sh
+logback-spring-json.xml
+opensearch-template.json
+
+
 
 # -------------------------
 # Build & Maven/Gradle outputs

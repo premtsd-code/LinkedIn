@@ -141,7 +141,7 @@ public class ConnectionsService {
         }
 
         if (senderId.equals(receiverId)) {
-            throw new BusinessRuleViolationException("Sender and receiver cannot be the same user");
+            throw new BusinessRuleViolationException("Cannot send connection request to yourself");
         }
     }
 
