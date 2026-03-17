@@ -1,22 +1,229 @@
+networks:
+  linkedin-network:
+
+volumes:
+  kafka_data:
+  linkedin-db-data:
+  connections-db-data:
+  opensearch-data:
+
+# ============================================================
+# PORT MAP — LinkedIn Project (10000–10999 range)
+# ============================================================
+# Microservices:    10000–10099
+#   10000 → api-gateway
+#   10001 → discovery-server
+#   10003 → notification-service
+# Databases:        10100–10199
+#   10100 → postgres (linkedin-db)
+#   10101 → neo4j browser
+#   10102 → neo4j bolt
+#   10103 → redis
+# Messaging:        10200–10299
+#   10201 → kafbat-ui
+# Observability:    10300–10399
+#   10300 → zipkin
+#   10301 → opensearch
+#   10302 → opensearch-dashboards
+#   10303 → opensearch-logstash
+# Infrastructure:   10400–10499
+#   10400 → traefik http
+#   10401 → traefik https
+#   10402 → traefik dashboard
+# App:              10500–10599
+#   10500 → prem-portfolio
+# ============================================================
+
 services:
-  kafka:
-    image: docker.io/bitnami/kafka:3.8
-    container_name: kafka
+
+  # ── Infrastructure ───────────────────────────────────────
+
+  traefik:
+    image: traefik:v3.0
+    platform: linux/amd64
+    container_name: linkedin-traefik
+    command:
+      - "--api.dashboard=true"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.letsencrypt.acme.tlschallenge=true"
+      - "--certificatesresolvers.letsencrypt.acme.email=i.prem.tsd@outlook.com"
+      - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+      - "--log.level=INFO"
+    ports:
+      - "10400:80"
+      - "10401:443"
+      - "10402:8080"
     volumes:
-      - "kafka_data:/bitnami"
-      - ./logs/kafka:/opt/bitnami/kafka/logs
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik/letsencrypt:/letsencrypt
+      - ./traefik/certs:/certs
+      - ./traefik/config:/etc/traefik/dynamic
+    networks:
+      - linkedin-network
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.premtsd.com`)"
+      - "traefik.http.routers.traefik.entrypoints=websecure"
+      - "traefik.http.routers.traefik.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.traefik.service=api@internal"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        labels: "service=traefik"
+
+  # ── Config + Discovery ───────────────────────────────────
+
+  config-server:
+    build:
+      context: ./config-server
+    platform: linux/amd64
+    container_name: linkedin-config-server
+    networks:
+      - linkedin-network
+    env_file:
+      - .env
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8888/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ./logs/config-server:/logs/config-server
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        labels: "service=config-server"
+
+  discovery-server:
+    build:
+      context: ./discovery-server
+    platform: linux/amd64
+    restart: unless-stopped
+    container_name: linkedin-discovery-server
+    networks:
+      - linkedin-network
+    ports:
+      - "10001:8761"
+    depends_on:
+      config-server:
+        condition: service_healthy
+    volumes:
+      - ./logs/discovery-server:/logs/discovery-server
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.eureka.rule=Host(`eureka.premtsd.com`)"
+      - "traefik.http.routers.eureka.entrypoints=websecure"
+      - "traefik.http.routers.eureka.tls.certresolver=letsencrypt"
+      - "traefik.http.services.eureka.loadbalancer.server.port=8761"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        labels: "service=discovery-server"
+
+  # ── Databases ────────────────────────────────────────────
+
+  linkedin-db:
+    image: postgres:15
+    platform: linux/amd64
+    container_name: linkedin-db
+    environment:
+      - POSTGRES_DB=linkedinDB
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "10100:5432"
+    networks:
+      - linkedin-network
+    volumes:
+      - linkedin-db-data:/var/lib/postgresql/data
+      - ./logs/linkedin-db:/var/log/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user"]
+      interval: 10s
+      retries: 5
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        labels: "service=linkedin-db"
+
+  connections-db:
+    image: neo4j:5
+    platform: linux/amd64
+    container_name: connections-db
+    environment:
+      - NEO4J_AUTH=neo4j/password
+    ports:
+      - "10101:7474"
+      - "10102:7687"
+    volumes:
+      - connections-db-data:/data
+      - ./logs/connections-db:/logs
+    networks:
+      - linkedin-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        labels: "service=connections-db"
+
+  redis:
+    image: bitnami/redis:latest
+    platform: linux/amd64
+    container_name: linkedin-redis
+    environment:
+      - REDIS_PASSWORD=secret123
+    ports:
+      - "10103:6379"
+    networks:
+      - linkedin-network
+    volumes:
+      - ./logs/redis:/opt/bitnami/redis/logs
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        labels: "service=redis"
+
+  # ── Messaging ────────────────────────────────────────────
+
+  kafka:
+    image: apache/kafka:3.7.0
+    platform: linux/amd64
+    container_name: linkedin-kafka
+    volumes:
+      - "kafka_data:/tmp/kraft-combined-logs"
+      - ./logs/kafka:/opt/kafka/logs
     networks:
       - linkedin-network
     environment:
-      - KAFKA_CFG_NODE_ID=0
-      - KAFKA_CFG_PROCESS_ROLES=controller,broker
-      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
-      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
-      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
-      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
-      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
-      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+      - KAFKA_NODE_ID=0
+      - KAFKA_PROCESS_ROLES=controller,broker
+      - KAFKA_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
+      - KAFKA_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      - KAFKA_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
       - KAFKA_HEAP_OPTS=-Xmx512m -Xms512m
+      - CLUSTER_ID=MkU3OEVBNTcwNTJENDM2Qk
     logging:
       driver: "json-file"
       options:
@@ -24,37 +231,12 @@ services:
         max-file: "3"
         labels: "service=kafka"
 
-  prem-portfolio:
-    build:
-      context: ./prem-portfolio
-      dockerfile: Dockerfile
-    container_name: prem-portfolio
-    ports:
-      - "4200:4200"
-    networks:
-      - linkedin-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.portfolio.rule=Host(`premtsd.com`) || Host(`www.premtsd.com`)"
-      - "traefik.http.routers.portfolio.entrypoints=websecure"
-      - "traefik.http.routers.portfolio.tls.certresolver=letsencrypt"
-      - "traefik.http.services.portfolio.loadbalancer.server.port=80"
-      # Redirect www to non-www
-      - "traefik.http.middlewares.www-redirect.redirectregex.regex=^https://www.premtsd.com/(.*)"
-      - "traefik.http.middlewares.www-redirect.redirectregex.replacement=https://premtsd.com/$${1}"
-      - "traefik.http.routers.portfolio.middlewares=www-redirect"
-
   kafbat-ui:
-    container_name: kafbat-ui
     image: ghcr.io/kafbat/kafka-ui:latest
+    platform: linux/amd64
+    container_name: linkedin-kafbat-ui
     ports:
-      - 8090:8080
+      - "10201:8080"
     depends_on:
       - kafka
     networks:
@@ -77,76 +259,66 @@ services:
         max-file: "3"
         labels: "service=kafbat-ui"
 
-  linkedin-db:
-    image: postgres
-    container_name: linkedin-db
-    environment:
-      - POSTGRES_DB=linkedinDB
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
-    ports:
-      - "5432:5432"
-    networks:
-      - linkedin-network
-    volumes:
-      - linkedin-db-data:/var/lib/postgresql/data
-      - ./logs/linkedin-db:/var/log/postgresql
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-        labels: "service=linkedin-db"
+  # ── Microservices ─────────────────────────────────────────
 
-  connections-db:
-    image: neo4j
-    container_name: connections-db
-    environment:
-      - NEO4J_AUTH=neo4j/password
+  api-gateway:
+    build:
+      context: ./api-gateway
+    platform: linux/amd64
+    container_name: linkedin-api-gateway
     ports:
-      - "7474:7474"
-      - "7687:7687"
-    volumes:
-      - connections-db-data:/data
-      - ./logs/connections-db:/logs
+      - "10000:8080"
     networks:
       - linkedin-network
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-        labels: "service=connections-db"
-
-  discovery-server:
-    image: premtsd18/discovery-server
-    restart: unless-stopped
-    container_name: discovery-server
-    networks:
-      - linkedin-network
-    ports:
-      - "8761:8761"
     depends_on:
-      config-server:
-        condition: service_healthy
+      - discovery-server
+      - config-server
     volumes:
-      - ./logs/discovery-server:/logs/discovery-server
+      - ./logs/api-gateway:/logs/api-gateway
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.eureka.rule=Host(`eureka.premtsd.com`)"
-      - "traefik.http.routers.eureka.entrypoints=websecure"
-      - "traefik.http.routers.eureka.tls.certresolver=letsencrypt"
-      - "traefik.http.services.eureka.loadbalancer.server.port=8761"
+      - "traefik.http.routers.api.rule=Host(`api.premtsd.com`)"
+      - "traefik.http.routers.api.entrypoints=websecure"
+      - "traefik.http.routers.api.tls.certresolver=letsencrypt"
+      - "traefik.http.services.api.loadbalancer.server.port=8080"
+      - "traefik.http.middlewares.api-cors.headers.accesscontrolallowmethods=GET,OPTIONS,PUT,POST,DELETE,PATCH"
+      - "traefik.http.middlewares.api-cors.headers.accesscontrolalloworiginlist=https://premtsd.com,https://www.premtsd.com"
+      - "traefik.http.middlewares.api-cors.headers.accesscontrolmaxage=100"
+      - "traefik.http.middlewares.api-cors.headers.addvaryheader=true"
+      - "traefik.http.routers.api.middlewares=api-cors"
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
         max-file: "3"
-        labels: "service=discovery-server"
+        labels: "service=api-gateway"
+
+  user-service:
+    build:
+      context: ./user-service
+    platform: linux/amd64
+    container_name: linkedin-user-service
+    networks:
+      - linkedin-network
+    depends_on:
+      - discovery-server
+      - linkedin-db
+      - kafka
+      - config-server
+    volumes:
+      - ./app/logs/user-service:/app/logs/user-service
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        labels: "service=user-service"
 
   post-service:
-    image: premtsd18/post-service
-    container_name: post-service
+    build:
+      context: ./post-service
+    platform: linux/amd64
+    container_name: linkedin-post-service
     networks:
       - linkedin-network
     depends_on:
@@ -167,49 +339,11 @@ services:
         max-file: "3"
         labels: "service=post-service"
 
-  user-service:
-    image: premtsd18/user-service
-    container_name: user-service
-    networks:
-      - linkedin-network
-    depends_on:
-      - discovery-server
-      - linkedin-db
-      - kafka
-      - config-server
-    volumes:
-      - ./app/logs/user-service:/app/logs/user-service
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-        labels: "service=user-service"
-
-  notification-service:
-    image: premtsd18/notification-service
-    container_name: notification-service
-    networks:
-      - linkedin-network
-    depends_on:
-      - discovery-server
-      - linkedin-db
-      - kafka
-      - config-server
-    ports:
-      - "9293:9293"
-    volumes:
-      - ./logs/notification-service:/logs/notification-service
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-        labels: "service=notification-service"
-
   connections-service:
-    image: premtsd18/connections-service
-    container_name: connections-service
+    build:
+      context: ./connections-service
+    platform: linux/amd64
+    container_name: linkedin-connections-service
     networks:
       - linkedin-network
     depends_on:
@@ -226,79 +360,34 @@ services:
         max-file: "3"
         labels: "service=connections-service"
 
-  api-gateway:
-    image: premtsd18/api-gateway
-    container_name: api-gateway
+  notification-service:
+    build:
+      context: ./notification-service
+    platform: linux/amd64
+    container_name: linkedin-notification-service
     ports:
-      - "8080:8080"
+      - "10003:9293"
     networks:
       - linkedin-network
     depends_on:
       - discovery-server
+      - linkedin-db
+      - kafka
       - config-server
     volumes:
-      - ./logs/api-gateway:/logs/api-gateway
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.api.rule=Host(`api.premtsd.com`)"
-      - "traefik.http.routers.api.entrypoints=websecure"
-      - "traefik.http.routers.api.tls.certresolver=letsencrypt"
-      - "traefik.http.services.api.loadbalancer.server.port=8080"
-      # CORS middleware for API
-      - "traefik.http.middlewares.api-cors.headers.accesscontrolallowmethods=GET,OPTIONS,PUT,POST,DELETE,PATCH"
-      - "traefik.http.middlewares.api-cors.headers.accesscontrolalloworiginlist=https://premtsd.com,https://www.premtsd.com"
-      - "traefik.http.middlewares.api-cors.headers.accesscontrolmaxage=100"
-      - "traefik.http.middlewares.api-cors.headers.addvaryheader=true"
-      - "traefik.http.routers.api.middlewares=api-cors"
+      - ./logs/notification-service:/logs/notification-service
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
         max-file: "3"
-        labels: "service=api-gateway"
-
-  config-server:
-    image: premtsd18/config-server
-    container_name: config-server
-    networks:
-      - linkedin-network
-    env_file:
-      - .env
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8888/actuator/health"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    volumes:
-      - ./logs/config-server:/logs/config-server
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-        labels: "service=config-server"
-
-  redis:
-    image: bitnami/redis:latest
-    container_name: redis
-    environment:
-      - REDIS_PASSWORD=secret123
-    ports:
-      - "6379:6379"
-    networks:
-      - linkedin-network
-    volumes:
-      - ./logs/redis:/opt/bitnami/redis/logs
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-        labels: "service=redis"
+        labels: "service=notification-service"
 
   uploader-service:
-    image: premtsd18/uploader-service
-    container_name: uploader-service
+    build:
+      context: ./uploader-service
+    platform: linux/amd64
+    container_name: linkedin-uploader-service
     networks:
       - linkedin-network
     depends_on:
@@ -315,9 +404,10 @@ services:
 
   zipkin:
     image: openzipkin/zipkin
-    container_name: zipkin
+    platform: linux/amd64
+    container_name: linkedin-zipkin
     ports:
-      - "9411:9411"
+      - "10300:9411"
     networks:
       - linkedin-network
     environment:
@@ -339,7 +429,8 @@ services:
 
   opensearch-init:
     image: busybox:latest
-    container_name: opensearch-init
+    platform: linux/amd64
+    container_name: linkedin-opensearch-init
     user: root
     volumes:
       - opensearch-data:/usr/share/opensearch/data
@@ -356,7 +447,8 @@ services:
 
   opensearch:
     image: opensearchproject/opensearch:2.17.0
-    container_name: opensearch
+    platform: linux/amd64
+    container_name: linkedin-opensearch
     user: "1000:1000"
     environment:
       - discovery.type=single-node
@@ -373,7 +465,7 @@ services:
         soft: 65536
         hard: 65536
     ports:
-      - "9200:9200"
+      - "10301:9200"
     networks:
       - linkedin-network
     volumes:
@@ -391,13 +483,14 @@ services:
 
   opensearch-dashboards:
     image: opensearchproject/opensearch-dashboards:2.17.0
-    container_name: opensearch-dashboards
+    platform: linux/amd64
+    container_name: linkedin-opensearch-dashboards
     user: "1000:1000"
     environment:
       - OPENSEARCH_HOSTS=http://opensearch:9200
       - DISABLE_SECURITY_DASHBOARDS_PLUGIN=true
     ports:
-      - "5601:5601"
+      - "10302:5601"
     depends_on:
       - opensearch
     networks:
@@ -406,11 +499,9 @@ services:
       - ./logs/opensearch-dashboards:/usr/share/opensearch-dashboards/logs
     labels:
       - "traefik.enable=true"
-      # HTTP route for local development
       - "traefik.http.routers.opensearch-http.rule=Host(`logs.premtsd.com`)"
       - "traefik.http.routers.opensearch-http.entrypoints=web"
       - "traefik.http.services.opensearch-http.loadbalancer.server.port=5601"
-      # HTTPS route for production
       - "traefik.http.routers.opensearch.rule=Host(`logs.premtsd.com`)"
       - "traefik.http.routers.opensearch.entrypoints=websecure"
       - "traefik.http.routers.opensearch.tls.certresolver=letsencrypt"
@@ -424,12 +515,13 @@ services:
 
   opensearch-logstash:
     image: opensearchproject/logstash-oss-with-opensearch-output-plugin:8.9.0
-    container_name: opensearch-logstash
+    platform: linux/amd64
+    container_name: linkedin-opensearch-logstash
     volumes:
       - ./logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
       - ./logs/opensearch-logstash:/usr/share/logstash/logs
     ports:
-      - "5044:5044"
+      - "10303:5044"
     networks:
       - linkedin-network
     depends_on:
@@ -445,7 +537,8 @@ services:
 
   filebeat:
     image: docker.elastic.co/beats/filebeat:8.13.4
-    container_name: filebeat
+    platform: linux/amd64
+    container_name: linkedin-filebeat
     user: root
     volumes:
       - ./filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
@@ -465,529 +558,3 @@ services:
         max-size: "10m"
         max-file: "3"
         labels: "service=filebeat"
-
-  # =======================
-  # Traefik Reverse Proxy with HTTPS
-  # =======================
-  traefik:
-    image: traefik:v3.0
-    container_name: traefik
-    command:
-      - "--api.dashboard=true"
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.websecure.address=:443"
-      - "--certificatesresolvers.letsencrypt.acme.tlschallenge=true"
-      - "--certificatesresolvers.letsencrypt.acme.email=i.prem.tsd@outlook.com"
-      - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
-      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
-      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
-      - "--log.level=INFO"
-    ports:
-      - "80:80"
-      - "443:443"
-      - "8081:8080"  # Traefik dashboard (changed from 8080 to avoid conflict)
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./traefik/letsencrypt:/letsencrypt
-      - ./traefik/certs:/certs
-      - ./traefik/config:/etc/traefik/dynamic
-    networks:
-      - linkedin-network
-    restart: unless-stopped
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.traefik.rule=Host(`traefik.premtsd.com`)"
-      - "traefik.http.routers.traefik.entrypoints=websecure"
-      - "traefik.http.routers.traefik.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.traefik.service=api@internal"
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-        labels: "service=traefik"
-networks:
-  linkedin-network:
-
-volumes:
-  kafka_data:
-  linkedin-db-data:
-  connections-db-data:
-  opensearch-data:
-  prometheus-data:
-  grafana-data:
-
-#services:
-#  kafka:
-#    image: docker.io/bitnami/kafka:3.8
-#    container_name: kafka
-#    platform: linux/arm64
-#    volumes:
-#      - "kafka_data:/bitnami"
-#      - ./logs/kafka:/opt/bitnami/kafka/logs
-#    networks:
-#      - linkedin-network
-#    environment:
-#      - KAFKA_CFG_NODE_ID=0
-#      - KAFKA_CFG_PROCESS_ROLES=controller,broker
-#      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
-#      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
-#      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
-#      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
-#      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
-#      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
-#      - KAFKA_HEAP_OPTS=-Xmx512m -Xms512m
-#    logging:
-#      driver: "json-file"
-#      options:
-#        max-size: "10m"
-#        max-file: "3"
-#        labels: "service=kafka"
-#
-#  prem-portfolio:
-#    build:
-#      context: ./prem-portfolio
-#    container_name: prem-portfolio
-#    platform: linux/arm64
-#    ports:
-#      - "4200:4200"
-#    networks:
-#      - linkedin-network
-#    restart: unless-stopped
-#    healthcheck:
-#      test: ["CMD", "curl", "-f", "http://localhost"]
-#      interval: 30s
-#      timeout: 10s
-#      retries: 3
-#    labels:
-#      - "traefik.enable=true"
-#      - "traefik.http.routers.portfolio.rule=Host(`premtsd.com`) || Host(`www.premtsd.com`)"
-#      - "traefik.http.routers.portfolio.entrypoints=websecure"
-#      - "traefik.http.routers.portfolio.tls.certresolver=letsencrypt"
-#      - "traefik.http.services.portfolio.loadbalancer.server.port=80"
-#      # Redirect www to non-www
-#      - "traefik.http.middlewares.www-redirect.redirectregex.regex=^https://www.premtsd.com/(.*)"
-#      - "traefik.http.middlewares.www-redirect.redirectregex.replacement=https://premtsd.com/$${1}"
-#      - "traefik.http.routers.portfolio.middlewares=www-redirect"
-#
-#  kafbat-ui:
-#    container_name: kafbat-ui
-#    image: ghcr.io/kafbat/kafka-ui:latest
-#    platform: linux/arm64
-#    ports:
-#      - 8090:8080
-#    depends_on:
-#      - kafka
-#    networks:
-#      - linkedin-network
-#    environment:
-#      KAFKA_CLUSTERS_0_NAME: local
-#      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
-#    volumes:
-#      - ./logs/kafbat-ui:/app/logs
-#    labels:
-#      - "traefik.enable=true"
-#      - "traefik.http.routers.kafka-ui.rule=Host(`kafka.premtsd.com`)"
-#      - "traefik.http.routers.kafka-ui.entrypoints=websecure"
-#      - "traefik.http.routers.kafka-ui.tls.certresolver=letsencrypt"
-#      - "traefik.http.services.kafka-ui.loadbalancer.server.port=8080"
-#    logging:
-#      driver: "json-file"
-#      options:
-#        max-size: "10m"
-#        max-file: "3"
-#        labels: "service=kafbat-ui"
-#
-#  # =======================
-#  # PostgreSQL
-#  # =======================
-#  linkedin-db:
-#    image: postgres:15
-#    container_name: linkedin-db
-#    environment:
-#      POSTGRES_DB: linkedinDB
-#      POSTGRES_USER: user
-#      POSTGRES_PASSWORD: password
-#    ports:
-#      - "5432:5432"
-#    volumes:
-#      - linkedin-db-data:/var/lib/postgresql/data
-#    networks:
-#      - linkedin-network
-#
-#  # =======================
-#  # Neo4j Graph DB
-#  # =======================
-#  connections-db:
-#    image: neo4j:5.18
-#    container_name: connections-db
-#    environment:
-#      NEO4J_AUTH: neo4j/password
-#    ports:
-#      - "7474:7474"
-#      - "7687:7687"
-#    volumes:
-#      - connections-db-data:/data
-#    networks:
-#      - linkedin-network
-#
-#  discovery-server:
-#    image: premtsd18/discovery-server:arm64
-#    restart: unless-stopped
-#    container_name: discovery-server
-#    platform: linux/arm64
-#    networks:
-#      - linkedin-network
-#    ports:
-#      - "8761:8761"
-#    depends_on:
-#      config-server:
-#        condition: service_healthy
-#    volumes:
-#      - ./logs/discovery-server:/logs/discovery-server
-#    labels:
-#      - "traefik.enable=true"
-#      - "traefik.http.routers.eureka.rule=Host(`eureka.premtsd.com`)"
-#      - "traefik.http.routers.eureka.entrypoints=websecure"
-#      - "traefik.http.routers.eureka.tls.certresolver=letsencrypt"
-#      - "traefik.http.services.eureka.loadbalancer.server.port=8761"
-#    logging:
-#      driver: "json-file"
-#      options:
-#        max-size: "10m"
-#        max-file: "3"
-#        labels: "service=discovery-server"
-#
-#  post-service:
-#    image: premtsd18/post-service:arm64
-#    container_name: post-service
-#    platform: linux/arm64
-#    networks:
-#      - linkedin-network
-#    depends_on:
-#      - discovery-server
-#      - linkedin-db
-#      - kafka
-#      - config-server
-#    environment:
-#      REDIS_HOST: redis
-#      REDIS_PORT: 6379
-#      REDIS_PASSWORD: secret123
-#    volumes:
-#      - ./app/logs/post-service:/app/logs/post-service
-#    logging:
-#      driver: "json-file"
-#      options:
-#        max-size: "10m"
-#        max-file: "3"
-#        labels: "service=post-service"
-#
-#  user-service:
-#    image: premtsd18/user-service:arm64
-#    container_name: user-service
-#    platform: linux/arm64
-#    networks:
-#      - linkedin-network
-#    depends_on:
-#      - discovery-server
-#      - linkedin-db
-#      - kafka
-#      - config-server
-#    volumes:
-#      - ./app/logs/user-service:/app/logs/user-service
-#    logging:
-#      driver: "json-file"
-#      options:
-#        max-size: "10m"
-#        max-file: "3"
-#        labels: "service=user-service"
-#
-#  notification-service:
-#    image: premtsd18/notification-service:arm64
-#    container_name: notification-service
-#    platform: linux/arm64
-#    networks:
-#      - linkedin-network
-#    depends_on:
-#      - discovery-server
-#      - linkedin-db
-#      - kafka
-#      - config-server
-#    volumes:
-#      - ./logs/notification-service:/logs/notification-service
-#    logging:
-#      driver: "json-file"
-#      options:
-#        max-size: "10m"
-#        max-file: "3"
-#        labels: "service=notification-service"
-#
-#  connections-service:
-#    image: premtsd18/connections-service:arm64
-#    container_name: connections-service
-#    platform: linux/arm64
-#    networks:
-#      - linkedin-network
-#    depends_on:
-#      - discovery-server
-#      - connections-db
-#      - kafka
-#      - config-server
-#    volumes:
-#      - ./logs/connections-service:/logs/connections-service
-#    logging:
-#      driver: "json-file"
-#      options:
-#        max-size: "10m"
-#        max-file: "3"
-#        labels: "service=connections-service"
-#
-#  api-gateway:
-#    image: premtsd18/api-gateway:arm64
-#    container_name: api-gateway
-#    platform: linux/arm64
-#    ports:
-#      - "8080:8080"
-#    networks:
-#      - linkedin-network
-#    depends_on:
-#      - discovery-server
-#      - config-server
-#    volumes:
-#      - ./logs/api-gateway:/logs/api-gateway
-#    labels:
-#      - "traefik.enable=true"
-#      - "traefik.http.routers.api.rule=Host(`api.premtsd.com`)"
-#      - "traefik.http.routers.api.entrypoints=websecure"
-#      - "traefik.http.routers.api.tls.certresolver=letsencrypt"
-#      - "traefik.http.services.api.loadbalancer.server.port=8080"
-#      # CORS middleware for API
-#      - "traefik.http.middlewares.api-cors.headers.accesscontrolallowmethods=GET,OPTIONS,PUT,POST,DELETE,PATCH"
-#      - "traefik.http.middlewares.api-cors.headers.accesscontrolalloworiginlist=https://premtsd.com,https://www.premtsd.com"
-#      - "traefik.http.middlewares.api-cors.headers.accesscontrolmaxage=100"
-#      - "traefik.http.middlewares.api-cors.headers.addvaryheader=true"
-#      - "traefik.http.routers.api.middlewares=api-cors"
-#    logging:
-#      driver: "json-file"
-#      options:
-#        max-size: "10m"
-#        max-file: "3"
-#        labels: "service=api-gateway"
-#
-#  config-server:
-#    image: premtsd18/config-server:arm64
-#    container_name: config-server
-#    platform: linux/arm64
-#    networks:
-#      - linkedin-network
-#    env_file:
-#      - .env
-#    healthcheck:
-#      test: ["CMD", "curl", "-f", "http://localhost:8888/actuator/health"]
-#      interval: 10s
-#      timeout: 5s
-#      retries: 5
-#    volumes:
-#      - ./logs/config-server:/logs/config-server
-#    logging:
-#      driver: "json-file"
-#      options:
-#        max-size: "10m"
-#        max-file: "3"
-#        labels: "service=config-server"
-#
-#  redis:
-#    image: bitnami/redis:latest
-#    container_name: redis
-#    platform: linux/arm64
-#    environment:
-#      - REDIS_PASSWORD=secret123
-#    ports:
-#      - "6379:6379"
-#    networks:
-#      - linkedin-network
-#    volumes:
-#      - ./logs/redis:/opt/bitnami/redis/logs
-#    logging:
-#      driver: "json-file"
-#      options:
-#        max-size: "10m"
-#        max-file: "3"
-#        labels: "service=redis"
-#
-#  uploader-service:
-#    image: premtsd18/uploader-service:arm64
-#    container_name: uploader-service
-#    platform: linux/arm64
-#    networks:
-#      - linkedin-network
-#    depends_on:
-#      - discovery-server
-#      - config-server
-#    volumes:
-#      - ./app/logs/uploader-service:/app/logs/uploader-service
-#    logging:
-#      driver: "json-file"
-#      options:
-#        max-size: "10m"
-#        max-file: "3"
-#        labels: "service=uploader-service"
-#
-#  zipkin:
-#    image: openzipkin/zipkin:latest
-#    container_name: zipkin
-#    platform: linux/arm64
-#    ports:
-#      - "9411:9411"
-#    networks:
-#      - linkedin-network
-#    environment:
-#      - JAVA_OPTS=-Xms256m -Xmx512m
-#    volumes:
-#      - ./logs/zipkin:/zipkin/logs
-#    labels:
-#      - "traefik.enable=true"
-#      - "traefik.http.routers.zipkin.rule=Host(`zipkin.premtsd.com`)"
-#      - "traefik.http.routers.zipkin.entrypoints=websecure"
-#      - "traefik.http.routers.zipkin.tls.certresolver=letsencrypt"
-#      - "traefik.http.services.zipkin.loadbalancer.server.port=9411"
-#    logging:
-#      driver: "json-file"
-#      options:
-#        max-size: "10m"
-#        max-file: "3"
-#        labels: "service=zipkin"
-#
-#  opensearch:
-#    image: opensearchproject/opensearch:2.12.0
-#    container_name: opensearch
-#    environment:
-#      discovery.type: single-node
-#      DISABLE_SECURITY_PLUGIN: "true"
-#      OPENSEARCH_JAVA_OPTS: -Xms512m -Xmx512m
-#    ports:
-#      - "9200:9200"
-#    networks:
-#      - linkedin-network
-#
-#  opensearch-dashboards:
-#    image: opensearchproject/opensearch-dashboards:2.12.0
-#    container_name: opensearch-dashboards
-#    environment:
-#      - OPENSEARCH_HOSTS=http://opensearch:9200
-#      - DISABLE_SECURITY_DASHBOARDS_PLUGIN=true
-#    depends_on:
-#      - opensearch
-#    labels:
-#      - "traefik.enable=true"
-#      - "traefik.http.routers.opensearch.rule=Host(`logs.premtsd.com`)"
-#      - "traefik.http.routers.opensearch.entrypoints=websecure"
-#      - "traefik.http.routers.opensearch.tls.certresolver=letsencrypt"
-#      - "traefik.http.services.opensearch.loadbalancer.server.port=5601"
-#    networks:
-#      - linkedin-network
-#
-#
-#  opensearch-logstash:
-#    image: opensearchproject/logstash-oss-with-opensearch-output-plugin:8.9.0
-#    container_name: opensearch-logstash
-#    platform: linux/arm64
-#    volumes:
-#      - ./logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
-#      - ./logs/opensearch-logstash:/usr/share/logstash/logs
-#    ports:
-#      - "5044:5044"
-#    networks:
-#      - linkedin-network
-#    depends_on:
-#      - opensearch
-#    environment:
-#      - LS_JAVA_OPTS=-Xms256m -Xmx512m
-#    logging:
-#      driver: "json-file"
-#      options:
-#        max-size: "10m"
-#        max-file: "3"
-#        labels: "service=opensearch-logstash"
-#
-#  filebeat:
-#    image: docker.elastic.co/beats/filebeat:8.13.4
-#    container_name: filebeat
-#    platform: linux/arm64
-#    user: root
-#    volumes:
-#      - ./filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
-#      - ./app/logs:/app/logs:ro
-#      - ./logs:/logs:ro
-#      - /var/lib/docker/containers:/var/lib/docker/containers:ro
-#      - /var/run/docker.sock:/var/run/docker.sock:ro
-#      - ./logs/filebeat:/var/log/filebeat
-#    networks:
-#      - linkedin-network
-#    depends_on:
-#      - opensearch-logstash
-#    command: ["--strict.perms=false"]
-#    logging:
-#      driver: "json-file"
-#      options:
-#        max-size: "10m"
-#        max-file: "3"
-#        labels: "service=filebeat"
-#
-#  # =======================
-#  # Traefik Reverse Proxy with HTTPS (ARM64)
-#  # =======================
-#  traefik:
-#    image: traefik:v3.0
-#    container_name: traefik
-#    platform: linux/arm64
-#    command:
-#      - "--api.dashboard=true"
-#      - "--api.insecure=true"
-#      - "--providers.docker=true"
-#      - "--providers.docker.exposedbydefault=false"
-#      - "--entrypoints.web.address=:80"
-#      - "--entrypoints.websecure.address=:443"
-#      - "--certificatesresolvers.letsencrypt.acme.tlschallenge=true"
-#      - "--certificatesresolvers.letsencrypt.acme.email=i.prem.tsd@outlook.com"
-#      - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
-#      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
-#      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
-#      - "--log.level=INFO"
-#    ports:
-#      - "80:80"
-#      - "443:443"
-#      - "8081:8080"  # Traefik dashboard (changed from 8080 to avoid conflict)
-#    volumes:
-#      - /var/run/docker.sock:/var/run/docker.sock:ro
-#      - ./traefik/letsencrypt:/letsencrypt
-#      - ./traefik/certs:/certs
-#      - ./traefik/config:/etc/traefik/dynamic
-#    networks:
-#      - linkedin-network
-#    restart: unless-stopped
-#    labels:
-#      - "traefik.enable=true"
-#      - "traefik.http.routers.traefik.rule=Host(`traefik.premtsd.com`)"
-#      - "traefik.http.routers.traefik.entrypoints=websecure"
-#      - "traefik.http.routers.traefik.tls.certresolver=letsencrypt"
-#      - "traefik.http.routers.traefik.service=api@internal"
-#    logging:
-#      driver: "json-file"
-#      options:
-#        max-size: "10m"
-#        max-file: "3"
-#        labels: "service=traefik"
-#
-#networks:
-#  linkedin-network:
-#
-#volumes:
-#  kafka_data:
-#  linkedin-db-data:
-#  connections-db-data:
-#  prometheus-data:
-#  grafana-data:
