@@ -1,0 +1,41 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: maven
+    directory: /api-gateway
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: maven
+    directory: /user-service
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: maven
+    directory: /post-service
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: maven
+    directory: /connections-service
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: maven
+    directory: /notification-service
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: maven
+    directory: /uploader-service
+    schedule:
+      interval: weekly
