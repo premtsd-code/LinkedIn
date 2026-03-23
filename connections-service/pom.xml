@@ -164,7 +164,7 @@
 				<version>3.4.4</version>
 				<configuration>
 					<to>
-						<image>docker.io/anuj55149/linkedin-app-${project.name}:${project.version}</image>
+						<image>docker.io/premtsd18/linkedin-app-${project.name}:${project.version}</image>
 						<tags>
 							<tag>latest</tag>
 						</tags>
