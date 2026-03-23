@@ -8,10 +8,6 @@ spring:
       discovery:
         enabled: false
       fail-fast: false
-    config:
-      import: optional:configserver:
-  config:
-    import: optional:configserver:
 
 eureka:
   client:

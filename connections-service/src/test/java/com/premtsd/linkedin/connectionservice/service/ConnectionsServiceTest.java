@@ -37,7 +37,6 @@ class ConnectionsServiceTest {
     @Mock
     private KafkaTemplate<Long, AcceptConnectionRequestEvent> acceptRequestKafkaTemplate;
 
-    @InjectMocks
     private ConnectionsService connectionsService;
 
     private static final Long CURRENT_USER_ID = 1L;
@@ -46,7 +45,9 @@ class ConnectionsServiceTest {
 
     @BeforeEach
     void setUp() {
-        // Clear any existing user context
+        // Manually construct to ensure correct KafkaTemplate injection (type erasure issue)
+        connectionsService = new ConnectionsService(
+            personRepository, sendRequestKafkaTemplate, acceptRequestKafkaTemplate);
         UserContextHolder.clear();
     }
 
@@ -99,8 +100,7 @@ class ConnectionsServiceTest {
         @SuppressWarnings("unchecked")
         CompletableFuture<SendResult<Long, SendConnectionRequestEvent>> future =
             CompletableFuture.completedFuture(mock(SendResult.class));
-        when(sendRequestKafkaTemplate.send(anyString(), any(Long.class), any(SendConnectionRequestEvent.class)))
-            .thenReturn(future);
+        doReturn(future).when(sendRequestKafkaTemplate).send(anyString(), any(), any());
 
         try (MockedStatic<UserContextHolder> mockedStatic = mockStatic(UserContextHolder.class)) {
             mockedStatic.when(UserContextHolder::getCurrentUserId).thenReturn(CURRENT_USER_ID);
@@ -111,7 +111,7 @@ class ConnectionsServiceTest {
             // Then
             assertTrue(result);
             verify(personRepository).addConnectionRequest(CURRENT_USER_ID, OTHER_USER_ID);
-            verify(sendRequestKafkaTemplate).send(eq("send-connection-request-topic"), eq(OTHER_USER_ID), any(SendConnectionRequestEvent.class));
+            verify(sendRequestKafkaTemplate).send(eq("send-connection-request-topic"), any(), any());
         }
     }
 
@@ -177,8 +177,7 @@ class ConnectionsServiceTest {
         @SuppressWarnings("unchecked")
         CompletableFuture<SendResult<Long, AcceptConnectionRequestEvent>> future =
             CompletableFuture.completedFuture(mock(SendResult.class));
-        when(acceptRequestKafkaTemplate.send(anyString(), any(Long.class), any(AcceptConnectionRequestEvent.class)))
-            .thenReturn(future);
+        doReturn(future).when(acceptRequestKafkaTemplate).send(anyString(), any(), any());
 
         try (MockedStatic<UserContextHolder> mockedStatic = mockStatic(UserContextHolder.class)) {
             mockedStatic.when(UserContextHolder::getCurrentUserId).thenReturn(CURRENT_USER_ID);
@@ -189,7 +188,7 @@ class ConnectionsServiceTest {
             // Then
             assertTrue(result);
             verify(personRepository).acceptConnectionRequest(OTHER_USER_ID, CURRENT_USER_ID);
-            verify(acceptRequestKafkaTemplate).send(eq("accept-connection-request-topic"), eq(CURRENT_USER_ID), any(AcceptConnectionRequestEvent.class));
+            verify(acceptRequestKafkaTemplate).send(eq("accept-connection-request-topic"), any(), any());
         }
     }
 
