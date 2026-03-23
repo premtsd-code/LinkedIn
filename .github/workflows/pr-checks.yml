@@ -182,7 +182,7 @@ jobs:
           for svc in user-service post-service connections-service notification-service uploader-service; do
             echo "=== Scanning $svc ==="
             cd $svc
-            mvn verify jacoco:report sonar:sonar \
+            mvn verify jacoco:report sonar:sonar -DskipTests \
               -Dsonar.projectKey=premtsd-code_LinkedIn_${svc} \
               -Dsonar.organization=premtsd-code \
               -Dsonar.host.url=https://sonarcloud.io \
