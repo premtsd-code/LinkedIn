@@ -1,15 +1,16 @@
 package com.premtsd.linkedin.connectionservice.integration;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.premtsd.linkedin.connectionservice.entity.Person;
 import com.premtsd.linkedin.connectionservice.exception.BusinessRuleViolationException;
 import com.premtsd.linkedin.connectionservice.service.ConnectionsService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureWebMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import com.premtsd.linkedin.connectionservice.controller.ConnectionsController;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
@@ -20,8 +21,9 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureWebMvc
+@WebMvcTest(ConnectionsController.class)
+@AutoConfigureMockMvc(addFilters = false)
+@ActiveProfiles("test")
 class ConnectionsControllerIntegrationTest {
 
     @Autowired
@@ -29,9 +31,6 @@ class ConnectionsControllerIntegrationTest {
 
     @MockBean
     private ConnectionsService connectionsService;
-
-    @Autowired
-    private ObjectMapper objectMapper;
 
     private static final String X_USER_ID_HEADER = "X-User-Id";
 

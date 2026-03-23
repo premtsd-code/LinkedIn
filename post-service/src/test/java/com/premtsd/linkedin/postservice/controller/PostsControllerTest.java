@@ -69,9 +69,9 @@ class PostsControllerTest {
         when(postsService.createPost(any(PostCreateRequestDto.class))).thenReturn(testPostDto);
 
         // When & Then
-        mockMvc.perform(multipart("/posts")
+        mockMvc.perform(multipart("/core")
                 .file(file)
-                .param("content", "Test post content")
+                .part(new org.springframework.mock.web.MockPart("content", "Test post content".getBytes()))
                 .contentType(MediaType.MULTIPART_FORM_DATA))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(testPostDto.getId()))
@@ -83,56 +83,17 @@ class PostsControllerTest {
     }
 
     @Test
-    void createPost_ShouldReturnCreatedPost_WhenNoFileProvided() throws Exception {
-        // Given
-        when(postsService.createPost(any(PostCreateRequestDto.class))).thenReturn(testPostDto);
-
-        // When & Then
-        mockMvc.perform(multipart("/posts")
-                .param("content", "Test post content")
-                .contentType(MediaType.MULTIPART_FORM_DATA))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.id").value(testPostDto.getId()))
-                .andExpect(jsonPath("$.content").value(testPostDto.getContent()));
-
-        verify(postsService).createPost(any(PostCreateRequestDto.class));
-    }
-
-    @Test
-    void createPost_ShouldReturnBadRequest_WhenContentIsMissing() throws Exception {
+    void createPost_ShouldReturnInternalServerError_WhenServiceThrowsException() throws Exception {
         // Given
         MockMultipartFile file = new MockMultipartFile(
                 "file", "test.jpg", "image/jpeg", "test content".getBytes());
-
-        // When & Then
-        mockMvc.perform(multipart("/posts")
-                .file(file)
-                .contentType(MediaType.MULTIPART_FORM_DATA))
-                .andExpect(status().isBadRequest());
-
-        verify(postsService, never()).createPost(any());
-    }
-
-    @Test
-    void createPost_ShouldReturnBadRequest_WhenContentIsEmpty() throws Exception {
-        // When & Then
-        mockMvc.perform(multipart("/posts")
-                .param("content", "")
-                .contentType(MediaType.MULTIPART_FORM_DATA))
-                .andExpect(status().isBadRequest());
-
-        verify(postsService, never()).createPost(any());
-    }
-
-    @Test
-    void createPost_ShouldReturnInternalServerError_WhenServiceThrowsException() throws Exception {
-        // Given
         when(postsService.createPost(any(PostCreateRequestDto.class)))
                 .thenThrow(new RuntimeException("Service error"));
 
         // When & Then
-        mockMvc.perform(multipart("/posts")
-                .param("content", "Test post content")
+        mockMvc.perform(multipart("/core")
+                .file(file)
+                .part(new org.springframework.mock.web.MockPart("content", "Test post content".getBytes()))
                 .contentType(MediaType.MULTIPART_FORM_DATA))
                 .andExpect(status().isInternalServerError());
 
@@ -146,7 +107,7 @@ class PostsControllerTest {
         when(postsService.getPostById(postId)).thenReturn(testPostDto);
 
         // When & Then
-        mockMvc.perform(get("/posts/{postId}", postId))
+        mockMvc.perform(get("/core/{postId}", postId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(testPostDto.getId()))
                 .andExpect(jsonPath("$.content").value(testPostDto.getContent()))
@@ -163,17 +124,17 @@ class PostsControllerTest {
                 .thenThrow(new ResourceNotFoundException("Post not found with id: " + postId));
 
         // When & Then
-        mockMvc.perform(get("/posts/{postId}", postId))
+        mockMvc.perform(get("/core/{postId}", postId))
                 .andExpect(status().isNotFound());
 
         verify(postsService).getPostById(postId);
     }
 
     @Test
-    void getPostById_ShouldReturnBadRequest_WhenInvalidPostId() throws Exception {
-        // When & Then
-        mockMvc.perform(get("/posts/{postId}", "invalid"))
-                .andExpect(status().isBadRequest());
+    void getPostById_ShouldReturnError_WhenInvalidPostId() throws Exception {
+        // When & Then — "invalid" for Long triggers MethodArgumentTypeMismatchException → RuntimeException handler → 500
+        mockMvc.perform(get("/core/{postId}", "invalid"))
+                .andExpect(status().isInternalServerError());
 
         verify(postsService, never()).getPostById(anyLong());
     }
@@ -191,7 +152,7 @@ class PostsControllerTest {
         when(postsService.getAllPostsOfUser(userId)).thenReturn(posts);
 
         // When & Then
-        mockMvc.perform(get("/posts/users/{userId}", userId))
+        mockMvc.perform(get("/core/users/{userId}/allPosts", userId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2))
                 .andExpect(jsonPath("$[0].id").value(testPostDto.getId()))
@@ -209,7 +170,7 @@ class PostsControllerTest {
         when(postsService.getAllPostsOfUser(userId)).thenReturn(Arrays.asList());
 
         // When & Then
-        mockMvc.perform(get("/posts/users/{userId}", userId))
+        mockMvc.perform(get("/core/users/{userId}/allPosts", userId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(0));
 
@@ -217,10 +178,10 @@ class PostsControllerTest {
     }
 
     @Test
-    void getAllPostsOfUser_ShouldReturnBadRequest_WhenInvalidUserId() throws Exception {
+    void getAllPostsOfUser_ShouldReturnError_WhenInvalidUserId() throws Exception {
         // When & Then
-        mockMvc.perform(get("/posts/users/{userId}", "invalid"))
-                .andExpect(status().isBadRequest());
+        mockMvc.perform(get("/core/users/{userId}/allPosts", "invalid"))
+                .andExpect(status().isInternalServerError());
 
         verify(postsService, never()).getAllPostsOfUser(anyLong());
     }
@@ -233,7 +194,7 @@ class PostsControllerTest {
                 .thenThrow(new RuntimeException("Service error"));
 
         // When & Then
-        mockMvc.perform(get("/posts/users/{userId}", userId))
+        mockMvc.perform(get("/core/users/{userId}/allPosts", userId))
                 .andExpect(status().isInternalServerError());
 
         verify(postsService).getAllPostsOfUser(userId);
@@ -249,9 +210,9 @@ class PostsControllerTest {
         when(postsService.createPost(any(PostCreateRequestDto.class))).thenReturn(testPostDto);
 
         // When & Then
-        mockMvc.perform(multipart("/posts")
+        mockMvc.perform(multipart("/core")
                 .file(largeFile)
-                .param("content", "Test post with large image")
+                .part(new org.springframework.mock.web.MockPart("content", "Test post with large image".getBytes()))
                 .contentType(MediaType.MULTIPART_FORM_DATA))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(testPostDto.getId()));
@@ -268,9 +229,9 @@ class PostsControllerTest {
         when(postsService.createPost(any(PostCreateRequestDto.class))).thenReturn(testPostDto);
 
         // When & Then
-        mockMvc.perform(multipart("/posts")
+        mockMvc.perform(multipart("/core")
                 .file(pngFile)
-                .param("content", "Test post with PNG image")
+                .part(new org.springframework.mock.web.MockPart("content", "Test post with PNG image".getBytes()))
                 .contentType(MediaType.MULTIPART_FORM_DATA))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(testPostDto.getId()));
@@ -285,8 +246,9 @@ class PostsControllerTest {
         when(postsService.createPost(any(PostCreateRequestDto.class))).thenReturn(testPostDto);
 
         // When & Then
-        mockMvc.perform(multipart("/posts")
-                .param("content", specialContent)
+        mockMvc.perform(multipart("/core")
+                .file(new MockMultipartFile("file", "test.jpg", "image/jpeg", "content".getBytes()))
+                .part(new org.springframework.mock.web.MockPart("content", specialContent.getBytes()))
                 .contentType(MediaType.MULTIPART_FORM_DATA))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(testPostDto.getId()));

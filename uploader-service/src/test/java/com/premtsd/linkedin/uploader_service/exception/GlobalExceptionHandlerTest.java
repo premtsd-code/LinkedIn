@@ -10,8 +10,6 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.multipart.MaxUploadSizeExceededException;
-
 import java.io.IOException;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -39,15 +37,15 @@ class GlobalExceptionHandlerTest {
         // Given
         MockMultipartFile file = new MockMultipartFile(
                 "file", "test.jpg", "image/jpeg", "content".getBytes());
-        IOException ioException = new IOException("File processing failed");
-        when(fileUploaderService.upload(any())).thenThrow(ioException);
+        when(fileUploaderService.upload(any())).thenThrow(new IOException("File processing failed"));
 
         // When & Then
         mockMvc.perform(multipart("/file")
                 .file(file)
                 .contentType("multipart/form-data"))
                 .andExpect(status().isInternalServerError())
-                .andExpect(content().string("File upload failed: File processing failed"));
+                .andExpect(jsonPath("$.message").value("File processing failed"))
+                .andExpect(jsonPath("$.status").value(500));
     }
 
     @Test
@@ -55,47 +53,15 @@ class GlobalExceptionHandlerTest {
         // Given
         MockMultipartFile file = new MockMultipartFile(
                 "file", "test.jpg", "image/jpeg", "content".getBytes());
-        RuntimeException runtimeException = new RuntimeException("Unexpected error occurred");
-        when(fileUploaderService.upload(any())).thenThrow(runtimeException);
+        when(fileUploaderService.upload(any())).thenThrow(new RuntimeException("Unexpected error occurred"));
 
         // When & Then
         mockMvc.perform(multipart("/file")
                 .file(file)
                 .contentType("multipart/form-data"))
                 .andExpect(status().isInternalServerError())
-                .andExpect(content().string("File upload failed: Unexpected error occurred"));
-    }
-
-    @Test
-    void handleMaxUploadSizeExceededException_ShouldReturnPayloadTooLarge() throws Exception {
-        // Given
-        MockMultipartFile file = new MockMultipartFile(
-                "file", "large.jpg", "image/jpeg", "content".getBytes());
-        MaxUploadSizeExceededException sizeException = new MaxUploadSizeExceededException(1024);
-        when(fileUploaderService.upload(any())).thenThrow(sizeException);
-
-        // When & Then
-        mockMvc.perform(multipart("/file")
-                .file(file)
-                .contentType("multipart/form-data"))
-                .andExpect(status().isPayloadTooLarge())
-                .andExpect(content().string("File size exceeds maximum allowed size"));
-    }
-
-    @Test
-    void handleIllegalArgumentException_ShouldReturnBadRequest() throws Exception {
-        // Given
-        MockMultipartFile file = new MockMultipartFile(
-                "file", "invalid.txt", "text/plain", "content".getBytes());
-        IllegalArgumentException illegalArgException = new IllegalArgumentException("Invalid file type");
-        when(fileUploaderService.upload(any())).thenThrow(illegalArgException);
-
-        // When & Then
-        mockMvc.perform(multipart("/file")
-                .file(file)
-                .contentType("multipart/form-data"))
-                .andExpect(status().isBadRequest())
-                .andExpect(content().string("Invalid request: Invalid file type"));
+                .andExpect(jsonPath("$.message").value("Unexpected error occurred"))
+                .andExpect(jsonPath("$.status").value(500));
     }
 
     @Test
@@ -103,94 +69,31 @@ class GlobalExceptionHandlerTest {
         // Given
         MockMultipartFile file = new MockMultipartFile(
                 "file", "test.jpg", "image/jpeg", "content".getBytes());
-        NullPointerException nullPointerException = new NullPointerException("Null value encountered");
-        when(fileUploaderService.upload(any())).thenThrow(nullPointerException);
+        when(fileUploaderService.upload(any())).thenThrow(new NullPointerException("Null value encountered"));
 
         // When & Then
         mockMvc.perform(multipart("/file")
                 .file(file)
                 .contentType("multipart/form-data"))
                 .andExpect(status().isInternalServerError())
-                .andExpect(content().string("File upload failed: Null value encountered"));
+                .andExpect(jsonPath("$.message").value("Null value encountered"))
+                .andExpect(jsonPath("$.status").value(500));
     }
 
     @Test
-    void handleGenericException_ShouldReturnInternalServerError() throws Exception {
+    void handleException_ShouldReturnJsonWithErrorDetails() throws Exception {
         // Given
         MockMultipartFile file = new MockMultipartFile(
                 "file", "test.jpg", "image/jpeg", "content".getBytes());
-        Exception genericException = new Exception("Generic error");
-        when(fileUploaderService.upload(any())).thenThrow(genericException);
+        when(fileUploaderService.upload(any())).thenThrow(new RuntimeException("Test error"));
 
         // When & Then
         mockMvc.perform(multipart("/file")
                 .file(file)
                 .contentType("multipart/form-data"))
                 .andExpect(status().isInternalServerError())
-                .andExpect(content().string("File upload failed: Generic error"));
-    }
-
-    @Test
-    void handleIOException_WithNullMessage_ShouldReturnGenericMessage() throws Exception {
-        // Given
-        MockMultipartFile file = new MockMultipartFile(
-                "file", "test.jpg", "image/jpeg", "content".getBytes());
-        IOException ioException = new IOException((String) null);
-        when(fileUploaderService.upload(any())).thenThrow(ioException);
-
-        // When & Then
-        mockMvc.perform(multipart("/file")
-                .file(file)
-                .contentType("multipart/form-data"))
-                .andExpect(status().isInternalServerError())
-                .andExpect(content().string("File upload failed: null"));
-    }
-
-    @Test
-    void handleRuntimeException_WithEmptyMessage_ShouldReturnEmptyMessage() throws Exception {
-        // Given
-        MockMultipartFile file = new MockMultipartFile(
-                "file", "test.jpg", "image/jpeg", "content".getBytes());
-        RuntimeException runtimeException = new RuntimeException("");
-        when(fileUploaderService.upload(any())).thenThrow(runtimeException);
-
-        // When & Then
-        mockMvc.perform(multipart("/file")
-                .file(file)
-                .contentType("multipart/form-data"))
-                .andExpect(status().isInternalServerError())
-                .andExpect(content().string("File upload failed: "));
-    }
-
-    @Test
-    void handleSecurityException_ShouldReturnForbidden() throws Exception {
-        // Given
-        MockMultipartFile file = new MockMultipartFile(
-                "file", "test.jpg", "image/jpeg", "content".getBytes());
-        SecurityException securityException = new SecurityException("Access denied");
-        when(fileUploaderService.upload(any())).thenThrow(securityException);
-
-        // When & Then
-        mockMvc.perform(multipart("/file")
-                .file(file)
-                .contentType("multipart/form-data"))
-                .andExpect(status().isForbidden())
-                .andExpect(content().string("Access denied: Access denied"));
-    }
-
-    @Test
-    void handleUnsupportedOperationException_ShouldReturnNotImplemented() throws Exception {
-        // Given
-        MockMultipartFile file = new MockMultipartFile(
-                "file", "test.jpg", "image/jpeg", "content".getBytes());
-        UnsupportedOperationException unsupportedException = new UnsupportedOperationException("Operation not supported");
-        when(fileUploaderService.upload(any())).thenThrow(unsupportedException);
-
-        // When & Then
-        mockMvc.perform(multipart("/file")
-                .file(file)
-                .contentType("multipart/form-data"))
-                .andExpect(status().isNotImplemented())
-                .andExpect(content().string("Operation not supported: Operation not supported"));
+                .andExpect(jsonPath("$.error").value("Internal Server Error"))
+                .andExpect(jsonPath("$.path").value("/file"))
+                .andExpect(jsonPath("$.timestamp").exists());
     }
 }

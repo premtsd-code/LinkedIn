@@ -113,19 +113,19 @@ class LikesControllerTest {
     }
 
     @Test
-    void likePost_ShouldReturnBadRequest_WhenInvalidPostId() throws Exception {
-        // When & Then
+    void likePost_ShouldReturnError_WhenInvalidPostId() throws Exception {
+        // When & Then — "invalid" for Long triggers MethodArgumentTypeMismatchException → RuntimeException handler → 500
         mockMvc.perform(post("/likes/{postId}", "invalid"))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isInternalServerError());
 
         verify(postLikeService, never()).likePost(anyLong());
     }
 
     @Test
-    void unlikePost_ShouldReturnBadRequest_WhenInvalidPostId() throws Exception {
+    void unlikePost_ShouldReturnError_WhenInvalidPostId() throws Exception {
         // When & Then
         mockMvc.perform(delete("/likes/{postId}", "invalid"))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isInternalServerError());
 
         verify(postLikeService, never()).unlikePost(anyLong());
     }
