@@ -20,7 +20,8 @@ spec:
     spec:
       containers:
       - name: post-service
-        image: premtsd18/post-service:amd64
+        image: premtsd18/post-service:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         envFrom:

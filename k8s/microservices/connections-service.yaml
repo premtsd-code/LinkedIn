@@ -20,7 +20,8 @@ spec:
     spec:
       containers:
       - name: connections-service
-        image: premtsd18/connections-service:amd64
+        image: premtsd18/connections-service:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         envFrom:

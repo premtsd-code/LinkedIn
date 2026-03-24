@@ -20,7 +20,8 @@ spec:
     spec:
       containers:
       - name: notification-service
-        image: premtsd18/notification-service:amd64
+        image: premtsd18/notification-service:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         envFrom:

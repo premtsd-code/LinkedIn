@@ -20,7 +20,8 @@ spec:
     spec:
       containers:
       - name: config-server
-        image: premtsd18/config-server:amd64
+        image: premtsd18/config-server:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8888
         envFrom:

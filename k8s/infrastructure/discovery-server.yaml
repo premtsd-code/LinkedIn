@@ -20,7 +20,8 @@ spec:
     spec:
       containers:
       - name: discovery-server
-        image: premtsd18/discovery-server:amd64
+        image: premtsd18/discovery-server:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8761
         envFrom:

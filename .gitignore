@@ -49,6 +49,7 @@ prem-portfolio/
 *.ps1
 *.sh
 !k8s/deploy.sh
+!build-and-push.sh
 
 # -------------------------
 # Node.js & Angular (if any)

@@ -20,7 +20,8 @@ spec:
     spec:
       containers:
       - name: uploader-service
-        image: premtsd18/uploader-service:amd64
+        image: premtsd18/uploader-service:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         envFrom:

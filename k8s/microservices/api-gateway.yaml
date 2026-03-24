@@ -20,7 +20,8 @@ spec:
     spec:
       containers:
       - name: api-gateway
-        image: premtsd18/api-gateway:amd64
+        image: premtsd18/api-gateway:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         envFrom:
