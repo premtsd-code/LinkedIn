@@ -108,6 +108,8 @@ jobs:
           mkdir -p ~/.kube
           echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
           chmod 600 ~/.kube/config
+      - name: Update configmap
+        run: kubectl apply -f k8s/configmap.yaml
       - name: Deploy changed services
         run: |
           for service in api-gateway user-service post-service connections-service notification-service uploader-service config-server discovery-server; do
