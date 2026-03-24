@@ -27,7 +27,9 @@ spec:
           valueFrom:
             secretKeyRef:
               name: linkedin-secrets
-              key: NEO4J_PASSWORD
+              key: NEO4J_AUTH
+        - name: NEO4J_server_config_strict__validation_enabled
+          value: "false"
         resources:
           requests:
             memory: "512Mi"

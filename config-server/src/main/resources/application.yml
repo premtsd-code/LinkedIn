@@ -1,16 +1,13 @@
 spring:
   application:
     name: config-server
-
+  profiles:
+    active: native
   cloud:
     config:
       server:
-        git:
-          uri: https://gitlab.cs.nuim.ie/linkedin-microservice/linkedinconfigs
-          default-label: main
-          username: p250109
-          password: ${GIT_PASSWORD}  # Use env var or Docker secret for safety
-          clone-on-start: true       # Good for reliability on restart
+        native:
+          search-locations: classpath:/configs
 
 server:
   port: 8888

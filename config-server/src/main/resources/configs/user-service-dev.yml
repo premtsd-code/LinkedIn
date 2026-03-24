@@ -1,0 +1,9 @@
+# Dev profile — Docker Compose
+spring:
+  datasource:
+    url: jdbc:postgresql://linkedin-db:5432/linkedinDB
+    username: user
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: create

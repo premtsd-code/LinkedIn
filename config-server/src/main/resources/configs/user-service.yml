@@ -1,0 +1,18 @@
+# Common user-service config
+server:
+  servlet:
+    context-path: /users
+  port: 8080
+
+jwt:
+  secretKey: ${JWT_SECRET:asdfladf98a7df89aysf8d9yasiudfha9s87dfa89syudhfa98sdfyaisuhdfa98sfy}
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  kafka:
+    bootstrap-servers: kafka:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.LongSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer

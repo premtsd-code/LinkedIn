@@ -1,0 +1,22 @@
+# Common connections-service config
+server:
+  servlet:
+    context-path: /connections
+  port: 8080
+
+spring:
+  data:
+    neo4j:
+      repositories:
+        enabled: true
+  kafka:
+    bootstrap-servers: kafka:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.LongSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: ${spring.application.name}
+      key-deserializer: org.apache.kafka.common.serialization.LongDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "com.premtsd.linkedin.*"

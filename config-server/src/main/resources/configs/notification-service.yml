@@ -1,0 +1,27 @@
+# Common notification-service config
+server:
+  port: 8080
+
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: i.prem.tsd@gmail.com
+    password: ${MAIL_PASSWORD:qwxzaaiswyqigbdh}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          ssl:
+            trust: smtp.gmail.com
+  kafka:
+    bootstrap-servers: kafka:9092
+    consumer:
+      group-id: ${spring.application.name}
+      key-deserializer: org.apache.kafka.common.serialization.LongDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "com.premtsd.linkedin.*"

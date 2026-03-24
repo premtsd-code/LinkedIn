@@ -1,0 +1,9 @@
+# Prod profile — K8s / K3s
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/linkedinDB
+    username: linkedin_user
+    password: ${DB_PASSWORD:password}
+  jpa:
+    hibernate:
+      ddl-auto: update
