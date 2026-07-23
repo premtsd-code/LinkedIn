@@ -1,0 +1,70 @@
+# Shared Patroni config for every node in every cluster.
+# Node-specific values (name, connect addresses) and the cluster grouping
+# (PATRONI_SCOPE: user-pg | engagement-pg) are injected via PATRONI_*
+# environment variables in docker-compose, which override this file.
+# Databases created on bootstrap come from the PG_INIT_DATABASES env var
+# (see post_init.sh).
+scope: linkedin-pg  # always overridden by PATRONI_SCOPE in compose
+
+etcd3:
+  hosts: etcd1:2379,etcd2:2379,etcd3:2379
+
+restapi:
+  listen: 0.0.0.0:8008
+  # connect_address comes from PATRONI_RESTAPI_CONNECT_ADDRESS per node
+
+bootstrap:
+  # Written to etcd once, on first cluster bootstrap. Later changes must go
+  # through `patronictl edit-config`, not this file.
+  dcs:
+    ttl: 30
+    loop_wait: 10
+    retry_timeout: 10
+    maximum_lag_on_failover: 1048576
+    # --- replication mode: ASYNC ---
+    # Commits return after the local WAL fsync; the replica catches up on its
+    # own (typically <100ms here). Fastest writes, and a dead replica never
+    # stalls the primary. Trade-offs: replica reads can briefly miss the very
+    # latest writes (per-request read-your-writes still holds via the app's
+    # routing layer), and a failover can lose the last unreplicated commits
+    # (bounded by maximum_lag_on_failover above).
+    # For sync replication instead: synchronous_mode: true + set
+    # synchronous_commit: remote_apply (change live via patronictl edit-config).
+    synchronous_mode: false
+    postgresql:
+      use_pg_rewind: true
+      parameters:
+        synchronous_commit: "on"
+        wal_level: replica
+        hot_standby: "on"
+        max_wal_senders: 10
+        max_replication_slots: 10
+        wal_keep_size: 128MB
+  initdb:
+    - encoding: UTF8
+    - data-checksums
+  # Runs once on the bootstrapped primary; creates the application user + DB.
+  post_init: /etc/patroni/post_init.sh
+
+postgresql:
+  listen: 0.0.0.0:5432
+  # connect_address comes from PATRONI_POSTGRESQL_CONNECT_ADDRESS per node
+  data_dir: /var/lib/postgresql/data/pgdata
+  bin_dir: /usr/lib/postgresql/16/bin
+  authentication:
+    superuser:
+      username: postgres
+      password: superpass
+    replication:
+      username: replicator
+      password: replpass
+  pg_hba:
+    - local all all trust
+    - host replication replicator 0.0.0.0/0 md5
+    - host all all 0.0.0.0/0 md5
+
+tags:
+  nofailover: false
+  noloadbalance: false
+  clonefrom: false
+  nosync: false
