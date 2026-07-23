@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +21,7 @@ public class NotificationService {
     private final NotificationRepository notificationRepository;
     private final ModelMapper modelMapper;
 
+    @Transactional(readOnly = true)  // routes to the replica (haproxy read port)
     public List<NotificationDto> getAllNotifications(Long userId) {
         log.info("Fetching all notifications for user: {}", userId);
         try {
@@ -35,6 +37,7 @@ public class NotificationService {
         }
     }
 
+    @Transactional(readOnly = true)  // routes to the replica (haproxy read port)
     public List<NotificationDto> getUnreadNotifications(Long userId) {
         log.info("Fetching unread notifications for user: {}", userId);
         try {

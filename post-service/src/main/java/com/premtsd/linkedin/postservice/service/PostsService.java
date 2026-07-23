@@ -20,6 +20,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -70,6 +71,7 @@ public class PostsService {
 
 
 
+    @Transactional(readOnly = true)  // routes to the replica (haproxy read port)
     public PostDto getPostById(Long postId) {
         log.debug("Retrieving post with ID: {}", postId);
 
@@ -79,6 +81,7 @@ public class PostsService {
     }
 
     @Cacheable(value = "post", key = "#userId")
+    @Transactional(readOnly = true)  // routes to the replica (haproxy read port)
     public List<PostDto> getAllPostsOfUser(Long userId) {
         log.info("Retrieving all posts for user: {}", userId);
         List<Post> posts = postsRepository.findByUserId(userId);

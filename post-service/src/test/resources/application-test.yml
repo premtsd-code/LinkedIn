@@ -66,3 +66,9 @@ logging:
     org.springframework.web: DEBUG
     org.springframework.test: DEBUG
     org.springframework.kafka: DEBUG
+
+# Use plain H2 datasource instead of the HA routing datasource in tests
+app:
+  datasource:
+    routing:
+      enabled: false

@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +23,7 @@ public class PostLikeService {
     private final PostsRepository postsRepository;
     private final KafkaTemplate<Long, PostLikedEvent> kafkaTemplate;
 
+    @Transactional  // one read-write tx: reads and the insert share the WRITER
     public void likePost(Long postId) {
         Long userId = UserContextHolder.getCurrentUserId();
         log.info("User {} attempting to like post: {}", userId, postId);
@@ -55,6 +57,7 @@ public class PostLikeService {
         log.debug("Post liked event published for post: {}", postId);
     }
 
+    @Transactional  // one read-write tx: reads and the delete share the WRITER
     public void unlikePost(Long postId) {
         Long userId = UserContextHolder.getCurrentUserId();
         log.info("User {} attempting to unlike post: {}", userId, postId);
