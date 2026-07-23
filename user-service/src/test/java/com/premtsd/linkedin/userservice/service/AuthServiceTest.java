@@ -21,7 +21,6 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 
 import java.util.List;
@@ -49,10 +48,7 @@ class AuthServiceTest {
     private JwtService jwtService;
 
     @Mock
-    private KafkaTemplate<String, Object> kafkaTemplate;
-
-    @Mock
-    private KafkaTemplate<String, Object> kafkaTemplate1;
+    private OutboxService outboxService;
 
     @InjectMocks
     private AuthService authService;

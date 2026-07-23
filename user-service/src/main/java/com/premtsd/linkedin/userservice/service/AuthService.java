@@ -17,8 +17,8 @@ import com.premtsd.linkedin.userservice.utils.PasswordUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -28,14 +28,17 @@ import java.util.stream.Collectors;
 @Slf4j
 public class AuthService {
 
-    private final KafkaTemplate<Long, UserCreatedEmailEvent> kafkaTemplate;
-    private final KafkaTemplate<Long, UserCreatedEvent> kafkaTemplate1;
+    private final OutboxService outboxService;
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private final JwtService jwtService;
     private final RoleRepository roleRepository;
     private final ObjectMapper objectMapper;
 
+    // Transactional outbox: the user row and its events commit atomically;
+    // the OutboxRelay publishes them to Kafka afterwards. Kafka being down
+    // can no longer fail (or half-complete) a signup.
+    @Transactional
     public UserDto signUp(SignupRequestDto signupRequestDto) {
         log.info("Processing signup request for email: {}", signupRequestDto.getEmail());
 
@@ -54,12 +57,14 @@ public class AuthService {
                     log.info("Creating new role: {}", role);
                     Role newRole = new Role();
                     newRole.setName(role);
-                    Role savedRole = roleRepository.save(newRole);
+                    roleSet.add(roleRepository.save(newRole));
+                } else {
+                    log.error("Invalid role requested: {}", role);
+                    throw new BadRequestException("Role does not exist. - " + role);
                 }
-                log.error("Invalid role requested: {}", role);
-                throw new BadRequestException("Role does not exist. - " + role);
+            } else {
+                roleSet.add(optionalRole.get());
             }
-            roleSet.add(optionalRole.get());
         }
 
         User user = modelMapper.map(signupRequestDto, User.class);
@@ -70,24 +75,25 @@ public class AuthService {
         User savedUser = userRepository.save(user);
         log.info("User created successfully with ID: {}", savedUser.getId());
 
-        log.debug("Sending user created email event");
+        log.debug("Staging user created email event in outbox");
         UserCreatedEmailEvent userCreatedEmailEvent=new UserCreatedEmailEvent();
         userCreatedEmailEvent.setTo(savedUser.getEmail());
         userCreatedEmailEvent.setSubject("Your account has been created at LinkedIn-Like");
         userCreatedEmailEvent.setBody("Hi "+savedUser.getName()+",\n"+" Thanks for signing up");
-        kafkaTemplate.send("userCreatedTopic", userCreatedEmailEvent);
+        outboxService.enqueue("userCreatedTopic", userCreatedEmailEvent);
 
-        log.debug("Sending user created event");
+        log.debug("Staging user created event in outbox");
         UserCreatedEvent userCreatedEvent=new UserCreatedEvent();
         userCreatedEvent.setUserId(savedUser.getId());
         userCreatedEvent.setName(savedUser.getName());
-        kafkaTemplate1.send("user-created-topic", userCreatedEvent);
+        outboxService.enqueue("user-created-topic", userCreatedEvent);
 
         log.info("Signup process completed for user: {}", savedUser.getEmail());
         return mapUserToUserDto(savedUser);
     }
 
 
+    @Transactional(readOnly = true)  // routes to the replica (haproxy read port)
     public UserLoginDto login(LoginRequestDto loginRequestDto) {
         log.info("Processing login request for email: {}", loginRequestDto.getEmail());
 
